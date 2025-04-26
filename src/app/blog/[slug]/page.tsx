@@ -13,7 +13,7 @@ import AnimatedArticle from "@/components/AnimatedArticle";
  * @param text The text to calculate the reading time for.
  */
 function getReadingTime(text: string): number {
-    const wordsPerMinute = 200
+    const wordsPerMinute = 100
     const numberOfWords = text.trim().split(/\s+/).length
     return Math.ceil(numberOfWords / wordsPerMinute)
 }
@@ -35,6 +35,7 @@ export default async function BlogPostPage({params}: { params: { slug: string } 
     const {content} = await compileMDX({
         source: mdxSource,
         options: {
+            parseFrontmatter: true,
             mdxOptions: {
                 rehypePlugins: [rehypeHighlight],
             },
