@@ -8,6 +8,7 @@ interface ProjectTileProps {
     slug: string
     title: string
     image: string
+    description?: string
 }
 
 /**
@@ -15,27 +16,50 @@ interface ProjectTileProps {
  *
  * @param {Object} props - The prop object for the component, containing slug, title, and image.
  */
-export default function ProjectTile({slug, title, image}: ProjectTileProps) {
+export default function ProjectTile({slug, title, image, description}: ProjectTileProps) {
     return (
-        <Link href={`/projects/${slug}`}>
+        <Link href={`/projects/${slug}`} className="block group">
             <motion.div
-                initial={{opacity: 0, y: 0}}
+                initial={{opacity: 0, y: 30}}
                 animate={{opacity: 1, y: 0}}
-                transition={{duration: 1.0}}
-                className="bg-black rounded-xl overflow-hidden shadow-md hover:shadow-xl transition text-white
-                hover:border-blue-500 border-2"
-                whileHover={{scale: 1.04}}
+                transition={{
+                    opacity: {duration: 0.8},
+                    y: {type: "spring", stiffness: 100, damping: 25}
+                }}
+                whileHover={{
+                    scale: 1.05,
+                    filter: 'brightness(1.15)',
+                    transition: {
+                        type: "spring",
+                        stiffness: 200,
+                        damping: 30,
+                        duration: 0.4
+                    }
+                }}
+                className="bg-black rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all text-white hover:border-blue-500 border-2"
             >
-                <div className="relative w-full h-48">
+                {/* Image */}
+                <div className="relative w-full h-48 overflow-hidden">
                     <Image
                         src={image}
                         alt={title}
-                        fill={true}
-                        priority
+                        fill
+                        loading="lazy"
+                        className="object-cover"
                     />
+                    <div
+                        className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span className="text-white text-lg font-semibold">Explore {title} ➔</span>
+                    </div>
                 </div>
-                <div className="p-4 text-center font-medium">{title}</div>
+
+                {/* Title with optional description */}
+                <div
+                    className="p-4 text-center font-semibold bg-gradient-to-t from-black/80 via-black/50 to-transparent">
+                    {title}
+                    {description && <span className="font-normal">: {description}</span>}
+                </div>
             </motion.div>
         </Link>
-    )
+    );
 }

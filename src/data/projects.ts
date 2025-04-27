@@ -1,33 +1,39 @@
 const projects = [
     {
         slug: 'project-A',
-        title: 'Project A',
-        image: '/projects/pictureA.jpg'
+        title: 'YouNovate',
+        image: '/projects/pictureA.jpg',
+        description: 'A platform for innovative ideas and solutions.'
     },
     {
         slug: 'project-B',
-        title: 'Project B',
-        image: '/projects/pictureB.jpg'
+        title: 'VoteChain',
+        image: '/projects/pictureB.jpg',
+        description: 'A decentralized voting system using blockchain technology.'
     },
     {
         slug: 'project-C',
-        title: 'Project C',
-        image: '/projects/pictureC.jpg'
+        title: 'FinAI',
+        image: '/projects/pictureC.jpg',
+        description: 'An AI-driven financial analysis tool.'
     },
     {
         slug: 'project-D',
-        title: 'Project D',
-        image: '/projects/pictureD.jpg'
+        title: 'AeroDeliver',
+        image: '/projects/pictureD.jpg',
+        description: 'An urban drone delivery service.'
     },
     {
         slug: 'project-E',
-        title: 'Project E',
-        image: '/projects/pictureE.jpg'
+        title: 'FitVR',
+        image: '/projects/pictureE.jpg',
+        description: 'A virtual reality fitness platform.'
     },
     {
         slug: 'project-F',
-        title: 'Project F',
-        image: '/projects/pictureF.jpg'
+        title: 'SmartHive',
+        image: '/projects/pictureF.jpg',
+        description: 'An IoT solution for smart beekeeping.'
     },
 ]
 
