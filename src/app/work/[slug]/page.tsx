@@ -9,9 +9,19 @@ import AnimatedArticle from "@/components/AnimatedArticle";
 import StackIcon from "tech-stack-icons";
 import {techStackMap} from "@/lib/constants";
 import {Timeline, TimelineItem} from '@/components/Timeline'
+import {pageParams} from "@/lib/types";
 
-export default async function WorkItemPage({params}: { params: { slug: string } }) {
-    const {slug} = await params // Await params before destructuring
+/**
+ * Generate static parameters for the work item pages to be pre-rendered.
+ */
+export async function generateStaticParams() {
+    return work.map((item) => ({
+        slug: item.slug,
+    }))
+}
+
+export default async function WorkItemPage(props: { params: pageParams }) {
+    const {slug} = await props.params
     const post = work.find(w => w.slug === slug)
     if (!post) return notFound()
 
