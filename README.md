@@ -12,11 +12,10 @@ performance-focused starting point for showcasing your **work**, **writing**, an
 > functionality needs, without requiring extensive modifications. So...here we are! Feel free to use this as a starting
 > point for your own personal website, or as a reference for doing the same thing I did: _building your own custom
 > theme!_
->
 
-<img src="/public/homepage-screenshot-desktop.png" alt="Screenshot Pages Desktop" width="75%" />
+![Screenshot Pages Desktop](public/homepage-screenshot-desktop.png)
 
-<img src="/public/pages-screenshots-phone.png" alt="Screenshot Pages Desktop" width="75%" />
+![Screenshot Pages Phone](public/pages-screenshots-phone.png)
 
 ---
 
