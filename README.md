@@ -4,8 +4,6 @@ This is a custom personal website theme built using [Next.js](https://nextjs.org
 `create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app). It’s designed as a minimal,
 performance-focused starting point for showcasing your **work**, **writing**, and **projects**.
 
-![Screenshot HomePage](public/homepage-screenshot.png)
-
 > **Note:** This theme is generally aimed at developers and designers who want to create a personal website
 > quickly and easily. Yes, I'm aware there are many other templates and themes available—_you can literally find
 > them all over the internet_. The personal goal of building this theme was to get familiar
@@ -14,6 +12,12 @@ performance-focused starting point for showcasing your **work**, **writing**, an
 > functionality needs, without requiring extensive modifications. So...here we are! Feel free to use this as a starting
 > point for your own personal website, or as a reference for doing the same thing I did: _building your own custom
 > theme!_
+>
+
+<img src="/public/homepage-screenshot-desktop.png" alt="Screenshot Pages Desktop" width="75%" />
+
+<img src="/public/pages-screenshots-phone.png" alt="Screenshot Pages Desktop" width="75%" />
+
 ---
 
 ## 🧱 Project Structure
