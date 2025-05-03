@@ -7,6 +7,10 @@ import rehypeHighlight from 'rehype-highlight'
 import AnimatedArticle from "@/components/AnimatedArticle";
 import {pageParams} from "@/lib/types";
 import BackToPageButton from "@/components/BackToPageButton";
+import {CodeBlock} from "@/components/mdx/CodeBlock";
+import {InlineCode} from "@/components/mdx/InlineCode";
+import {ReactElement} from "react";
+import {MDXComponents} from "mdx/types";
 
 /**
  * Calculate the reading time of a text based on the number of words.
@@ -40,16 +44,45 @@ export default async function BlogPostPage(props: { params: pageParams }) {
     }
 
     const mdxSource = fs.readFileSync(filePath, 'utf-8')
-
     const readingTime = getReadingTime(mdxSource)
+
+    type PreProps = {
+        children: ReactElement<{
+            className?: string;
+            children: string;
+        }>;
+    };
+
+    const mdxComponents: MDXComponents = {
+        pre: ({children}: PreProps) => {
+            const child = children;
+
+            if (child?.props && typeof child.props.className === 'string') {
+                return <CodeBlock {...child.props} />;
+            }
+
+            return <pre>{children}</pre>;
+        },
+
+        code: ({children, className}) => {
+            // Block-level code is handled by <pre> tags, so we can assume this is inline
+            if (className) {
+                return <code className={className}>{children}</code>;
+            }
+
+            return <InlineCode>{children}</InlineCode>;
+        },
+    };
+
     const {content} = await compileMDX({
         source: mdxSource,
         options: {
             parseFrontmatter: true,
             mdxOptions: {
-                rehypePlugins: [rehypeHighlight],
+                rehypePlugins: [[rehypeHighlight, {ignoreMissing: true}]]
             },
         },
+        components: mdxComponents
     })
 
     return (
@@ -59,7 +92,7 @@ export default async function BlogPostPage(props: { params: pageParams }) {
             <p className="text-gray-500 mb-8">
                 {new Date(post.date).toLocaleDateString()} • {readingTime} min read
             </p>
-            <div className="prose dark:prose-invert">{content}</div>
+            <div className="prose dark:prose-invert max-w-full overflow-hidden">{content}</div>
         </AnimatedArticle>
     )
 }
