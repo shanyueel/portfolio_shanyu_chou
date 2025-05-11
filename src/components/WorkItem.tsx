@@ -20,8 +20,8 @@ interface WorkItemProps {
  */
 export default function WorkItem({slug, company, title, start, end, description, locations}: WorkItemProps) {
     return (
-        <Link href={`/work/${slug}`} className="group">
-            <motion.article
+        <Link href={`/work/${slug}`} className="block group">
+            <motion.div
                 initial={{opacity: 0, y: 30}}
                 animate={{opacity: 1, y: 0}}
                 transition={{
@@ -30,7 +30,6 @@ export default function WorkItem({slug, company, title, start, end, description,
                 }}
                 whileHover={{
                     scale: 1.05,
-                    filter: 'brightness(1.15)',
                     transition: {
                         type: "spring",
                         stiffness: 200,
@@ -38,7 +37,9 @@ export default function WorkItem({slug, company, title, start, end, description,
                         duration: 0.4
                     }
                 }}
-                className="border rounded-xl p-4 shadow-sm hover:border-blue-500 transition cursor-pointerbg-white dark:bg-gray-900">
+                className="border rounded-xl p-4 shadow-sm hover:border-blue-500 transition bg-gray-100
+                dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-800 cursor-pointer"
+            >
                 <h3 className="text-xl font-semibold group-hover:text-blue-500 transition">{title} @ {company}</h3>
 
                 {/* Duration and Locations */}
@@ -57,7 +58,7 @@ export default function WorkItem({slug, company, title, start, end, description,
                 </div>
 
                 <p className="mt-2 text-gray-700">{description}</p>
-            </motion.article>
+            </motion.div>
         </Link>
     )
 }
