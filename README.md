@@ -78,8 +78,8 @@ Planned improvements and current/future features:
 - [ ] 🔍 Improve content structure, accessibility, and SEO
 - [ ] 🧪 Add tests and linting support for better maintainability
 - [ ] ❔ Add guides (i.e., READMEs) for creating blog/project/work pages
-- [ ] 🔢 Add sorting/filtering functionality for:
-    - [ ] Work items
+- [X] 🔢 Add sorting/filtering functionality for:
+    - [X] Work items
     - [X] Projects
     - [X] Blog posts
 - [ ] 🖼 Add theme customization options:
