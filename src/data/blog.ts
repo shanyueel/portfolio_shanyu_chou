@@ -1,4 +1,6 @@
-const posts = [
+import {BlogPostProps} from "@/lib/types";
+
+const posts: BlogPostProps[] = [
     {
         slug: 'post1',
         title: 'Getting Started with Bash',
@@ -92,10 +94,17 @@ const posts = [
     },
     {
         slug: 'post14',
-        title: 'Caching in System Design: Redis, Memcached, and More',
+        title: 'Caching in System Design',
         summary: 'Learn about caching strategies, tools like Redis and Memcached, and their role in scalable system design.',
         date: '2022-03-30',
         tags: ['caching', 'redis', 'memcached', 'performance', 'system design']
+    },
+    {
+        slug: 'post15',
+        title: 'Tailwind CSS: Modern Styling',
+        summary: 'Explore how Tailwind CSS simplifies styling in modern web apps.',
+        date: '2025-04-15',
+        tags: ['tailwind css', 'css', 'web design', 'frontend']
     }
 ]
 
