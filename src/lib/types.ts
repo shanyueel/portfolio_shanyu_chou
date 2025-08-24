@@ -13,3 +13,8 @@ export interface BlogPostProps {
     date: string;
     tags?: string[];
 }
+
+/**
+ * @description This type is used to define the params for a dynamic tag route in Next.js.
+ */
+export type tagPageParams = Promise<{ tag: string }>;

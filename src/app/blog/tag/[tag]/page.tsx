@@ -1,7 +1,7 @@
 import Link from "next/link";
 import posts from '@/data/blog';
 import BlogPost from '@/components/BlogPost';
-import {BlogPostProps} from '@/lib/types';
+import {BlogPostProps, tagPageParams} from '@/lib/types';
 import {FaArrowLeft, FaTag} from "react-icons/fa";
 
 /**
@@ -10,8 +10,7 @@ import {FaArrowLeft, FaTag} from "react-icons/fa";
  * This page is accessed via the "/blog/tag/[tag]" URL.
  * @param params - The route parameters including the tag to filter by.
  */
-export default async function BlogTagPage({params}: { params: { tag: string } }) {
-
+export default async function BlogTagPage({params}: { params: tagPageParams }) {
     const {tag} = await params;
     const decodedTag = decodeURIComponent(tag);
 
