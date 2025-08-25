@@ -7,6 +7,7 @@ import FilterDropdown from '@/components/FilterDropdown';
 import SortDropdown from '@/components/SortDropdown';
 import BlogPost from '@/components/BlogPost';
 import PaginationControls from '@/components/PaginationControls';
+import ActiveFilterChips from '@/components/ActiveFilterChips';
 import posts from '@/data/blog';
 
 /**
@@ -77,6 +78,18 @@ export default function BlogPage() {
         return filteredPosts.slice(start, start + POSTS_PER_PAGE);
     }, [filteredPosts, currentPage]);
 
+    // Handler to remove a single tag from filters
+    const removeTag = (tag: string) => {
+        setSelectedTags(prev => prev.filter(t => t !== tag));
+        setTagDrafts(prev => prev.filter(t => t !== tag));
+    };
+
+    // Handler to clear all tags
+    const clearAllTags = () => {
+        setSelectedTags([]);
+        setTagDrafts([]);
+    };
+
     return (
         <section className="px-4 max-w-4xl mx-auto">
             <div className="flex flex-wrap justify-between gap-4 mb-8 items-center w-full">
@@ -106,6 +119,13 @@ export default function BlogPage() {
                     />
                 </div>
             </div>
+
+            {/* Active Filter Chips */}
+            <ActiveFilterChips
+                filters={selectedTags}
+                onRemove={removeTag}
+                onClearAll={selectedTags.length > 1 ? clearAllTags : undefined}
+            />
 
             {/* Blog Posts */}
             <AnimatePresence mode="wait">

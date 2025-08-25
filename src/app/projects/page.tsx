@@ -6,6 +6,7 @@ import {motion, AnimatePresence} from 'framer-motion';
 import FilterDropdown from '@/components/FilterDropdown';
 import SortDropdown from '@/components/SortDropdown';
 import ProjectTile from '@/components/ProjectTile';
+import ActiveFilterChips from '@/components/ActiveFilterChips';
 import projects from '@/data/projects';
 
 /**
@@ -41,6 +42,18 @@ export default function ProjectsPage() {
     };
 
     const clearFilters = () => {
+        setSelectedTechStack([]);
+        setTechStackDrafts([]);
+    };
+
+    // Handler to remove a single tech from filters
+    const removeTech = (tech: string) => {
+        setSelectedTechStack(prev => prev.filter(t => t !== tech));
+        setTechStackDrafts(prev => prev.filter(t => t !== tech));
+    };
+
+    // Handler to clear all tech filters
+    const clearAllTech = () => {
         setSelectedTechStack([]);
         setTechStackDrafts([]);
     };
@@ -90,6 +103,13 @@ export default function ProjectsPage() {
                     />
                 </div>
             </div>
+
+            {/* Active Filter Chips */}
+            <ActiveFilterChips
+                filters={selectedTechStack}
+                onRemove={removeTech}
+                onClearAll={selectedTechStack.length > 1 ? clearAllTech : undefined}
+            />
 
             <AnimatePresence mode="wait">
                 {filteredProjects.length > 0 ? (
