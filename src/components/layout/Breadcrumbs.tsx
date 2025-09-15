@@ -41,9 +41,9 @@ export default function Breadcrumbs() {
         <div className="flex items-center gap-1 text-lg text-black dark:text-white my-auto">
             <Link href="/" className="hover:text-blue-400 font-semibold">
                 {/* Initials on mobile */}
-                <span className="block md:hidden">JD</span>
+                <span className="block md:hidden">SC</span>
                 {/* Full name on desktop */}
-                <span className="hidden md:inline">John Doe</span>
+                <span className="hidden md:inline">Shan-Yu Chou</span>
             </Link>
 
             {/* Crumbs part: show only on mobile, not on desktop */}

@@ -15,7 +15,7 @@ const gabarito = Gabarito({
  * Metadata for the application, including SEO and social media sharing information.
  */
 export const metadata: Metadata = {
-    title: 'Next.js Developer Portfolio Template',
+    title: 'Shan-Yu Chou Portfolio',
     description: 'Developer-focused portfolio starter built with Next.js, TypeScript, TailwindCSS, and optimized for SEO.',
     icons: {
         icon: '/icons/favicon.ico',
@@ -54,7 +54,7 @@ export default function RootLayout({children}: { children: ReactNode }) {
     return (
         <html lang="en" className={`${gabarito.className} ${gabarito.variable}`} suppressHydrationWarning>
             <head>
-                <title>Next.js Developer Portfolio Template</title>
+                <title>Shan-Yu Chou Portfolio</title>
             </head>
             <body
                 className={`antialiased flex flex-col min-h-screen transition-colors ${gabarito.className} ${gabarito.variable}`}

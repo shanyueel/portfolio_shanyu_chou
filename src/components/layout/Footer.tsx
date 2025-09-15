@@ -11,51 +11,23 @@ export default function Footer() {
             dark:border-gray-800 border-gray-300 dark:bg-black"
             id="footerPortfolio"
         >
-            <div className="flex justify-center gap-6 mb-2 text-lg">
+            <div className="flex justify-center gap-6 mb-2 text-xl">
                 <Link
-                    href="/"
+                    href="https://github.com/shanyueel"
                     aria-label="GitHub"
                     className="hover:text-blue-500 transition-transform hover:scale-125 duration-200"
                 >
                     <FaGithub/>
                 </Link>
                 <Link
-                    href="/"
+                    href="https://www.linkedin.com/in/shanyu-chou/"
                     aria-label="LinkedIn"
                     className="hover:text-blue-500 transition-transform hover:scale-125 duration-200"
                 >
                     <FaLinkedin/>
                 </Link>
                 <Link
-                    href="/"
-                    aria-label="GoodReads"
-                    className="hover:text-blue-500 transition-transform hover:scale-125 duration-200"
-                >
-                    <FaGoodreads/>
-                </Link>
-                <Link
-                    href="/"
-                    aria-label="Instagram"
-                    className="hover:text-blue-500 transition-transform hover:scale-125 duration-200"
-                >
-                    <FaInstagram/>
-                </Link>
-                <Link
-                    href="/"
-                    aria-label="X"
-                    className="hover:text-blue-500 transition-transform hover:scale-125 duration-200"
-                >
-                    <FaXTwitter/>
-                </Link>
-                <Link
-                    href="/"
-                    aria-label="Reddit"
-                    className="hover:text-blue-500 transition-transform hover:scale-125 duration-200"
-                >
-                    <FaReddit/>
-                </Link>
-                <Link
-                    href="mailto:<EMAIL>"
+                    href="mailto:wulingkevin0704@gmail.com"
                     target="_blank"
                     aria-label="Email"
                     className="hover:text-blue-500 transition-transform hover:scale-125 duration-200"
@@ -65,28 +37,7 @@ export default function Footer() {
             </div>
 
             {/* Copyright section */}
-            <p className="text-xs sm:text-sm">© {new Date().getFullYear()} John Doe. All rights reserved.</p>
-
-            {/* Display version & Link to GitHub Repo */}
-            {/* You can update or remove this for your own template */}
-            <p className="text-xs sm:text-sm">
-                <Link href={`https://github.com/alemoraru/nextjs-portofolio-website/releases/tag/v${appVersion}`}
-                      rel="noopener noreferrer">
-                    <span
-                        className="font-semibold hover:text-blue-500 transition-colors duration-200"
-                    >
-                        v{appVersion}
-                    </span>
-                </Link>
-                &nbsp;built by&nbsp;
-                <Link href="https://github.com/alemoraru" rel="noopener noreferrer">
-                    <span
-                        className="font-semibold hover:text-blue-500 transition-colors duration-200"
-                    >
-                        @alemoraru
-                    </span>
-                </Link>
-            </p>
+            <p className="text-xs sm:text-sm">© {new Date().getFullYear()} Shan-Yu Chou. All rights reserved.</p>
         </footer>
     )
 }

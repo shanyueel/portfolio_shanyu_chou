@@ -9,9 +9,9 @@ import BlogPost from "@/components/features/BlogPost";
 import ViewAllHeader from "@/components/layout/ViewAllHeader";
 import {motion} from "framer-motion";
 import {
-    FaMapMarkerAlt, FaBook, FaLanguage,
+    FaMapMarkerAlt, FaLanguage,
     FaGamepad, FaUniversity,
-    FaSkiing, FaBuilding, FaTools
+    FaTableTennis, FaBuilding, FaTools
 } from "react-icons/fa";
 
 /**
@@ -38,21 +38,21 @@ export default function Home() {
             >
                 {/* Introductory Text */}
                 <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-gray-900 dark:text-gray-100">
-                    Hi, I&#39;m John Doe 👋
+                    Hi, I&#39;m Shan-Yu Chou 👋
                 </h1>
-                <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-4xl mx-auto text-left mb-6">
-                    I&#39;m a software engineer passionate about solving problems, building things, and reading sci-fi.
-                    Whenever I&#39;m not coding, you can find me exploring the world, playing tennis or skating.
-                    I love to share my knowledge and experiences through my blog, where I write about tech, books, and
-                    life lessons.
+
+                <h2 className="text-2xl italic">
+                    &quot;Focus on the user and all else will follow.&quot; <span className="text-lg">— Google</span>
+                </h2>
+
+                <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-4xl mx-auto text-left mb-6 mt-6">
+                    A collaborative and detail-oriented Front-End Engineer with 3+ years of professional experience,
+                    including 2 years in a dynamic e-commerce team at Wabow Information Inc. 
                 </p>
 
                 {/* Current Work Description or other highlights */}
                 <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-4xl mx-auto text-left">
-                    I am currently working at Hypernova Labs as a software engineer, where I focus on building scalable
-                    applications and improving user experiences. I have a keen interest in full-stack development,
-                    particularly in React and Node.js. I enjoy collaborating with cross-functional teams to deliver
-                    high-quality software solutions.
+                    Leverages a background in Industrial Design to build intuitive and engaging user experiences with Typescript, Vue, and React. A quick learner adept at writing clean, robust, and maintainable code to solve complex problems and deliver high-quality web applications.
                 </p>
 
 
@@ -62,14 +62,13 @@ export default function Home() {
 
                     <div className="flex flex-wrap justify-center gap-3 px-4 max-w-4xl mx-auto">
                         {[
-                            {icon: FaBuilding, label: "Hypernova Labs"},
-                            {icon: FaUniversity, label: "Computer Science Grad @ VuA"},
-                            {icon: FaMapMarkerAlt, label: "Lille, France"},
-                            {icon: FaBook, label: "Book Reviewer"},
-                            {icon: FaLanguage, label: "EN / ES / DE"},
-                            {icon: FaTools, label: "Full-Stack Dev"},
+                            {icon: FaBuilding, label: "Wabow Information Inc"},
+                            {icon: FaUniversity, label: "CS Student @ Oregon State Univ."},
+                            {icon: FaMapMarkerAlt, label: "Taipei City, Taiwan"},
+                            {icon: FaLanguage, label: "ZH-Native | EN-Fluent"},
+                            {icon: FaTools, label: "Front-End Dev"},
                             {icon: FaGamepad, label: "Sci-fi Fan"},
-                            {icon: FaSkiing, label: "Skiing Enthusiast"},
+                            {icon: FaTableTennis, label: "Table Tennis Enthusiast"},
                         ].map((fact, i) => {
                             const Icon = fact.icon;
                             return (
