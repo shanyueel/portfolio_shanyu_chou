@@ -1,11 +1,11 @@
 'use client'
 
 import {useState} from 'react'
-import Breadcrumbs from "@/components/Breadcrumbs";
-import NavigationMenu from "@/components/NavigationMenu";
-import ThemeToggleButton from "@/components/ThemeToggleButton";
-import MobileMenuToggle from "@/components/MobileMenuToggle";
-import MobileMenu from "@/components/MobileMenu";
+import Breadcrumbs from "@/components/layout/Breadcrumbs";
+import NavigationMenu from "@/components/layout/NavigationMenu";
+import ThemeToggleButton from "@/components/ui/ThemeToggleButton";
+import MobileMenuToggle from "@/components/layout/MobileMenuToggle";
+import MobileMenu from "@/components/layout/MobileMenu";
 
 /**
  * Header component that serves as the top navigation bar for the portfolio.

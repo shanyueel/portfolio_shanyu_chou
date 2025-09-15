@@ -2,8 +2,8 @@ import type {Metadata} from "next";
 import "./globals.css";
 import {Gabarito} from "next/font/google";
 import React, {ReactNode} from "react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 import {ThemeProvider} from "next-themes";
 
 const gabarito = Gabarito({

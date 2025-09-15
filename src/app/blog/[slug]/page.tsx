@@ -4,13 +4,13 @@ import path from 'path'
 import fs from 'fs'
 import {compileMDX} from 'next-mdx-remote/rsc'
 import rehypeHighlight from 'rehype-highlight'
-import AnimatedArticle from "@/components/AnimatedArticle";
+import AnimatedArticle from "@/components/ui/AnimatedArticle";
 import {pageParams} from "@/lib/types";
-import BackToPageButton from "@/components/BackToPageButton";
+import BackToPageButton from "@/components/ui/BackToPageButton";
 import {CodeBlock} from "@/components/mdx/CodeBlock";
 import {InlineCode} from "@/components/mdx/InlineCode";
-import SimilarBlogPosts from "@/components/SimilarBlogPosts";
-import BlogTag from "@/components/BlogTag";
+import SimilarBlogPosts from "@/components/features/SimilarBlogPosts";
+import BlogTag from "@/components/ui/BlogTag";
 import {ReactElement} from "react";
 import {MDXComponents} from "mdx/types";
 import remark_gfm from "remark-gfm";

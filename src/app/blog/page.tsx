@@ -3,11 +3,11 @@
 import {useState, useMemo, useEffect} from 'react';
 import {FaFrown} from 'react-icons/fa';
 import {motion, AnimatePresence} from 'framer-motion';
-import FilterDropdown from '@/components/FilterDropdown';
-import SortDropdown from '@/components/SortDropdown';
-import BlogPost from '@/components/BlogPost';
-import PaginationControls from '@/components/PaginationControls';
-import ActiveFilterChips from '@/components/ActiveFilterChips';
+import FilterDropdown from '@/components/features/FilterDropdown';
+import SortDropdown from '@/components/features/SortDropdown';
+import BlogPost from '@/components/features/BlogPost';
+import PaginationControls from '@/components/ui/PaginationControls';
+import ActiveFilterChips from '@/components/features/ActiveFilterChips';
 import posts from '@/data/blog';
 
 /**

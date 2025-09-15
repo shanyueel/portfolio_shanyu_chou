@@ -3,10 +3,10 @@
 import {useState, useMemo} from 'react';
 import {FaFrown} from 'react-icons/fa';
 import {motion, AnimatePresence} from 'framer-motion';
-import FilterDropdown from '@/components/FilterDropdown';
-import SortDropdown from '@/components/SortDropdown';
-import ProjectTile from '@/components/ProjectTile';
-import ActiveFilterChips from '@/components/ActiveFilterChips';
+import FilterDropdown from '@/components/features/FilterDropdown';
+import SortDropdown from '@/components/features/SortDropdown';
+import ProjectTile from '@/components/features/ProjectTile';
+import ActiveFilterChips from '@/components/features/ActiveFilterChips';
 import projects from '@/data/projects';
 
 /**

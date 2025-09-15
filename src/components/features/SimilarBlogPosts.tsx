@@ -1,4 +1,4 @@
-import BlogPost from "@/components/BlogPost";
+import BlogPost from "@/components/features/BlogPost";
 import {BlogPostProps} from "@/lib/types";
 
 /**

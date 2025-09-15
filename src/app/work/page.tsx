@@ -1,10 +1,10 @@
 'use client'
 
-import WorkItem from '@/components/WorkItem'
+import WorkItem from '@/components/features/WorkItem'
 import work from '@/data/work'
 import {useMemo, useState} from "react";
-import SortDropdown from "@/components/SortDropdown";
-import FilterDropdown from "@/components/FilterDropdown";
+import SortDropdown from "@/components/features/SortDropdown";
+import FilterDropdown from "@/components/features/FilterDropdown";
 import {AnimatePresence, motion} from "framer-motion";
 import {FaFrown} from "react-icons/fa";
 

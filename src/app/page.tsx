@@ -3,10 +3,10 @@
 import blog from "@/data/blog";
 import projects from "@/data/projects";
 import work from "@/data/work";
-import WorkItem from "@/components/WorkItem";
-import ProjectTile from "@/components/ProjectTile";
-import BlogPost from "@/components/BlogPost";
-import ViewAllHeader from "@/components/ViewAllHeader";
+import WorkItem from "@/components/features/WorkItem";
+import ProjectTile from "@/components/features/ProjectTile";
+import BlogPost from "@/components/features/BlogPost";
+import ViewAllHeader from "@/components/layout/ViewAllHeader";
 import {motion} from "framer-motion";
 import {
     FaMapMarkerAlt, FaBook, FaLanguage,

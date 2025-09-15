@@ -4,12 +4,12 @@ import fs from 'fs'
 import {compileMDX} from 'next-mdx-remote/rsc'
 import rehypeHighlight from 'rehype-highlight'
 import work from "@/data/work";
-import AnimatedArticle from "@/components/AnimatedArticle";
+import AnimatedArticle from "@/components/ui/AnimatedArticle";
 import StackIcon from "tech-stack-icons";
 import {techStackMap} from "@/lib/constants";
 import {Timeline, TimelineItem} from '@/components/mdx/Timeline'
 import {pageParams} from "@/lib/types";
-import BackToPageButton from "@/components/BackToPageButton";
+import BackToPageButton from "@/components/ui/BackToPageButton";
 import remark_gfm from "remark-gfm";
 
 /**

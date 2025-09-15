@@ -1,6 +1,6 @@
 import Link from "next/link";
 import posts from '@/data/blog';
-import BlogPost from '@/components/BlogPost';
+import BlogPost from '@/components/features/BlogPost';
 import {BlogPostProps, tagPageParams} from '@/lib/types';
 import {FaArrowLeft, FaTag} from "react-icons/fa";
 
