@@ -1,5 +1,8 @@
 "use client";
 
+import StackIcon from "tech-stack-icons";
+import { motion } from "framer-motion";
+import { FaMapMarkerAlt, FaLanguage, FaUniversity, FaBuilding, FaCode, FaPaintBrush} from "react-icons/fa";
 import blog from "@/data/blog";
 import projects from "@/data/projects";
 import work from "@/data/work";
@@ -7,12 +10,7 @@ import WorkItem from "@/components/features/WorkItem";
 import ProjectTile from "@/components/features/ProjectTile";
 import BlogPost from "@/components/features/BlogPost";
 import ViewAllHeader from "@/components/layout/ViewAllHeader";
-import {motion} from "framer-motion";
-import {
-    FaMapMarkerAlt, FaLanguage,
-    FaGamepad, FaUniversity,
-    FaTableTennis, FaBuilding, FaTools
-} from "react-icons/fa";
+import {techStackMap} from "@/lib/constants";
 
 /**
  * Home component that serves as the main landing page for the portfolio.
@@ -24,6 +22,8 @@ export default function Home() {
         const date = new Date(dateStr ?? '');
         return isNaN(date.getTime()) ? 0 : date.getTime();
     };
+
+    const techStack = [ "React", "Vue", "TypeScript", "Python", "TailwindCSS", "Git", "Firebase"]
 
     return (
         <section className="px-4 max-w-4xl mx-auto">
@@ -45,6 +45,30 @@ export default function Home() {
                     &quot;Focus on the user and all else will follow.&quot; <span className="text-lg">— Google</span>
                 </h2>
 
+                {/* Facts */}
+                <div className="flex flex-wrap justify-center gap-3 mt-4 px-4 max-w-4xl mx-auto">
+                    {[
+                        {icon: FaCode, label: "Frontend Engineer"},
+                        {icon: FaPaintBrush, label: "Design Background"},
+                        {icon: FaBuilding, label: "Wabow Information Inc."},
+                        {icon: FaUniversity, label: "CS Student @ Oregon State Univ."},
+                        {icon: FaLanguage, label: "ZH-Native | EN-Fluent"},
+                        {icon: FaMapMarkerAlt, label: "Taipei, Taiwan"}
+                    ].map((fact, i) => {
+                        const Icon = fact.icon;
+                        return (
+                            <div
+                                key={i}
+                                className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800
+                                text-sm text-gray-700 dark:text-gray-300 rounded-full shadow-md transition"
+                            >
+                                <Icon className="text-blue-500 dark:text-blue-400 text-base"/>
+                                <span>{fact.label}</span>
+                            </div>
+                        );
+                    })}
+                </div>
+
                 <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-4xl mx-auto text-left mb-6 mt-6">
                     A collaborative and detail-oriented Front-End Engineer with 3+ years of professional experience,
                     including 2 years in a dynamic e-commerce team at Wabow Information Inc. 
@@ -55,37 +79,33 @@ export default function Home() {
                     Leverages a background in Industrial Design to build intuitive and engaging user experiences with Typescript, Vue, and React. A quick learner adept at writing clean, robust, and maintainable code to solve complex problems and deliver high-quality web applications.
                 </p>
 
-
-                {/* Quick Facts Section */}
-                <div className="mt-8 text-center">
-                    <h2 className="text-3xl font-bold mb-4">Quick & Fun Facts</h2>
-
-                    <div className="flex flex-wrap justify-center gap-3 px-4 max-w-4xl mx-auto">
-                        {[
-                            {icon: FaBuilding, label: "Wabow Information Inc"},
-                            {icon: FaUniversity, label: "CS Student @ Oregon State Univ."},
-                            {icon: FaMapMarkerAlt, label: "Taipei City, Taiwan"},
-                            {icon: FaLanguage, label: "ZH-Native | EN-Fluent"},
-                            {icon: FaTools, label: "Front-End Dev"},
-                            {icon: FaGamepad, label: "Sci-fi Fan"},
-                            {icon: FaTableTennis, label: "Table Tennis Enthusiast"},
-                        ].map((fact, i) => {
-                            const Icon = fact.icon;
-                            return (
-                                <div
-                                    key={i}
-                                    className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800
-                                    text-sm text-gray-700 dark:text-gray-300 rounded-full shadow-md transition"
-                                >
-                                    <Icon className="text-blue-500 dark:text-blue-400 text-base"/>
-                                    <span>{fact.label}</span>
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
-
             </motion.div>
+
+            {/* Tech Stack */}
+            <motion.div
+                initial={{opacity: 0, y: 20}}
+                whileInView={{opacity: 1, y: 0}}
+                transition={{duration: 1}}
+                viewport={{once: true}}
+                className="text-center mt-2"
+            >
+                <hr className="my-4 border-gray-500"/>
+                <div className="flex flex-wrap justify-center gap-4 my-4">
+                    {techStack.map((tech) => (
+                        <div
+                            key={tech}
+                            className="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-sm"
+                        >
+                            <StackIcon
+                                name={techStackMap[tech] || tech}
+                                style={{width: '24px', height: '24px'}}
+                            />
+                            <span>{tech}</span>
+                        </div>
+                    ))}
+                </div>
+            </motion.div>
+
 
             {/* Recent Work */}
             <motion.div

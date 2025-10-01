@@ -15,6 +15,10 @@ export const navItems = [
  */
 export const techStackMap: Record<string, string> = {
     'React': 'reactjs',
+    'Vue': 'vuejs',
+    'HTML5': 'html5',
+    'CSS3': 'css3',
+    "JQuery": "jquery",
     'TypeScript': 'typescript',
     'TailwindCSS': 'tailwindcss',
     'Node.js': 'nodejs',
