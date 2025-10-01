@@ -1,39 +1,30 @@
 const work = [
     {
-        slug: 'BigBossCorp',
-        company: 'Hypernova Labs',
-        title: 'Software Engineer',
-        start: 'Jan 2021',
+        slug: 'WabowInfoInc',
+        company: 'Wabow Information Inc.',
+        title: 'Frontend Developer',
+        start: 'Dec 2023',
         end: 'Present',
-        description: 'Led a team of 5 building scalable microservices with Node.js and AWS.',
-        locations: ['Remote', 'New York City (Hybrid)']
+        description: 'Led the rebuilt of the e-commerce app with Vue & TypeScript to enhance its UI and maintainability.',
+        locations: ['Taipei City', 'Taiwan']
     },
     {
-        slug: 'MediumBossCorp',
-        company: 'Big Brain Technologies',
-        title: 'Software Engineer',
-        start: 'Jul 2018',
-        end: 'Dec 2020',
-        description: 'Worked on the core platform, optimizing React apps and APIs.',
-        locations: ['Remote', 'New York City']
+        slug: 'AlphaCamp',
+        company: 'Alpha Camp online school',
+        title: 'Frontend Development Course',
+        start: 'Nov 2022',
+        end: 'May 2023',
+        description: 'Learn front-end technologies and React to build applications and practice Agile development.',
+        locations: ['Remote', 'Taipei City']
     },
     {
-        slug: 'SmallBossCorp',
-        company: 'Small Boss Corp',
-        title: 'Software Engineer',
-        start: 'Jan 2017',
-        end: 'Jun 2018',
-        description: 'Assisted in developing web applications using PHP and MySQL.',
-        locations: ['Remote', 'San Francisco (Hybrid)'],
-    },
-    {
-        slug: 'InternBossCorp',
-        company: 'CodeNest',
-        title: 'Software Engineer Intern',
-        start: 'Mar 2021',
-        end: 'Sep 2021',
-        description: 'Building Java applications and learning about cloud technologies.',
-        locations: ['Vienna', 'Austra']
+        slug: 'ClevoComputer',
+        company: 'CLEVO Computer Co.',
+        title: 'Color, Material, & Finish Designer',
+        start: 'Jul 2021',
+        end: 'Sep 2022',
+        description: 'Hold presentations for laptop design reference and revise the content for keyboard printing.',
+        locations: ['Taipei City', 'Taiwan'],
     }
 ]
 
