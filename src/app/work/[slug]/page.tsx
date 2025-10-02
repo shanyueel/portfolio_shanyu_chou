@@ -39,8 +39,10 @@ export default async function WorkItemPage(props: { params: pageParams }) {
 
     const {content, frontmatter} = await compileMDX<{
         name: string
+        highlight: string
         description: string
         techStack: string[]
+        toolsUsed: string[]
     }>({
         source: mdxSource,
         components: {
@@ -61,12 +63,15 @@ export default async function WorkItemPage(props: { params: pageParams }) {
             <BackToPageButton pageUrl="/work"/>
             <h1 className="text-4xl font-bold mb-2">{frontmatter.name}</h1>
             <p className="text-lg text-gray-600 mb-6">{frontmatter.description}</p>
-            <h2 className="text-xl font-semibold mb-6">Tech Stack</h2>
-            <div className="flex flex-wrap gap-4 mb-8">
+
+            <h2 className="my-4 italic">&quot;{frontmatter.highlight}&quot;</h2>
+
+            <h2 className="text-xl font-semibold mb-6">Tech Stack & Tools used</h2>
+            <div className="flex flex-wrap gap-4">
                 {frontmatter.techStack?.map((tech) => (
                     <div
                         key={tech}
-                        className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full"
+                        className="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-sm"
                     >
                         <StackIcon
                             name={techStackMap[tech] || tech}
@@ -76,6 +81,22 @@ export default async function WorkItemPage(props: { params: pageParams }) {
                     </div>
                 ))}
             </div>
+            <hr className="w-full my-4 border-1 border-gray-300" />
+            <div className="flex flex-wrap gap-4 mb-8">
+                {frontmatter.toolsUsed?.map((tool) => (
+                    <div
+                        key={tool}
+                        className="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-sm"
+                    >
+                        <StackIcon
+                            name={techStackMap[tool] || tool}
+                            style={{width: '24px', height: '24px'}}
+                        />
+                        <span>{tool}</span>
+                    </div>
+                ))}
+            </div>
+
             <div className="max-w-5xl prose dark:prose-invert">{content}</div>
         </AnimatedArticle>
     )

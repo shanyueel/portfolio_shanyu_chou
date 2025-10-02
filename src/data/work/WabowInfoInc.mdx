@@ -1,14 +1,18 @@
 ---
-name: Hypernova Labs
-description: Hypernova Labs is a fast-growing tech startup focused on building next-generation collaboration tools powered by AI and real-time data. Their mission is to redefine the way remote teams communicate and build products together.
+name: Wabow Information Inc.
+highlight: Delivered Data Warehouse feature from draft to production in 4 months, enabling >300 merchants to visualize sales trends and contributing to a 15% increase in plan fee.
+description: Wabow Information Inc. is an innovative e-commerce solutions provider that empowers entrepreneurs with its core platform, WACA. The company focuses on creating a seamless 'Online-Merge-Offline' retail experience, enabling businesses to effortlessly launch and manage both online stores and physical POS systems.
 techStack:
-  - NextJS
+  - Vue
   - TypeScript
-  - GraphQL
+  - Laravel
+  - Sass
+  - JQuery
+toolsUsed:
+  - Pinia
+  - Storybook
   - TailwindCSS
-  - Node.js
-  - AWS
-  - Redis
+  - Postman
 ---
 
 import {TimelineItem} from "../../components/mdx/Timeline";
@@ -18,28 +22,53 @@ import {Timeline} from "../../components/mdx/Timeline";
 
 <Timeline>
     <TimelineItem
-        title="Lead Frontend Engineer"
-        duration="02/2025 - Present"
-        location="Remote / Hybrid (NYC)"
+        title="Frontend Engineer"
+        duration="04/2024 - Present"
+        location="Taipei, Taiwan"
     >
-        - Leading the frontend engineering team to build AI-driven real-time collaboration platforms.
-        - Spearheaded migration to **GraphQL** APIs and optimized frontend data handling.
-        - Established design system in **TailwindCSS** for unified UX across products.
-        - Actively involved in product discovery and rapid prototyping with PMs and Designers.
+        - Led the modernization of a legacy e-commerce system using Vue 3 & TypeScript, improving code maintainability and developer productivity.
+        - Developed and launched key features, including Data Warehouse and Rental Service, contributing to an 15% increase in average plan price.
+        - Collaborated with backend engineers to define/test/document API specs with Postman, accelerating parallel development and reducing time by 30%.
+        - Applied modern tooling, including Storybook & Tailwind, to build reusable components and minimized UI inconsistencies.
+        - Implemented user event tracking across key product funnels, providing the product team with actionable data to validate feature adoption.
     </TimelineItem>
 
     <TimelineItem
-        title="Senior Software Engineer"
-        duration="08/2024 - 01/2025"
-        location="Remote"
+        title="UI Engineer"
+        duration="12/2023 - 03/2024"
+        location="Taipei, Taiwan"
     >
-        - Developed new core features for the Hypernova App, enabling team presence and live document collaboration.
-        - Implemented server-side rendering (SSR) strategies to improve TTFB and Core Web Vitals.
-        - Introduced lightweight **microfrontend** architecture for faster parallel development.
+        - Translated UI/UX designs from Figma into pixel-perfect, responsive web pages using HTML and SCSS within a Laravel (Blade) environment.
+        - Authored maintainable stylesheets using Sass and BEM methodology, reducing CSS specificity conflicts and simplifying future style modifications.
+        - Diagnosed and resolved critical, customer-reported bugs in production environment, conducting analysis to implement robust, long-term solutions.
     </TimelineItem>
 </Timeline>
 
 ## Key Projects
 
-- **NovaFlow**: Built the live-collaboration engine enabling shared cursors, live text editing, and instant notifications.
-- **AI Meeting Summarizer**
+- <a href="/projects/simpleTwitter">**Data Warehouse**</a>:
+    Visualize complex and hard-understanding data into clear charts and tables, assisting users to understand the effect of their business and implement better strategies.
+    <div className="grid grid-cols-2 gap-2">
+        <img src="/projects/pictureA.jpg" alt="Data Warehouse Cover" className="flex-shrink-0 w-auto mt-0" />
+        <img src="/projects/pictureB.jpg" alt="Data Warehouse Detail" className="flex-shrink-0 w-auto mt-0" />
+    </div>
+- **Onboarding Page**:
+    Guides new merchants through the essential initial setup of a complex e‑commerce platform, speeding time-to-first-configuration and reducing early support friction.
+    <div className="grid grid-cols-2 gap-2">
+        <img src="/projects/pictureA.jpg" alt="Data Warehouse Cover" className="flex-shrink-0 w-auto mt-0" />
+        <img src="/projects/pictureB.jpg" alt="Data Warehouse Detail" className="flex-shrink-0 w-auto mt-0" />
+    </div>
+- **Internal Management System**:
+    Centralizes configuration, merchant reporting, and announcement/promo publishing for different internal roles, streamlining daily operations.
+    <div className="grid grid-cols-2 gap-2">
+        <img src="/projects/pictureA.jpg" alt="Data Warehouse Cover" className="flex-shrink-0 w-auto mt-0" />
+        <img src="/projects/pictureB.jpg" alt="Data Warehouse Detail" className="flex-shrink-0 w-auto mt-0" />
+    </div>
+
+
+## Skills Developed
+
+- Adopted a maintainability-first mindset; standardized reusable components & Sass structure to reduce future rework.
+- Improved cross-team alignment by clarifying API contracts, edge cases, and data states early, reducing iteration loops.
+- Leveraged AI tooling (code suggestions, refactor hints, code optimization) to speed delivery and surface issues.
+
