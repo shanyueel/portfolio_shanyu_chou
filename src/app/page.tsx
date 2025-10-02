@@ -2,6 +2,7 @@
 
 import StackIcon from "tech-stack-icons";
 import { motion } from "framer-motion";
+import type { IconType } from "react-icons";
 import { FaMapMarkerAlt, FaLanguage, FaUniversity, FaBuilding, FaCode, FaPaintBrush} from "react-icons/fa";
 import blog from "@/data/blog";
 import projects from "@/data/projects";
@@ -11,6 +12,11 @@ import ProjectTile from "@/components/features/ProjectTile";
 import BlogPost from "@/components/features/BlogPost";
 import ViewAllHeader from "@/components/layout/ViewAllHeader";
 import {techStackMap} from "@/lib/constants";
+
+interface Fact {
+    icon: IconType
+    label: string
+}
 
 /**
  * Home component that serves as the main landing page for the portfolio.
@@ -23,7 +29,16 @@ export default function Home() {
         return isNaN(date.getTime()) ? 0 : date.getTime();
     };
 
-    const techStack = [ "React", "Vue", "TypeScript", "Python", "TailwindCSS", "Git", "Firebase"]
+    const facts: Fact[] = [
+        {icon: FaCode, label: "Frontend Engineer"},
+        {icon: FaPaintBrush, label: "Design Background"},
+        {icon: FaBuilding, label: "Wabow Information Inc."},
+        {icon: FaUniversity, label: "CS Student @ Oregon State Univ."},
+        {icon: FaLanguage, label: "ZH-Native | EN-Fluent"},
+        {icon: FaMapMarkerAlt, label: "Taipei, Taiwan"}
+    ]
+
+    const techStack: string[] = [ "React", "Vue", "TypeScript", "Python", "TailwindCSS", "Git", "Firebase"]
 
     return (
         <section className="px-4 max-w-4xl mx-auto">
@@ -47,14 +62,7 @@ export default function Home() {
 
                 {/* Facts */}
                 <div className="flex flex-wrap justify-center gap-3 mt-4 px-4 max-w-4xl mx-auto">
-                    {[
-                        {icon: FaCode, label: "Frontend Engineer"},
-                        {icon: FaPaintBrush, label: "Design Background"},
-                        {icon: FaBuilding, label: "Wabow Information Inc."},
-                        {icon: FaUniversity, label: "CS Student @ Oregon State Univ."},
-                        {icon: FaLanguage, label: "ZH-Native | EN-Fluent"},
-                        {icon: FaMapMarkerAlt, label: "Taipei, Taiwan"}
-                    ].map((fact, i) => {
+                    {facts.map((fact, i) => {
                         const Icon = fact.icon;
                         return (
                             <div
