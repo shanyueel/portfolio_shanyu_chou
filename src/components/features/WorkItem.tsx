@@ -20,7 +20,7 @@ interface WorkItemProps {
  */
 export default function WorkItem({slug, company, title, start, end, description, locations}: WorkItemProps) {
     return (
-        <Link href={`/experience/${slug}`} className="block group">
+        <Link href={`/work/${slug}`} className="block group">
             <motion.div
                 initial={{opacity: 0}}
                 animate={{opacity: 1}}

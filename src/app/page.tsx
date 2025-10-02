@@ -115,7 +115,7 @@ export default function Home() {
                 viewport={{once: true}}
                 className="mt-16"
             >
-                <ViewAllHeader title="Work & Experience" pageUrl="/experience" itemCount={work.length}/>
+                <ViewAllHeader title="Work & Experience" pageUrl="/work" itemCount={work.length}/>
                 <div className="grid gap-4">
                     {work.slice(0, 3).map((job, i) => (
                         <motion.div
@@ -156,32 +156,35 @@ export default function Home() {
             </motion.div>
 
             {/* Recent Blog Posts */}
-            <motion.div
-                initial={{opacity: 0, y: 20}}
-                whileInView={{opacity: 1, y: 0}}
-                transition={{duration: 1}}
-                viewport={{once: true}}
-                className="mt-16 mb-12"
-            >
-                <ViewAllHeader title="Recent Blog Posts" pageUrl="/blog" itemCount={blog.length}/>
-                <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-                    {blog
-                        .slice()
-                        .sort((a, b) => getTimeSafe(b.date) - getTimeSafe(a.date))
-                        .slice(0, 3)
-                        .map((post) => (
-                            <motion.div
-                                key={post.slug}
-                                initial={{opacity: 0, y: 20}}
-                                whileInView={{opacity: 1, y: 0}}
-                                transition={{duration: 1}}
-                                viewport={{once: true}}
-                            >
-                                <BlogPost {...post} />
-                            </motion.div>
-                        ))}
-                </div>
-            </motion.div>
+            { blog.length > 0 && (
+                <motion.div
+                    initial={{opacity: 0, y: 20}}
+                    whileInView={{opacity: 1, y: 0}}
+                    transition={{duration: 1}}
+                    viewport={{once: true}}
+                    className="mt-16 mb-12"
+                >
+                    <ViewAllHeader title="Recent Blog Posts" pageUrl="/blog" itemCount={blog.length}/>
+                    <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+                        {blog
+                            .slice()
+                            .sort((a, b) => getTimeSafe(b.date) - getTimeSafe(a.date))
+                            .slice(0, 3)
+                            .map((post) => (
+                                <motion.div
+                                    key={post.slug}
+                                    initial={{opacity: 0, y: 20}}
+                                    whileInView={{opacity: 1, y: 0}}
+                                    transition={{duration: 1}}
+                                    viewport={{once: true}}
+                                >
+                                    <BlogPost {...post} />
+                                </motion.div>
+                            ))}
+                    </div>
+                </motion.div>
+            )}
+
 
         </section>
     )
