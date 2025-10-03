@@ -25,6 +25,7 @@ export const techStackMap: Record<string, string> = {
     "Laravel": "laravel",
     "Sass": "sass",
     "Postman": "postman",
+    'JavaScript': 'js',
     'TypeScript': 'typescript',
     'TailwindCSS': 'tailwindcss',
     'Node.js': 'nodejs',
