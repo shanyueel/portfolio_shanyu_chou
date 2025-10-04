@@ -123,7 +123,7 @@ export default function Home() {
                 viewport={{once: true}}
                 className="mt-16"
             >
-                <ViewAllHeader title="Work & Experience" pageUrl="/work" itemCount={work.length}/>
+                <ViewAllHeader title="Work Experience" pageUrl="/work" itemCount={work.length}/>
                 <div className="grid gap-4">
                     {work.slice(0, 3).map((job, i) => (
                         <motion.div
