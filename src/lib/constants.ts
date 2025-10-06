@@ -50,7 +50,9 @@ export const techStackMap: Record<string, string> = {
     'Spring': 'spring',
     'Spring Boot': 'spring',
     'Git': 'git',
-    'GitLab': 'gitlab'
+    'GitLab': 'gitlab',
+    'Adobe Photoshop': 'ps',
+    'Adobe Illustrator': 'ai',
 }
 
 /**
