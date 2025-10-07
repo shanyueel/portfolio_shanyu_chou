@@ -12,7 +12,7 @@ const projects = [
         slug: 'wildSync',
         title: 'WildSync',
         image: '/projects/pictureA.jpg',
-        description: 'A platform for users to register, organize, and participate in outdoor activities.',
+        description: 'A social platform that connects outdoor enthusiasts, allowing them to plan activities, discover new adventures, and meet like-minded people.',
         startDate: '2023-06',
         endDate: '2023-09',
         techStack: ['React', 'Redux', 'Firebase'],

@@ -1,44 +1,40 @@
 ---
-title: "Project YouNovate"
-teamSize: 4
-role: "Full-Stack Developer"
-description: "Project YouNovate is a cutting-edge platform designed to revolutionize the way teams collaborate on software development projects."
-duration: "01/2023–06/2023"
+title: "WildSync - Outdoor Activity Platform"
+teamSize: 1
+role: "Product Designer & Frontend Developer"
+description: "A social platform that connects outdoor enthusiasts, allowing them to plan activities, discover new adventures, and meet like-minded people."
+duration: "06/2023–09/2023"
 techStack:
   - React
-  - TypeScript
-  - TailwindCSS
-  - Node.js
-  - PostgreSQL
-  - aws
-githubUrl: "https://github.com/project-YouNovate"
+  - Redux
+  - Firebase
+githubUrl: "https://github.com/shanyueel/wild_sync_with_react"
 ---
 
 # Introduction
 
-Project YouNovate is a comprehensive collaboration platform tailored for software development teams. It combines task management, real-time communication, and code integration into a single, seamless experience.
+WildSync is a social platform designed to connect outdoor enthusiasts. It allows users to plan activities, discover new adventures, and meet like-minded people who share a passion for the outdoors.
 
 ## Key Features
 
-- **Task Management**: A Kanban-style board for tracking tasks, sprints, and milestones.
-- **Real-Time Collaboration**: Integrated chat and video conferencing for team discussions.
-- **Code Integration**: Direct integration with GitHub for pull requests, issue tracking, and code reviews.
-- **Analytics Dashboard**: Visualize team performance with metrics like velocity, code churn, and deployment frequency.
+- **User Management**: Allow user to register, login, and manage their personal profile, including basic information, avatar photo, and personal page banner image.
+- **Activities List**: Browse and search for outdoor activities based on event difficulty, time, and location, with pagination for easy navigation.
+- **Activity Page**: Display detailed information about each activity, allowing holder to create, edit, and delete and participants to like, join or leave activities.
+- **Personal Page**: Showcase user's personal information and avatar, listing out their created and joined activities for others to view.
+- **Browse History & Like**: Keep track of recently viewed and liked activities to assist users in finding activities they are interested in.
 
 ## Technical Insights
 
-- **Frontend**: Built with React and TypeScript, the UI is highly responsive and optimized for performance. TailwindCSS was used for rapid prototyping and consistent styling.
-- **Backend**: A Node.js server with an Express framework powers the API, ensuring scalability and reliability.
-- **Database**: PostgreSQL was chosen for its robust relational data handling, with Sequelize as the ORM.
-- **Cloud Infrastructure**: Hosted on AWS, leveraging services like EC2, S3, and RDS for deployment, storage, and database management.
-- **CI/CD Pipeline**: Implemented using GitHub Actions for automated testing, linting, and deployment.
+- **Frontend**: Built with React for a dynamic and responsive user interface, allowing components to be reused and managed efficiently.
+- **Database**: Utilized Firebase Firestore for real-time data storage and retrieval, ensuring seamless synchronization across devices.
+- **State Management**: Implemented Redux for efficient state management, enabling predictable state transitions and maintaining single source of truth.
 
 ## Challenges and Solutions
 
-- **Real-Time Communication**: Implemented WebSocket-based communication for chat and notifications, ensuring low latency.
-- **Scalability**: Designed the backend with a microservices architecture to handle increasing user loads.
-- **Security**: Integrated OAuth 2.0 for secure authentication and role-based access control.
+- **State Management**: Overcame challenges in managing complex state interactions by leveraging Redux, ensuring a consistent and predictable application state.
+- **Data Fetching**: Optimized data fetching strategies to reduce load times and improve user experience, especially for activities list with pagination.
+- **Deployment**: Successfully deployed the application on Github Page, ensuring reliable access and performance.
 
 ## Outcome
 
-Project YouNovate was successfully deployed and adopted by several development teams, improving their productivity and collaboration. The platform received positive feedback for its intuitive design and robust feature set.
+WildSync demonstrates effective use of React, Firebase, and Redux to create a seamless user experience.
