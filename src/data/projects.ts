@@ -3,10 +3,10 @@ const projects = [
         slug: 'portfolio',
         title: 'Portfolio',
         image: '/projects/pictureA.jpg',
-        description: 'A website to display personal experience, projects and blog posts.',
+        description: 'A personal branding platform designed and engineered to showcase my career and experience for an international recruiters and hiring managers.',
         startDate: '2025-09',
         endDate: 'Present',
-        techStack: ['Nextjs', 'React', 'Typescript', 'TailwindCSS'],
+        techStack: ['Nextjs', 'React', 'Typescript', 'TailwindCSS', 'Vercel'],
     },
     {
         slug: 'wildSync',

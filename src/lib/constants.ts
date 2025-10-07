@@ -53,6 +53,7 @@ export const techStackMap: Record<string, string> = {
     'GitLab': 'gitlab',
     'Adobe Photoshop': 'ps',
     'Adobe Illustrator': 'ai',
+    'Vercel': 'vercel',
 }
 
 /**
