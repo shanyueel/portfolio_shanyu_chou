@@ -69,6 +69,7 @@ export default async function ProjectPage(props: { params: pageParams }) {
                 <div className="mb-4">
                     <Link
                         href={frontmatter.githubUrl}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center text-gray-800 dark:text-gray-100 hover:text-blue-600 transition"
                     >
