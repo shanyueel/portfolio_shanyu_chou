@@ -58,7 +58,8 @@ export const techStackMap: Record<string, string> = {
     'ExpressJS': 'expressjs',
     'Heroku': 'heroku',
     'React Router': 'reactrouter',
-    'Figma': 'figma'
+    'Figma': 'figma',
+    'Redux': 'redux'
 }
 
 /**

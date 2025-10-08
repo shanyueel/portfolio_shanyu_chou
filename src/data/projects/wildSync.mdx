@@ -5,9 +5,17 @@ role: "Product Designer & Frontend Developer"
 description: "A social platform that connects outdoor enthusiasts, allowing them to plan activities, discover new adventures, and meet like-minded people."
 duration: "06/2023–09/2023"
 techStack:
-  - React
-  - Redux
-  - Firebase
+  frontend:
+    - React
+    - React Router
+    - Redux
+    - Styled Components
+    - Sass
+  backend:
+    - Firebase
+  tools:
+    - Git
+    - GitHub
 githubUrl: "https://github.com/shanyueel/wild_sync_with_react"
 ---
 
@@ -17,24 +25,38 @@ WildSync is a social platform designed to connect outdoor enthusiasts. It allows
 
 ## Key Features
 
-- **User Management**: Allow user to register, login, and manage their personal profile, including basic information, avatar photo, and personal page banner image.
-- **Activities List**: Browse and search for outdoor activities based on event difficulty, time, and location, with pagination for easy navigation.
-- **Activity Page**: Display detailed information about each activity, allowing holder to create, edit, and delete and participants to like, join or leave activities.
-- **Personal Page**: Showcase user's personal information and avatar, listing out their created and joined activities for others to view.
-- **Browse History & Like**: Keep track of recently viewed and liked activities to assist users in finding activities they are interested in.
+- **User Management**: Allow user to register, login, and manage their personal profile, including basic information, avatar, and cover image.
+- **Personal Page**: Showcase user's personal information and avatar, listing out activities they created, joined or liked for other users to view.
+- **Activity List**: Users can browse a list of all available activities. They can also search for specific activities based on keywords, activity type, location, and date.
+- **Activity Page**: Each activity has its dedicated page displaying detailed information, including activity details, additional memos, and a list of attendees.
+- **User Interactions**: Users can create or join interesting activities, and leave activities they previously joined. They can also like activities for later reference.
+
 
 ## Technical Insights
 
-- **Frontend**: Built with React for a dynamic and responsive user interface, allowing components to be reused and managed efficiently.
-- **Database**: Utilized Firebase Firestore for real-time data storage and retrieval, ensuring seamless synchronization across devices.
-- **State Management**: Implemented Redux for efficient state management, enabling predictable state transitions and maintaining single source of truth.
+- **Frontend components**: Built with React for a dynamic and responsive user interface, allowing components to be reused and managed efficiently.
+- **Firebase Solution**: Utilized Firebase for authentication, database, and hosting, securing user management and enabling data synchronization with Firestore's APIs.
+- **State Management**: Implemented Redux for efficient state management, enabling predictable state transitions and maintaining single source of truth for important and frequently accessed data.
+- **Responsive Design**: The application is designed to work well on a variety of devices, including desktops, tablets, and mobile phones.
 
 ## Challenges and Solutions
 
-- **State Management**: Overcame challenges in managing complex state interactions by leveraging Redux, ensuring a consistent and predictable application state.
-- **Data Fetching**: Optimized data fetching strategies to reduce load times and improve user experience, especially for activities list with pagination.
-- **Deployment**: Successfully deployed the application on Github Page, ensuring reliable access and performance.
+- **State Management**:
+  - **Challenge**: React Context API was not sufficient for managing complex state interactions, especially with user authentication and activity data.
+  - **Solution**: Learned and leveraged Redux to manage the application state, ensuring a consistent and predictable state across the application.
+- **Complex Data Fetching**:
+  - **Challenge**: The data for the activities list could be large, leading to performance issues and slow load times.
+  - **Solution**: Implemented optimized data fetching strategies, including pagination and selective data loading, to improve performance and user experience.
+- **Deployment**:
+  - **Challenge**: Ensuring the application is reliably deployed and accessible to users across the world.
+  - **Solution**: Successfully deployed the application on Github Page, making it easy to access for all users.
 
 ## Outcome
 
-WildSync demonstrates effective use of React, Firebase, and Redux to create a seamless user experience.
+- Introduced Redux to replace React Context API, reducing prop drilling and cutting redundant Firestore reads (leaner data flow, easier debugging).
+- Applied Firebase services (Authentication, Firestore, Hosting) to build a full-stack web application with secure user management and real-time data synchronization.
+- Implemented pagination and selective field querying to keep initial activity list lightweight and responsive.
+- Built a responsive UI system (desktop / tablet / mobile) using Styled Components + Sass utilities.
+- Deployed to GitHub Pages with a reproducible build pipeline, demonstrating end‑to‑end delivery capability.
+
+This project strengthened my full‑stack thinking (data modeling, auth flows, optimistic updates) and showcases my ability to scope, build, and launch a complete web application independently.
