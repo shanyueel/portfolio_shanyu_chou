@@ -28,7 +28,7 @@ export const techStackMap: Record<string, string> = {
     'JavaScript': 'js',
     'TypeScript': 'typescript',
     'TailwindCSS': 'tailwindcss',
-    'Node.js': 'nodejs',
+    'NodeJS': 'nodejs',
     'NextJS': 'nextjs',
     'aws': 'aws',
     'MongoDB': 'mongodb',
@@ -51,9 +51,14 @@ export const techStackMap: Record<string, string> = {
     'Spring Boot': 'spring',
     'Git': 'git',
     'GitLab': 'gitlab',
+    'GitHub': 'github',
     'Adobe Photoshop': 'ps',
     'Adobe Illustrator': 'ai',
     'Vercel': 'vercel',
+    'ExpressJS': 'expressjs',
+    'Heroku': 'heroku',
+    'React Router': 'reactrouter',
+    'Figma': 'figma'
 }
 
 /**

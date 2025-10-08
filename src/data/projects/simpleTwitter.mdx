@@ -1,12 +1,25 @@
 ---
-title: "Simple Twitter"
+title: 'Simple Twitter'
 teamSize: 4
-role: "Frontend Engineer"
-description: "Simple Twitter is a minimalist social media app that allows users to post short messages and follow others."
-duration: "03/2023–04/2023"
+role: 'Frontend Engineer'
+description: 'Simple Twitter is a minimalist social media app that allows users to post short messages and follow others.'
+duration: '03/2023–04/2023'
 techStack:
-  - React
-githubUrl: "https://github.com/Noseble/simple-twitter"
+  frontend:
+    - React
+    - React Router
+    - Styled Components
+    - Axios
+  backend:
+    - ExpressJS
+    - NodeJS
+    - Heroku
+  tools:
+    - Git
+    - GitHub
+    - Postman
+    - Figma
+githubUrl: 'https://github.com/Noseble/simple-twitter'
 ---
 
 # Introduction
@@ -15,24 +28,40 @@ Simple Twitter is a minimalist social media application designed to provide user
 
 ## Key Features
 
-- **Expense Tracking**: Automatically categorizes transactions and provides spending insights.
-- **Budget Planning**: Suggests budgets based on user income and spending patterns.
-- **Goal Setting**: Helps users set and achieve financial goals with actionable recommendations.
-- **AI Chatbot**: Provides real-time financial advice through a conversational interface.
+**User Features**:
+- **Authentication**: Users can sign up for a new account or log in to an existing one.
+- **User Profiles**: Each user has a profile page displaying their tweets, replies, and liked tweets.
+- **Profile Editing**: Users can edit their personal information, including name, introduction, avatar, and background image.
+- **Tweeting & Engagement**: Users can create & post new tweets. They can also reply to and like tweets from other users.
+- **Following System**: Users can follow and unfollow other users to customize their social network.
+- **Timeline**: The main page displays a timeline of all users' tweets.
+
+**Admin Features**:
+- **Independent Entry**: A separate login and web page for administrators to manage the platform.
+- **Tweet Management**: Administrators can view all tweets posted by users and have the ability to delete any tweet.
+- **User Management**: Administrators can view a list of all registered users on the platform.
 
 ## Technical Insights
 
-- **AI Models**: Built predictive models using TensorFlow to analyze spending patterns and forecast future expenses.
-- **Backend**: Developed a Flask API to handle user data and integrate AI functionalities.
-- **Mobile App**: Created a cross-platform app using React Native for iOS and Android.
-- **Database**: Used MongoDB for storing user data securely and efficiently.
+- **Component Architecture**: Extracted reusable <b>React</b> components from design draft to ensure consistency and maintainability.
+- **Clean Styling**: Used <b>Styled Components</b> for modular and reusable CSS-in-JS styling in React components.
+- **State Management**: Managed complex state across multiple components using <b>React's Context API</b>.
+- **API Integration**: Used <b>Axios</b> to handle HTTP requests to the backend server for user authentication, tweet management, and profile updates.
+- **Routing**: Implemented <b>React Router</b> for navigation between different pages and user profiles.
 
 ## Challenges and Solutions
 
-- **Data Privacy**: Implemented encryption and anonymization techniques to protect user data.
-- **Accuracy**: Trained AI models on diverse datasets to improve prediction accuracy.
-- **Integration**: Ensured seamless integration of AI features with the mobile app.
+- **Team Coordination**:
+  - **Challenge**: Team members have different schedules, making it hard to gather everyone to discuss project details frequently.
+  - **Solution**: Utilize Agile development practices, including daily stand-ups and sprint planning meetings, to ensure effective communication and collaboration.
+- **Backend API Document**:
+  - **Challenge**: Frontend engineers must wait for backend engineers to complete the API features before they can start development.
+  - **Solution**: Use Postman to align API documentation with backend engineers, allowing frontend engineers to start development in parallel.
 
 ## Outcome
 
-Project FinAI was launched on app stores and received positive feedback for its user-friendly interface and accurate financial insights. It helped users save an average of 15% on monthly expenses.
+- Delivered a responsive front-end with ~18 reusable React components, reducing style/markup duplication by ~35%.
+- Established a shared API spec (Postman collection), enabling frontend to start ~3 days earlier than original plan.
+- Implemented Context-based state to remove >20 prop-drilling paths and simplify maintenance.
+
+This project strengthened my React component design, state management, and API integration collaboration skills, improving my ability to work in a multi-role team environment.
