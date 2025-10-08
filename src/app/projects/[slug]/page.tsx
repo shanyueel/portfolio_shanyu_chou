@@ -43,7 +43,7 @@ export default async function ProjectPage(props: { params: pageParams }) {
 
     const {content, frontmatter} = await compileMDX<{
         title: string
-        techStack: string[]
+        techStack: Record<string, string[]>
         teamSize: string
         role: string
         duration: string
@@ -103,15 +103,24 @@ export default async function ProjectPage(props: { params: pageParams }) {
                     <BsStack></BsStack>
                     <h2 className="text-xl font-semibold">Tech Stack</h2>
                 </div>
-                <ul className="flex flex-wrap gap-4">
-                    {frontmatter.techStack?.map((tech) => (
-                        <li key={tech} className="flex items-center gap-2">
-                            <StackIcon
-                                name={techStackMap[tech] || tech}
-                                style={{width: '24px', height: '24px'}}
-                            />
-                            <span>{tech}</span>
-                        </li>
+                <ul className="flex flex-col gap-1">
+                    { Object.entries(frontmatter.techStack || {}).map(([category, technologies]) => (
+                        <div key={category} className="flex">
+                            <h3 className="text-lg font-medium capitalize mb-2 text-gray-700 dark:text-gray-300">
+                                {category}:
+                            </h3>
+                            <ul className="flex flex-wrap gap-4 ml-4">
+                                {technologies.map((tech) => (
+                                    <li key={tech} className="flex items-center gap-2">
+                                        <StackIcon
+                                            name={techStackMap[tech] || tech}
+                                            style={{width: '24px', height: '24px'}}
+                                        />
+                                        <span>{tech}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     ))}
                 </ul>
             </div>
