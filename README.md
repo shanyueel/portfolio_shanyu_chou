@@ -56,35 +56,35 @@ homepage.
 
 Planned improvements and current/future features:
 
-- [X] 🖥️ Create pages for:
-    - [X] Home
-    - [X] Work
-    - [X] Projects
-    - [X] Blog
-- [X] 📺 Add UI components/elements for:
-    - [X] Header with navigation
-    - [X] Footer
-    - [X] Home page with a hero section
-- [X] 📄 Enable MDX for:
-    - [X] Individual Work pages
-    - [X] Blog post pages
-    - [X] Project detail pages
-- [X] 👨🏻‍💻 MDX Syntax Highlighting for code blocks
-- [X] 🌙 Add light/dark mode support
-- [X] 🖼️ Add a Carousel component to display images/highlights for work/projects/blog posts
-- [X] 🔍 Improve content structure, accessibility, and SEO
+- [x] 🖥️ Create pages for:
+  - [x] Home
+  - [x] Work
+  - [x] Projects
+  - [x] Blog
+- [x] 📺 Add UI components/elements for:
+  - [x] Header with navigation
+  - [x] Footer
+  - [x] Home page with a hero section
+- [x] 📄 Enable MDX for:
+  - [x] Individual Work pages
+  - [x] Blog post pages
+  - [x] Project detail pages
+- [x] 👨🏻‍💻 MDX Syntax Highlighting for code blocks
+- [x] 🌙 Add light/dark mode support
+- [x] 🖼️ Add a Carousel component to display images/highlights for work/projects/blog posts
+- [x] 🔍 Improve content structure, accessibility, and SEO
 - [ ] 🧪 Add tests and linting support for better maintainability
 - [ ] ❔ Add guides (i.e., READMEs) for creating blog/project/work pages
-- [X] 🔢 Add sorting/filtering functionality for:
-    - [X] Work items
-    - [X] Projects
-    - [X] Blog posts
+- [x] 🔢 Add sorting/filtering functionality for:
+  - [x] Work items
+  - [x] Projects
+  - [x] Blog posts
 - [ ] 🖼 Add theme customization options:
-    - [ ] Color palette
-    - [ ] Layout options
-- [X] 📄 Add recommended similar blog posts items to the bottom of each blog post
+  - [ ] Color palette
+  - [ ] Layout options
+- [x] 📄 Add recommended similar blog posts items to the bottom of each blog post
 - [ ] 📄 Add blog post categories pages
-- [X] 📄 Add pagination to blog posts
+- [x] 📄 Add pagination to blog posts
 
 ---
 
