@@ -6,14 +6,13 @@ import rehypeHighlight from "rehype-highlight"
 import Link from "next/link"
 import projects from "@/data/projects"
 import StackIcon from "tech-stack-icons"
-import { BsStack, BsCardImage } from "react-icons/bs"
-import { FaUsers, FaUserTie, FaClock, FaGithub } from "react-icons/fa"
+import { FaUsers, FaUserTie, FaClock, FaGithub, FaPlayCircle, FaLayerGroup } from "react-icons/fa"
 import AnimatedArticle from "@/components/ui/AnimatedArticle"
 import { techStackMap } from "@/lib/constants"
 import { pageParams } from "@/lib/types"
-import BackToPageButton from "@/components/ui/BackToPageButton"
 import remark_gfm from "remark-gfm"
 import ImageCarouselWrapper from "@/components/features/ImageCarouselWrapper"
+import TeamMembers from "@/components/features/project/TeamMembers"
 
 /**
  * Generate static parameters for the blog post pages to be pre-rendered.
@@ -43,28 +42,14 @@ export default async function ProjectPage(props: { params: pageParams }) {
 
   const { content, frontmatter } = await compileMDX<{
     title: string
-    techStack: string[]
-    teamSize: string
+    subtitle: string
+    introduction: string
     role: string
     duration: string
-    githubUrl?: string
-  }>({
-    source: mdxSource,
-    options: {
-      parseFrontmatter: true,
-      mdxOptions: {
-        remarkPlugins: [remark_gfm],
-        rehypePlugins: [rehypeHighlight],
-      },
-    },
-  })
-  const { content, frontmatter } = await compileMDX<{
-    title: string
     techStack: Record<string, string[]>
-    teamSize: string
-    role: string
-    duration: string
+    teamMembers?: Record<string, number>
     githubUrl?: string
+    liveDemoUrl?: string
   }>({
     source: mdxSource,
     options: {
@@ -75,117 +60,116 @@ export default async function ProjectPage(props: { params: pageParams }) {
       },
     },
   })
+
+  const showLinks = frontmatter.githubUrl || frontmatter.liveDemoUrl
 
   return (
     <AnimatedArticle>
-      <BackToPageButton pageUrl="/projects" />
-      <h1 className="text-3xl font-extrabold mb-4">{frontmatter.title}</h1>
+      <h1 className="text-3xl font-extrabold ">{frontmatter.title}</h1>
+      <h3 className="text-lg mb-4 text-gray-500">{frontmatter.subtitle}</h3>
 
-      {/* GitHub Link Section */}
-      {frontmatter.githubUrl && (
-        <div className="mb-4">
-          <Link
-            href={frontmatter.githubUrl}
-            rel="noopener noreferrer"
-            className="inline-flex items-center text-gray-800 dark:text-gray-100 hover:text-blue-600 transition"
-          >
-            <FaGithub className="mr-2 w-5 h-5" />
-            <span className="underline underline-offset-4">View on GitHub</span>
-          </Link>
+      {/* GitHub Link & Live Demo Section */}
+      {showLinks && (
+        <div className="flex gap-4 mb-4">
+          {frontmatter.githubUrl && (
+            <Link
+              href={frontmatter.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center text-gray-800 dark:text-gray-100 hover:text-blue-600 transition"
+            >
+              <FaGithub className="mr-1.5 w-5 h-5 text-gray-700 group-hover:text-blue-600" />
+              <span className="underline underline-offset-4">GitHub</span>
+            </Link>
+          )}
+          {frontmatter.liveDemoUrl && (
+            <Link
+              href={frontmatter.liveDemoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center text-gray-800 dark:text-gray-100 hover:text-blue-600 transition"
+            >
+              <FaPlayCircle className="mr-1.5 w-5 h-5 text-red-500 group-hover:text-blue-600" />
+              <span className="underline underline-offset-4">Live Demo</span>
+            </Link>
+          )}
         </div>
       )}
-      {/* GitHub Link Section */}
-      {frontmatter.githubUrl && (
-        <div className="mb-4">
-          <Link
-            href={frontmatter.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center text-gray-800 dark:text-gray-100 hover:text-blue-600 transition"
-          >
-            <FaGithub className="mr-2 w-5 h-5" />
-            <span className="underline underline-offset-4">View on GitHub</span>
-          </Link>
-        </div>
-      )}
+
+      {/* Project Introduction */}
+      <p className="mb-4">{frontmatter.introduction}</p>
 
       {/* Project Metadata */}
-      <div className="w-full mb-6 bg-gray-50 dark:bg-gray-800 p-5 rounded-xl shadow-md">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm sm:text-base">
-          <div className="flex items-center gap-2">
-            <FaUsers className="text-blue-500" />
-            <span>
-              <strong>Team Size:</strong> {frontmatter.teamSize}
-            </span>
-          </div>
+      <div className="mb-6 p-2 w-full bg-gray-50 dark:bg-gray-800 rounded-xl shadow-md">
+        <div className="grid grid-cols-1 gap-2 text-sm sm:grid-cols-2 sm:text-base">
           <div className="flex items-center gap-2">
             <FaUserTie className="text-green-500" />
             <span>
               <strong>Role:</strong> {frontmatter.role}
             </span>
           </div>
+
           <div className="flex items-center gap-2">
             <FaClock className="text-purple-500" />
             <span>
               <strong>Duration:</strong> {frontmatter.duration}
             </span>
           </div>
-        </div>
-      </div>
 
-      {/* Tech Stack Section */}
-      <div className="w-full mb-8">
-        <div className="flex items-center gap-2 mb-4" style={{ fontSize: "1.25rem" }}>
-          <BsStack></BsStack>
-          <h2 className="text-xl font-semibold">Tech Stack</h2>
-        </div>
-        <ul className="flex flex-wrap gap-4">
-          {frontmatter.techStack?.map(tech => (
-            <li key={tech} className="flex items-center gap-2">
-              <StackIcon
-                name={techStackMap[tech] || tech}
-                style={{ width: "24px", height: "24px" }}
-              />
-              <span>{tech}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-      {/* Tech Stack Section */}
-      <div className="w-full mb-8">
-        <div className="flex items-center gap-2 mb-4" style={{ fontSize: "1.25rem" }}>
-          <BsStack></BsStack>
-          <h2 className="text-xl font-semibold">Tech Stack</h2>
-        </div>
-        <ul className="flex flex-col gap-1">
-          {Object.entries(frontmatter.techStack || {}).map(([category, technologies]) => (
-            <div key={category} className="flex">
-              <h3 className="text-lg font-medium capitalize mb-2 text-gray-700 dark:text-gray-300">
-                {category}:
-              </h3>
-              <ul className="flex flex-wrap gap-4 ml-4">
-                {technologies.map(tech => (
-                  <li key={tech} className="flex items-center gap-2">
-                    <StackIcon
-                      name={techStackMap[tech] || tech}
-                      style={{ width: "24px", height: "24px" }}
-                    />
-                    <span>{tech}</span>
-                  </li>
+          {frontmatter.teamMembers && (
+            <div className="col-span-1  sm:col-span-2 flex items-center gap-2">
+              <FaUsers className="text-blue-500" />
+              <span>
+                <strong>Team:</strong>
+              </span>
+
+              <div className="flex gap-2">
+                {Object.entries(frontmatter.teamMembers).map(([role, count]) => (
+                  <TeamMembers key={role} role={role} count={count} />
                 ))}
-              </ul>
+              </div>
             </div>
-          ))}
-        </ul>
+          )}
+
+          <hr className="col-span-full border-gray-300" />
+
+          <div className="col-span-1  sm:col-span-2">
+            <div className="flex items-center gap-2">
+              <FaLayerGroup className="text-gray-500" />
+              <span>
+                <strong>Tech Stack</strong>
+              </span>
+            </div>
+            <div className="flex flex-col gap-1 mt-1">
+              {Object.entries(frontmatter.techStack || {}).map(([category, technologies]) => (
+                <div
+                  key={category}
+                  className="flex flex-col items-start sm:flex-row sm:items-center sm:ml-7"
+                >
+                  <h3 className="text-md font-bold capitalize text-gray-700 dark:text-gray-300">
+                    {category}:
+                  </h3>
+                  <ul className="flex flex-wrap gap-x-2 gap-y-1 ml-0 sm:gap-x-4 sm:ml-2">
+                    {technologies.map(tech => (
+                      <li key={tech} className="flex items-center gap-2">
+                        <StackIcon
+                          name={techStackMap[tech] || tech}
+                          style={{ width: "16px", height: "16px" }}
+                        />
+                        <span>{tech}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Image Carousel - Display project photos if available */}
       {fs.existsSync(projectPhotoDir) && fs.readdirSync(projectPhotoDir).length > 0 && (
         <div className="w-full">
-          <div className="flex items-center gap-2 mb-4" style={{ fontSize: "1.25rem" }}>
-            <BsCardImage></BsCardImage>
-            <h2 className="text-xl font-semibold">Project Gallery</h2>
-          </div>
           <ImageCarouselWrapper imageDir={`projects/${slug}`} altPrefix={frontmatter.title} />
         </div>
       )}

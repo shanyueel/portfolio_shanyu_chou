@@ -15,51 +15,50 @@ export const navItems = [
  * Temporary mapping for tech stack icons.
  */
 export const techStackMap: Record<string, string> = {
-  React: "reactjs",
-  Vue: "vuejs",
-  HTML5: "html5",
-  CSS3: "css3",
-  JQuery: "jquery",
-  Pinia: "pinia",
-  Storybook: "storybook",
-  Laravel: "laravel",
-  Sass: "sass",
-  Postman: "postman",
+  // programming languages
+  Python: "python",
   JavaScript: "js",
   TypeScript: "typescript",
-  TailwindCSS: "tailwindcss",
-  NodeJS: "nodejs",
+
+  // frameworks and environments
+  React: "react",
+  Redux: "redux",
+  "React Router": "reactrouter",
   NextJS: "nextjs",
-  aws: "aws",
-  MongoDB: "mongodb",
-  PostgreSQL: "postgresql",
-  Python: "python",
-  Flask: "flask",
-  Solidity: "solidity",
-  "C#": "csharp",
-  Firebase: "firebase",
-  "AWS IoT": "aws",
-  AWS: "aws",
-  "C++": "c++",
-  Azure: "azure",
-  Redis: "redis",
-  GraphQL: "graphql",
-  Docker: "docker",
-  Java: "java",
-  MySQL: "mysql",
-  Spring: "spring",
-  "Spring Boot": "spring",
+  Vue: "vuejs",
+  Pinia: "pinia",
+  NodeJS: "nodejs",
+  ExpressJS: "expressjs",
+  Laravel: "laravel",
+
+  // libraries
+  HTML5: "html5",
+  CSS3: "css3",
+  Sass: "sass",
+  TailwindCSS: "tailwindcss",
+  JQuery: "jquery",
+
+  // tools
   Git: "git",
-  GitLab: "gitlab",
   GitHub: "github",
+  GitLab: "gitlab",
+  Postman: "postman",
+  Storybook: "storybook",
+  Vercel: "vercel",
+  Heroku: "heroku",
+  Firebase: "firebase",
+  Figma: "figma",
+
+  // others
   "Adobe Photoshop": "ps",
   "Adobe Illustrator": "ai",
-  Vercel: "vercel",
-  ExpressJS: "expressjs",
-  Heroku: "heroku",
-  "React Router": "reactrouter",
-  Figma: "figma",
-  Redux: "redux",
+}
+
+export const roleAbbreviationMap: Record<string, string> = {
+  PO: "Product Owner",
+  "UI/UX": "UI/UX Designer",
+  FE: "Frontend Engineer",
+  BE: "Backend Engineer",
 }
 
 /**
