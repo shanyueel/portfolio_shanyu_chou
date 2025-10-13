@@ -49,14 +49,13 @@ const projects = [
     techStack: ["React", "Redux", "Firebase"],
   },
   {
-    slug: "simpleTwitter",
-    title: "Simple Twitter",
-    image: "/projects/pictureB.jpg",
-    description:
-      "A mock twitter website to practice frontend-backend cooperation and agile development.",
+    slug: "alphitter",
+    title: "Alphitter",
+    image: "/projects/img_alphitter_cover.jpg",
+    description: "A social media app that allows users to post short messages and follow others.",
     startDate: "2023-04",
     endDate: "2023-05",
-    techStack: ["React", "Postman"],
+    techStack: ["React", "React Router", "Styled Components", "Axios", ,"Figma", "Postman"],
   },
 ]
 
