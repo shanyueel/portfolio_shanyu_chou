@@ -3,8 +3,7 @@ const projects = [
     slug: "portfolio",
     title: "Portfolio",
     image: "/projects/pictureA.jpg",
-    description:
-      "A personal branding platform designed and engineered to showcase my career and experience for an international recruiters and hiring managers.",
+    description: "A personal branding platform designed and engineered to showcase my career and experience for an international recruiters and hiring managers.",
     startDate: "2025-09",
     endDate: "Present",
     techStack: ["Nextjs", "React", "Typescript", "TailwindCSS", "Vercel"],
