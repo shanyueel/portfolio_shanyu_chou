@@ -1,9 +1,11 @@
 ---
-title: "WildSync - Outdoor Activity Platform"
-teamSize: 1
-role: "Product Designer & Frontend Developer"
-description: "A social platform that connects outdoor enthusiasts, allowing them to plan activities, discover new adventures, and meet like-minded people."
-duration: "06/2023–09/2023"
+title: "WildSync"
+subtitle: "Outdoor Social Platform"
+githubUrl: "https://github.com/shanyueel/wild_sync_with_react"
+liveDemoUrl: "https://shanyueel.github.io/wild_sync_with_react"
+role: "Full-Stack Engineer"
+introduction: "WildSync is a social platform designed to connect outdoor enthusiasts. It allows users to plan activities, discover new adventures, and meet like-minded people who share a passion for the outdoors."
+duration: "Jun 2023 – Sep 2023"
 techStack:
   frontend:
     - React
@@ -16,12 +18,7 @@ techStack:
   tools:
     - Git
     - GitHub
-githubUrl: "https://github.com/shanyueel/wild_sync_with_react"
 ---
-
-# Introduction
-
-WildSync is a social platform designed to connect outdoor enthusiasts. It allows users to plan activities, discover new adventures, and meet like-minded people who share a passion for the outdoors.
 
 ## Key Features
 
@@ -34,29 +31,33 @@ WildSync is a social platform designed to connect outdoor enthusiasts. It allows
 
 ## Technical Insights
 
-- **Frontend components**: Built with React for a dynamic and responsive user interface, allowing components to be reused and managed efficiently.
-- **Firebase Solution**: Utilized Firebase for authentication, database, and hosting, securing user management and enabling data synchronization with Firestore's APIs.
-- **State Management**: Implemented Redux for efficient state management, enabling predictable state transitions and maintaining single source of truth for important and frequently accessed data.
+- **Frontend components**: Built with **React** for a dynamic and responsive user interface, allowing components to be reused and managed efficiently.
+- **Firebase Solution**: Utilized **Firebase** for authentication, database, and hosting, securing user management and enabling data synchronization with Firestore's APIs.
+- **State Management**: Implemented **Redux** for efficient state management, enabling predictable state transitions and maintaining single source of truth for important and frequently accessed data.
 - **Responsive Design**: The application is designed to work well on a variety of devices, including desktops, tablets, and mobile phones.
+- **Deployment**: Deployed the application on **GitHub Pages** and provided a test account in the README.md file, ensuring easy access for users worldwide.
 
 ## Challenges and Solutions
 
-- **State Management**:
-  - **Challenge**: React Context API was not sufficient for managing complex state interactions, especially with user authentication and activity data.
-  - **Solution**: Learned and leveraged Redux to manage the application state, ensuring a consistent and predictable state across the application.
-- **Complex Data Fetching**:
-  - **Challenge**: The data for the activities list could be large, leading to performance issues and slow load times.
-  - **Solution**: Implemented optimized data fetching strategies, including pagination and selective data loading, to improve performance and user experience.
-- **Deployment**:
-  - **Challenge**: Ensuring the application is reliably deployed and accessible to users across the world.
-  - **Solution**: Successfully deployed the application on Github Page, making it easy to access for all users.
+### Product Management:
+
+- **Challenge**: Being too ambitious and trying to get everything perfect at once caused the schedule to be delayed again and again.
+- **Solution**: Apply the **Minimum Viable Product (MVP)** principle by modularizing and prioritizing all features based on their strategic importance and business value. This allows for a swift initial launch, followed by an iterative process of rolling out the remaining functionalities as well-planned modules.
+
+### Backend Database:
+
+- **Challenge**: The project required a secure and real-time backend. Building one from scratch was not feasible for a solo developer aiming for rapid delivery.
+- **Solution**: Leveraged **Firebase** services (Authentication, Firestore) to build a full-stack web application with secure user management and real-time data synchronization. Gained experience in designing the database schema and structuring data by following Firebase official guidelines.
+
+### Global State:
+
+- **Challenge**: To display user information and authentication status across multiple pages, managing state with React Context API led to excessive prop drilling and redundant Firestore reads.
+- **Solution**: Introduced **Redux** to set different stores for managing global state, reducing prop drilling and cutting redundant Firestore reads. This resulted in a leaner data flow and easier debugging.
 
 ## Outcome
 
-- Introduced Redux to replace React Context API, reducing prop drilling and cutting redundant Firestore reads (leaner data flow, easier debugging).
-- Applied Firebase services (Authentication, Firestore, Hosting) to build a full-stack web application with secure user management and real-time data synchronization.
-- Implemented pagination and selective field querying to keep initial activity list lightweight and responsive.
-- Built a responsive UI system (desktop / tablet / mobile) using Styled Components + Sass utilities.
-- Deployed to GitHub Pages with a reproducible build pipeline, demonstrating end‑to‑end delivery capability.
+- Successfully delivered an end-to-end project within a 3-month timeframe, covering the entire development lifecycle from initial concept to final deployment. This experience provided a holistic understanding of product development.
+- By single-handedly managing the roles of product manager, designer, and developer, the experience not only strengthened my respective technical skills but also enabled me to foster more effective team collaboration and communication with different roles.
+- Proficiently acquired and applied new technologies and tools (e.g., Firebase, Redux) to develop efficient and effective solutions. This further honed my ability to quickly learn and adapt within dynamic development environments.
 
-This project strengthened my full‑stack thinking (data modeling, auth flows, optimistic updates) and showcases my ability to scope, build, and launch a complete web application independently.
+This project strengthened my product thinking and full‑stack thinking (data modeling, auth flows, optimistic updates), while showcasing my ability to scope, build, and launch a complete web application independently.

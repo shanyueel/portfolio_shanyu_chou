@@ -41,12 +41,12 @@ const projects = [
   {
     slug: "wildSync",
     title: "WildSync",
-    image: "/projects/pictureA.jpg",
+    image: "/projects/pictureC.jpg",
     description:
       "A social platform that connects outdoor enthusiasts, allowing them to plan activities, discover new adventures, and meet like-minded people.",
     startDate: "2023-06",
     endDate: "2023-09",
-    techStack: ["React", "Redux", "Firebase"],
+    techStack: ["React", "React Router", "Redux", "Styled Components", "Sass", "Firebase"],
   },
   {
     slug: "alphitter",
