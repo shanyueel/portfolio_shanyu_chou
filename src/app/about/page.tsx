@@ -4,6 +4,7 @@ import { TimelineItem } from "../../components/mdx/Timeline"
 import { Timeline } from "../../components/mdx/Timeline"
 import { FaDownload, FaShapes, FaUsers, FaSearch } from "react-icons/fa"
 import education from "@/data/education"
+import journey from "@/data/journey"
 
 export default function AboutPage() {
   return (
@@ -100,29 +101,18 @@ export default function AboutPage() {
       {/* Personal Journey */}
       <h2 className="text-2xl mb-4 font-bold">Personal Journey</h2>
       <Timeline>
-        <TimelineItem
-          title="Gap year - Military service and Career exploration"
-          duration="2020"
-          location="Taipei, Taiwan"
-        ></TimelineItem>
-
-        <TimelineItem
-          title="Color, Material, Finishing design for laptop company"
-          duration="2021 - 2022"
-          location="Taipei, Taiwan"
-        ></TimelineItem>
-
-        <TimelineItem
-          title="Changing careers from design to programming"
-          duration="2023"
-          location="Taipei, Taiwan"
-        ></TimelineItem>
-
-        <TimelineItem
-          title="E-commerce front-end development"
-          duration="2024 - 2025"
-          location="Taipei, Taiwan"
-        ></TimelineItem>
+        {journey.map((item, index) => (
+          <TimelineItem
+            key={index}
+            title={item.title}
+            duration={item.duration}
+            location={item.location}
+          >
+            {item.description.map((content, index) => (
+              <p key={index}>{content}</p>
+            ))}
+          </TimelineItem>
+        ))}
       </Timeline>
     </section>
   )
