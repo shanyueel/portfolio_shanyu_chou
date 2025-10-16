@@ -1,4 +1,14 @@
-const projects = [
+interface Project {
+  slug: string
+  title: string
+  image: string
+  description: string
+  startDate: string
+  endDate: string | "Present"
+  techStack: string[]
+}
+
+const projects: Project[] = [
   {
     slug: "portfolio",
     title: "Portfolio",
@@ -34,7 +44,7 @@ const projects = [
     description: "A social media app that allows users to post short messages and follow others.",
     startDate: "2023-04",
     endDate: "2023-05",
-    techStack: ["React", "React Router", "Styled Components", "Axios", ,"Figma", "Postman"],
+    techStack: ["React", "React Router", "Styled Components", "Axios", "Figma", "Postman"],
   },
 ]
 
