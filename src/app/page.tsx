@@ -96,37 +96,30 @@ export default function Home() {
           experience, including 2 years in a dynamic e-commerce team at Wabow Information Inc.
         </p>
 
-        {/* Current Work Description or other highlights */}
         <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-4xl mx-auto text-left">
           Leverages a background in Industrial Design to build intuitive and engaging user
           experiences with Typescript, Vue, and React. A quick learner adept at writing clean,
           robust, and maintainable code to solve complex problems and deliver high-quality web
           applications.
         </p>
-      </motion.div>
 
-      {/* Tech Stack */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-        className="text-center mt-2"
-      >
-        <hr className="my-4 border-gray-500" />
-        <div className="flex flex-wrap justify-center gap-4 my-4">
-          {techStack.map(tech => (
-            <div
-              key={tech}
-              className="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-sm"
-            >
-              <StackIcon
-                name={techStackMap[tech] || tech}
-                style={{ width: "24px", height: "24px" }}
-              />
-              <span>{tech}</span>
-            </div>
-          ))}
+        {/* Tech Stack */}
+        <div className="text-center mt-2">
+          <hr className="my-4 border-gray-500" />
+          <div className="flex flex-wrap justify-center gap-4 my-4">
+            {techStack.map(tech => (
+              <div
+                key={tech}
+                className="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-sm"
+              >
+                <StackIcon
+                  name={techStackMap[tech] || tech}
+                  style={{ width: "24px", height: "24px" }}
+                />
+                <span>{tech}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </motion.div>
 
@@ -141,15 +134,7 @@ export default function Home() {
         <ViewAllHeader title="Work Experience" pageUrl="/work" itemCount={work.length} />
         <div className="grid gap-4">
           {work.slice(0, 3).map((job, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
-              viewport={{ once: true }}
-            >
-              <WorkItem {...job} />
-            </motion.div>
+            <WorkItem key={i} {...job} />
           ))}
         </div>
       </motion.div>
@@ -159,25 +144,22 @@ export default function Home() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, amount: 0.3 }}
         className="mt-16"
       >
         <ViewAllHeader title="Recent Projects" pageUrl="/projects" itemCount={projects.length} />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
-          {projects.slice(0, 4).map(proj => {
+          {projects.slice(0, 4).map((proj, index) => {
             const filteredTechStack = proj.techStack.filter(
               (tech): tech is string => typeof tech === "string"
             )
             return (
-              <motion.div
+              <ProjectTile
                 key={proj.slug}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1 }}
-                viewport={{ once: true }}
-              >
-                <ProjectTile key={proj.slug} {...proj} techStack={filteredTechStack} />
-              </motion.div>
+                {...proj}
+                techStack={filteredTechStack}
+                priority={index < 2}
+              />
             )
           })}
         </div>
@@ -199,15 +181,7 @@ export default function Home() {
               .sort((a, b) => getTimeSafe(b.date) - getTimeSafe(a.date))
               .slice(0, 3)
               .map(post => (
-                <motion.div
-                  key={post.slug}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1 }}
-                  viewport={{ once: true }}
-                >
-                  <BlogPost {...post} />
-                </motion.div>
+                  <BlogPost key={post.slug} {...post} />
               ))}
           </div>
         </motion.div>

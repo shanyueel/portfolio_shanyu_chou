@@ -12,6 +12,7 @@ interface ProjectTileProps {
   techStack?: string[]
   startDate?: string
   endDate?: string
+  priority?: boolean
 }
 
 /**
@@ -19,7 +20,7 @@ interface ProjectTileProps {
  *
  * @param {Object} props - The prop object for the component, containing slug, title, and image.
  */
-export default function ProjectTile({ slug, title, image, description }: ProjectTileProps) {
+export default function ProjectTile({ slug, title, image, description, priority = false }: ProjectTileProps) {
   return (
     <Link href={`/projects/${slug}`} className="block group">
       <motion.div
@@ -41,7 +42,7 @@ export default function ProjectTile({ slug, title, image, description }: Project
       >
         {/* Image */}
         <div className="relative w-full h-48 overflow-hidden">
-          <Image src={image} alt={title} fill loading="lazy" className="object-cover" />
+          <Image src={image} alt={title} fill priority={priority} className="object-cover" quality={75} />
           <div className="absolute inset-0 bg-zinc-900/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <span className="text-white text-lg font-semibold">Explore {title} ➔</span>
           </div>
