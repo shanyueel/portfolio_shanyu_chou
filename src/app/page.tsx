@@ -1,6 +1,5 @@
 "use client"
 
-import StackIcon from "tech-stack-icons"
 import { motion } from "framer-motion"
 import type { IconType } from "react-icons"
 import {
@@ -107,18 +106,18 @@ export default function Home() {
         <div className="text-center mt-2">
           <hr className="my-4 border-gray-500" />
           <div className="flex flex-wrap justify-center gap-4 my-4">
-            {techStack.map(tech => (
-              <div
-                key={tech}
-                className="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-sm"
-              >
-                <StackIcon
-                  name={techStackMap[tech] || tech}
-                  style={{ width: "24px", height: "24px" }}
-                />
-                <span>{tech}</span>
-              </div>
-            ))}
+            {techStack.map(tech => {
+              const Icon = techStackMap[tech]
+              return (
+                <div
+                  key={tech}
+                  className="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-sm"
+                >
+                  {Icon && <Icon style={{ width: "20px", height: "20px" }} />}
+                  <span>{tech}</span>
+                </div>
+              )
+            })}
           </div>
         </div>
       </motion.div>
@@ -181,7 +180,7 @@ export default function Home() {
               .sort((a, b) => getTimeSafe(b.date) - getTimeSafe(a.date))
               .slice(0, 3)
               .map(post => (
-                  <BlogPost key={post.slug} {...post} />
+                <BlogPost key={post.slug} {...post} />
               ))}
           </div>
         </motion.div>

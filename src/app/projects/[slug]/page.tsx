@@ -5,7 +5,6 @@ import { compileMDX } from "next-mdx-remote/rsc"
 import rehypeHighlight from "rehype-highlight"
 import Link from "next/link"
 import projects from "@/data/projects"
-import StackIcon from "tech-stack-icons"
 import { FaUsers, FaUserTie, FaClock, FaGithub, FaPlayCircle, FaLayerGroup } from "react-icons/fa"
 import AnimatedArticle from "@/components/ui/AnimatedArticle"
 import { techStackMap } from "@/lib/constants"
@@ -150,15 +149,15 @@ export default async function ProjectPage(props: { params: pageParams }) {
                     {category}:
                   </h3>
                   <ul className="flex flex-wrap gap-x-2 gap-y-1 ml-0 sm:gap-x-4 sm:ml-2">
-                    {technologies.map(tech => (
-                      <li key={tech} className="flex items-center gap-2">
-                        <StackIcon
-                          name={techStackMap[tech] || tech}
-                          style={{ width: "16px", height: "16px" }}
-                        />
-                        <span>{tech}</span>
-                      </li>
-                    ))}
+                    {technologies.map(tech => {
+                      const Icon = techStackMap[tech]
+                      return (
+                        <li key={tech} className="flex items-center gap-2">
+                          {Icon && <Icon style={{ width: "20px", height: "20px" }} />}
+                          <span>{tech}</span>
+                        </li>
+                      )
+                    })}
                   </ul>
                 </div>
               ))}

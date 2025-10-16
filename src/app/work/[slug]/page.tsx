@@ -5,7 +5,6 @@ import { compileMDX } from "next-mdx-remote/rsc"
 import rehypeHighlight from "rehype-highlight"
 import work from "@/data/work"
 import AnimatedArticle from "@/components/ui/AnimatedArticle"
-import StackIcon from "tech-stack-icons"
 import { techStackMap } from "@/lib/constants"
 import { Timeline, TimelineItem } from "@/components/mdx/Timeline"
 import { pageParams } from "@/lib/types"
@@ -68,33 +67,35 @@ export default async function WorkItemPage(props: { params: pageParams }) {
 
       <h2 className="text-xl font-semibold mb-6">Tech Stack & Tools used</h2>
       <div className="flex flex-wrap gap-4">
-        {frontmatter.techStack?.map(tech => (
-          <div
-            key={tech}
-            className="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-sm"
-          >
-            <StackIcon
-              name={techStackMap[tech] || tech}
-              style={{ width: "24px", height: "24px" }}
-            />
-            <span>{tech}</span>
-          </div>
-        ))}
+        {frontmatter.techStack?.map(tech => {
+          const Icon = techStackMap[tech]
+
+          return (
+            <div
+              key={tech}
+              className="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-sm"
+            >
+              {Icon && <Icon style={{ width: "20px", height: "20px" }} />}
+              <span>{tech}</span>
+            </div>
+          )
+        })}
       </div>
       <hr className="w-full my-4 border-1 border-gray-300" />
       <div className="flex flex-wrap gap-4 mb-8">
-        {frontmatter.toolsUsed?.map(tool => (
-          <div
-            key={tool}
-            className="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-sm"
-          >
-            <StackIcon
-              name={techStackMap[tool] || tool}
-              style={{ width: "24px", height: "24px" }}
-            />
-            <span>{tool}</span>
-          </div>
-        ))}
+        {frontmatter.toolsUsed?.map(tool => {
+          const Icon = techStackMap[tool]
+
+          return (
+            <div
+              key={tool}
+              className="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-sm"
+            >
+              {Icon && <Icon style={{ width: "20px", height: "20px" }} />}
+              <span>{tool}</span>
+            </div>
+          )
+        })}
       </div>
 
       <div className="max-w-5xl prose dark:prose-invert">{content}</div>

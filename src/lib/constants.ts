@@ -1,4 +1,35 @@
 import packageJson from "../../package.json"
+import type { IconType } from "react-icons"
+import {
+  SiPython,
+  SiJavascript,
+  SiTypescript,
+  SiReact,
+  SiRedux,
+  SiReactrouter,
+  SiNextdotjs,
+  SiVuedotjs,
+  SiNodedotjs,
+  SiExpress,
+  SiLaravel,
+  SiHtml5,
+  SiCss3,
+  SiSass,
+  SiTailwindcss,
+  SiJquery,
+  SiGit,
+  SiGithub,
+  SiGitlab,
+  SiPostman,
+  SiStorybook,
+  SiVercel,
+  SiHeroku,
+  SiFirebase,
+  SiFigma,
+  SiAdobephotoshop,
+  SiAdobeillustrator,
+} from "react-icons/si"
+import { GiPineapple } from "react-icons/gi"
 
 /**
  * Array of navigation items for the website (i.e. paths/pages to navigate to).
@@ -12,46 +43,46 @@ export const navItems = [
 ]
 
 /**
- * Temporary mapping for tech stack icons.
+ * Mapping for tech stack icons from strings to react-icons components.
  */
-export const techStackMap: Record<string, string> = {
+export const techStackMap: Record<string, IconType> = {
   // programming languages
-  Python: "python",
-  JavaScript: "js",
-  TypeScript: "typescript",
+  Python: SiPython,
+  JavaScript: SiJavascript,
+  TypeScript: SiTypescript,
 
   // frameworks and environments
-  React: "react",
-  Redux: "redux",
-  "React Router": "reactrouter",
-  NextJS: "nextjs",
-  Vue: "vuejs",
-  Pinia: "pinia",
-  NodeJS: "nodejs",
-  ExpressJS: "expressjs",
-  Laravel: "laravel",
+  React: SiReact,
+  Redux: SiRedux,
+  "React Router": SiReactrouter,
+  NextJS: SiNextdotjs,
+  Vue: SiVuedotjs,
+  Pinia: GiPineapple,
+  NodeJS: SiNodedotjs,
+  ExpressJS: SiExpress,
+  Laravel: SiLaravel,
 
   // libraries
-  HTML5: "html5",
-  CSS3: "css3",
-  Sass: "sass",
-  TailwindCSS: "tailwindcss",
-  JQuery: "jquery",
+  HTML5: SiHtml5,
+  CSS3: SiCss3,
+  Sass: SiSass,
+  TailwindCSS: SiTailwindcss,
+  JQuery: SiJquery,
 
   // tools
-  Git: "git",
-  GitHub: "github",
-  GitLab: "gitlab",
-  Postman: "postman",
-  Storybook: "storybook",
-  Vercel: "vercel",
-  Heroku: "heroku",
-  Firebase: "firebase",
-  Figma: "figma",
+  Git: SiGit,
+  GitHub: SiGithub,
+  GitLab: SiGitlab,
+  Postman: SiPostman,
+  Storybook: SiStorybook,
+  Vercel: SiVercel,
+  Heroku: SiHeroku,
+  Firebase: SiFirebase,
+  Figma: SiFigma,
 
   // others
-  "Adobe Photoshop": "ps",
-  "Adobe Illustrator": "ai",
+  "Adobe Photoshop": SiAdobephotoshop,
+  "Adobe Illustrator": SiAdobeillustrator,
 }
 
 export const roleAbbreviationMap: Record<string, string> = {
