@@ -55,7 +55,6 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
           alt={`${altPrefix} ${current + 1}`}
           fill
           className="object-contain select-none"
-          priority
         />
 
         {/* Right Arrow */}
