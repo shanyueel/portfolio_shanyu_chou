@@ -68,14 +68,20 @@ export default async function WorkItemPage(props: { params: pageParams }) {
       <h2 className="text-xl font-semibold mb-6">Tech Stack & Tools used</h2>
       <div className="flex flex-wrap gap-4">
         {frontmatter.techStack?.map(tech => {
-          const Icon = techStackMap[tech]
+          const { icon: Icon, color, darkColor } = techStackMap[tech]
 
           return (
             <div
               key={tech}
               className="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-sm"
+              style={{
+                ["--text-c"]: color,
+                ["--text-c-dark"]: darkColor ?? color,
+              }}
             >
-              {Icon && <Icon style={{ width: "20px", height: "20px" }} />}
+              {Icon && (
+                <Icon size={20} className="text-[var(--text-c)] dark:text-[var(--text-c-dark)]" />
+              )}
               <span>{tech}</span>
             </div>
           )
@@ -84,14 +90,14 @@ export default async function WorkItemPage(props: { params: pageParams }) {
       <hr className="w-full my-4 border-1 border-gray-300" />
       <div className="flex flex-wrap gap-4 mb-8">
         {frontmatter.toolsUsed?.map(tool => {
-          const Icon = techStackMap[tool]
+          const { icon: Icon, color } = techStackMap[tool]
 
           return (
             <div
               key={tool}
               className="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-sm"
             >
-              {Icon && <Icon style={{ width: "20px", height: "20px" }} />}
+              {Icon && <Icon style={{ width: "20px", height: "20px", color }} />}
               <span>{tool}</span>
             </div>
           )

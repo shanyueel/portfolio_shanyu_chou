@@ -107,13 +107,22 @@ export default function Home() {
           <hr className="my-4 border-gray-500" />
           <div className="flex flex-wrap justify-center gap-4 my-4">
             {techStack.map(tech => {
-              const Icon = techStackMap[tech]
+              const { icon: Icon, color, darkColor } = techStackMap[tech]
               return (
                 <div
                   key={tech}
                   className="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-sm"
+                  style={{
+                    ["--text-c"]: color,
+                    ["--text-c-dark"]: darkColor ?? color,
+                  }}
                 >
-                  {Icon && <Icon style={{ width: "20px", height: "20px" }} />}
+                  {Icon && (
+                    <Icon
+                      className="text-[var(--text-c)] dark:text-[var(--text-c-dark)]"
+                      size={20}
+                    />
+                  )}
                   <span>{tech}</span>
                 </div>
               )

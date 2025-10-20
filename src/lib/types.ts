@@ -1,3 +1,5 @@
+export type ColorHex = `#${string}`
+
 /**
  * @description This type is used to define the params for a dynamic route in Next.js.
  */

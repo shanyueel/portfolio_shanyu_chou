@@ -150,10 +150,22 @@ export default async function ProjectPage(props: { params: pageParams }) {
                   </h3>
                   <ul className="flex flex-wrap gap-x-2 gap-y-1 ml-0 sm:gap-x-4 sm:ml-2">
                     {technologies.map(tech => {
-                      const Icon = techStackMap[tech]
+                      const { icon: Icon, color, darkColor } = techStackMap[tech]
                       return (
-                        <li key={tech} className="flex items-center gap-2">
-                          {Icon && <Icon style={{ width: "20px", height: "20px" }} />}
+                        <li
+                          key={tech}
+                          className="flex items-center gap-2"
+                          style={{
+                            ["--text-c"]: color,
+                            ["--text-c-dark"]: darkColor ?? color,
+                          }}
+                        >
+                          {Icon && (
+                            <Icon
+                              size={20}
+                              className="text-[var(--text-c)] dark:text-[var(--text-c-dark)]"
+                            />
+                          )}
                           <span>{tech}</span>
                         </li>
                       )

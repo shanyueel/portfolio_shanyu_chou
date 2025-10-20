@@ -1,5 +1,6 @@
 import packageJson from "../../package.json"
 import type { IconType } from "react-icons"
+import type { ColorHex } from "./types"
 import {
   SiPython,
   SiJavascript,
@@ -28,12 +29,14 @@ import {
   SiFigma,
   SiAdobephotoshop,
   SiAdobeillustrator,
+  SiAxios,
 } from "react-icons/si"
 import { GiPineapple } from "react-icons/gi"
+import { IoIosAperture } from "react-icons/io"
+import { PiMicrosoftPowerpointLogoFill } from "react-icons/pi"
+import { FaCode } from "react-icons/fa"
 
-/**
- * Array of navigation items for the website (i.e. paths/pages to navigate to).
- */
+/* Array of navigation items for the website. */
 export const navItems = [
   { name: "Home", path: "/" },
   { name: "Work", path: "/work" },
@@ -42,49 +45,58 @@ export const navItems = [
   { name: "About", path: "/about" },
 ]
 
-/**
- * Mapping for tech stack icons from strings to react-icons components.
- */
-export const techStackMap: Record<string, IconType> = {
-  // programming languages
-  Python: SiPython,
-  JavaScript: SiJavascript,
-  TypeScript: SiTypescript,
-
-  // frameworks and environments
-  React: SiReact,
-  Redux: SiRedux,
-  "React Router": SiReactrouter,
-  NextJS: SiNextdotjs,
-  Vue: SiVuedotjs,
-  Pinia: GiPineapple,
-  NodeJS: SiNodedotjs,
-  ExpressJS: SiExpress,
-  Laravel: SiLaravel,
-
-  // libraries
-  HTML5: SiHtml5,
-  CSS3: SiCss3,
-  Sass: SiSass,
-  TailwindCSS: SiTailwindcss,
-  JQuery: SiJquery,
-
-  // tools
-  Git: SiGit,
-  GitHub: SiGithub,
-  GitLab: SiGitlab,
-  Postman: SiPostman,
-  Storybook: SiStorybook,
-  Vercel: SiVercel,
-  Heroku: SiHeroku,
-  Firebase: SiFirebase,
-  Figma: SiFigma,
-
-  // others
-  "Adobe Photoshop": SiAdobephotoshop,
-  "Adobe Illustrator": SiAdobeillustrator,
+/* Mapping for tech stack icons and colors */
+interface TechStackIcon {
+  icon: IconType
+  color: ColorHex
+  darkColor?: ColorHex
 }
 
+export const techStackMap: Record<string, TechStackIcon> = {
+  // programming languages
+  Python: { icon: SiPython, color: "#3776AB" },
+  JavaScript: { icon: SiJavascript, color: "#F7DF1E" },
+  TypeScript: { icon: SiTypescript, color: "#007ACC" },
+
+  // frameworks and environments
+  React: { icon: SiReact, color: "#61DAFB" },
+  Redux: { icon: SiRedux, color: "#764ABC" },
+  "React Router": { icon: SiReactrouter, color: "#CA4245" },
+  NextJS: { icon: SiNextdotjs, color: "#000000", darkColor: "#FFFFFF" },
+  Vue: { icon: SiVuedotjs, color: "#4FC08D" },
+  Pinia: { icon: GiPineapple, color: "#FFE46A" },
+  NodeJS: { icon: SiNodedotjs, color: "#8CC84B" },
+  ExpressJS: { icon: SiExpress, color: "#000000", darkColor: "#FFFFFF" },
+  Laravel: { icon: SiLaravel, color: "#FF2D20" },
+
+  // libraries
+  HTML5: { icon: SiHtml5, color: "#E34F26" },
+  CSS3: { icon: SiCss3, color: "#1572B6" },
+  Sass: { icon: SiSass, color: "#CC6699" },
+  TailwindCSS: { icon: SiTailwindcss, color: "#38B2AC" },
+  "Styled Components": { icon: FaCode, color: "#333333", darkColor: "#FFFFFF" },
+  JQuery: { icon: SiJquery, color: "#0769AD" },
+
+  // tools
+  Git: { icon: SiGit, color: "#F05032" },
+  GitHub: { icon: SiGithub, color: "#181717", darkColor: "#FFFFFF" },
+  GitLab: { icon: SiGitlab, color: "#FCA121" },
+  Postman: { icon: SiPostman, color: "#FF6C37" },
+  Storybook: { icon: SiStorybook, color: "#FF4785" },
+  Vercel: { icon: SiVercel, color: "#000000", darkColor: "#FFFFFF" },
+  Heroku: { icon: SiHeroku, color: "#430098" },
+  Firebase: { icon: SiFirebase, color: "#FFCA28" },
+  Figma: { icon: SiFigma, color: "#F24E1E" },
+  Axios: { icon: SiAxios, color: "#5A29E4" },
+
+  // others
+  "Adobe Photoshop": { icon: SiAdobephotoshop, color: "#31A8FF" },
+  "Adobe Illustrator": { icon: SiAdobeillustrator, color: "#FF9A00" },
+  Keyshot: { icon: IoIosAperture, color: "#189AFA" },
+  PowerPoint: { icon: PiMicrosoftPowerpointLogoFill, color: "#D24726" },
+}
+
+/* Roles Abbreviation and full name */
 export const roleAbbreviationMap: Record<string, string> = {
   PO: "Product Owner",
   "UI/UX": "UI/UX Designer",
@@ -92,7 +104,5 @@ export const roleAbbreviationMap: Record<string, string> = {
   BE: "Backend Engineer",
 }
 
-/**
- * Version of the application from package.json.
- */
+/* Version of the application from package.json */
 export const appVersion = packageJson.version
