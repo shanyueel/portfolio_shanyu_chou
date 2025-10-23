@@ -63,20 +63,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head>
         <title>Shan-Yu Chou Portfolio</title>
       </head>
-      <body
-        className={`antialiased flex flex-col min-h-screen transition-colors ${gabarito.className} ${gabarito.variable}`}
-      >
+      <body className={`antialiased flex flex-col min-h-screen transition-colors`}>
         <ThemeProvider attribute="class" defaultTheme="system">
-          {/* Dot Background Layer */}
-          <div
-            className={`
-                        fixed inset-0 -z-10
-                        bg-[radial-gradient(circle,_#d1d5db_1px,_transparent_1px)]
-                        dark:bg-[radial-gradient(circle,_#3f3f46_1px,_transparent_1px)]
-                        bg-[length:30px_30px]
-                        [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)]
-                      `}
-          />
+          <div className="background" />
           <Header />
           <main className="flex-grow container mx-auto px-4 py-6">{children}</main>
           <Footer />

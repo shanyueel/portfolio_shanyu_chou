@@ -1,13 +1,14 @@
 "use client"
 
-import { FaMoon, FaSun } from "react-icons/fa"
+import { MdSunny } from "react-icons/md"
+import { FaMoon } from "react-icons/fa"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
 
 /**
  * A functional component that renders a button to toggle between light and dark themes.
  */
-export default function ThemeToggleButton() {
+const ThemeToggleButton = () => {
   const [mounted, setMounted] = useState(false)
   const { resolvedTheme, setTheme } = useTheme()
 
@@ -22,10 +23,12 @@ export default function ThemeToggleButton() {
   return (
     <button
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-      className="p-2 rounded-full transition-colors cursor-pointer dark:hover:bg-gray-800 hover:bg-gray-200"
+      className="rounded-full transition-colors cursor-pointer p-2 dark:p-1 hover:bg-gray-200 dark:hover:bg-gray-800"
       aria-label="Toggle Dark Mode"
     >
-      {resolvedTheme === "dark" ? <FaSun /> : <FaMoon />}
+      {resolvedTheme === "dark" ? <FaMoon size="16" /> : <MdSunny size="20" />}
     </button>
   )
 }
+
+export default ThemeToggleButton

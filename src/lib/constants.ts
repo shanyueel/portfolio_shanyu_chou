@@ -37,11 +37,16 @@ import { PiMicrosoftPowerpointLogoFill } from "react-icons/pi"
 import { FaCode } from "react-icons/fa"
 
 /* Array of navigation items for the website. */
-export const navItems = [
+interface NavItem {
+  name: string
+  path: string
+}
+
+export const navItems: NavItem[] = [
   { name: "Home", path: "/" },
   { name: "Work", path: "/work" },
   { name: "Projects", path: "/projects" },
-  { name: "Blog", path: "/blog" },
+  // { name: "Blog", path: "/blog" },
   { name: "About", path: "/about" },
 ]
 

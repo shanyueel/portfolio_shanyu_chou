@@ -12,6 +12,20 @@
   --foreground: #ffffff;
 }
 
+.background {
+  @apply fixed inset-0 -z-10;
+
+  background-color: #e5e5f7;
+  background-image: radial-gradient(
+    ellipse farthest-corner at 10px 10px,
+    #bebebe,
+    #bebebe 50%,
+    #e5e5f7 50%
+  );
+  background-size: 10px 10px;
+  opacity: 0.1;
+}
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 body {

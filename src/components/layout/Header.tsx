@@ -10,7 +10,7 @@ import MobileMenu from "@/components/layout/MobileMenu"
 /**
  * Header component that serves as the top navigation bar for the portfolio.
  */
-export default function Header() {
+const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
@@ -19,7 +19,7 @@ export default function Header() {
       className="sticky top-0 z-50 w-full bg-zinc-50 text-black dark:bg-black dark:text-white transition-colors
             border-b dark:border-gray-800 border-gray-300 backdrop-blur-sm shadow-md"
     >
-      <div className="max-w-4xl mx-auto w-full px-4 py-5 transition-all duration-300 flex items-center justify-between">
+      <div className="max-w-4xl mx-auto w-full px-4 py-2 md:py-4 transition-all duration-300 flex items-center justify-between">
         {/* Left side: logo or current path */}
         <Breadcrumbs />
 
@@ -27,7 +27,7 @@ export default function Header() {
         <NavigationMenu />
 
         {/* Right side: Theme toggle + Mobile Menu Toggle */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           {/* Theme toggle button */}
           <ThemeToggleButton />
 
@@ -44,3 +44,5 @@ export default function Header() {
     </header>
   )
 }
+
+export default Header
