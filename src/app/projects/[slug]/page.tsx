@@ -8,7 +8,7 @@ import projects from "@/data/projects"
 import { FaUsers, FaUserTie, FaClock, FaGithub, FaPlayCircle, FaLayerGroup } from "react-icons/fa"
 import AnimatedArticle from "@/components/ui/AnimatedArticle"
 import { techStackMap } from "@/lib/constants"
-import { pageParams } from "@/lib/types"
+import { pageParams, TechIconColors } from "@/lib/types"
 import remark_gfm from "remark-gfm"
 import ImageCarouselWrapper from "@/components/features/ImageCarouselWrapper"
 import TeamMembers from "@/components/features/project/TeamMembers"
@@ -155,10 +155,12 @@ export default async function ProjectPage(props: { params: pageParams }) {
                         <li
                           key={tech}
                           className="flex items-center gap-2"
-                          style={{
-                            ["--text-c"]: color,
-                            ["--text-c-dark"]: darkColor ?? color,
-                          }}
+                          style={
+                            {
+                              ["--text-c"]: color,
+                              ["--text-c-dark"]: darkColor ?? color,
+                            } as TechIconColors
+                          }
                         >
                           {Icon && (
                             <Icon

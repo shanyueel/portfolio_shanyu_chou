@@ -18,6 +18,7 @@ import ProjectTile from "@/components/features/ProjectTile"
 import BlogPost from "@/components/features/BlogPost"
 import ViewAllHeader from "@/components/layout/ViewAllHeader"
 import { techStackMap } from "@/lib/constants"
+import { TechIconColors } from "@/lib/types"
 
 interface Fact {
   icon: IconType
@@ -112,10 +113,12 @@ export default function Home() {
                 <div
                   key={tech}
                   className="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-sm"
-                  style={{
-                    ["--text-c"]: color,
-                    ["--text-c-dark"]: darkColor ?? color,
-                  }}
+                  style={
+                    {
+                      ["--text-c"]: color,
+                      ["--text-c-dark"]: darkColor ?? color,
+                    } as TechIconColors
+                  }
                 >
                   {Icon && (
                     <Icon

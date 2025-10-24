@@ -1,4 +1,11 @@
+import React from "react"
+
 export type ColorHex = `#${string}`
+
+export interface TechIconColors extends React.CSSProperties {
+  "--text-c"?: ColorHex
+  "--text-c-dark"?: ColorHex
+}
 
 /**
  * @description This type is used to define the params for a dynamic route in Next.js.

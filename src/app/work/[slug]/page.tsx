@@ -7,7 +7,7 @@ import work from "@/data/work"
 import AnimatedArticle from "@/components/ui/AnimatedArticle"
 import { techStackMap } from "@/lib/constants"
 import { Timeline, TimelineItem } from "@/components/mdx/Timeline"
-import { pageParams } from "@/lib/types"
+import { pageParams, TechIconColors } from "@/lib/types"
 import BackToPageButton from "@/components/ui/BackToPageButton"
 import remark_gfm from "remark-gfm"
 
@@ -74,10 +74,12 @@ export default async function WorkItemPage(props: { params: pageParams }) {
             <div
               key={tech}
               className="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-sm"
-              style={{
-                ["--text-c"]: color,
-                ["--text-c-dark"]: darkColor ?? color,
-              }}
+              style={
+                {
+                  ["--text-c"]: color,
+                  ["--text-c-dark"]: darkColor ?? color,
+                } as TechIconColors
+              }
             >
               {Icon && (
                 <Icon size={20} className="text-[var(--text-c)] dark:text-[var(--text-c-dark)]" />
