@@ -65,7 +65,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body className={`antialiased flex flex-col min-h-screen transition-colors`}>
         <ThemeProvider attribute="class" defaultTheme="system">
-          <div className="background" />
+          <div className="background-texture" />
           <Header />
           <main className="flex-grow container mx-auto px-4 py-6">{children}</main>
           <Footer />

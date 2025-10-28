@@ -2,17 +2,40 @@
 @import "highlight.js/styles/github-dark.css";
 @plugin "@tailwindcss/typography";
 
+@theme {
+  --color-light: #f9faf8;
+  --color-surface: #eaeaec;
+  --color-dark: #2c2d38;
+
+  --color-primary: #f5a115;
+  /* --color-primary-fg: var(--color-light); */
+  --color-secondary: #0598d6;
+  /* --color-secondary-fg: var(--color-dark); */
+
+  --color-muted: #707372;
+  /* --color-border: var(--color-fg); */
+  --color-link: var(--color-primary);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-bg: var(--color-light);
+  --color-fg: var(--color-dark);
 }
 
 .dark {
-  --background: #171717;
-  --foreground: #ffffff;
+  --color-bg: var(--color-dark);
+  --color-fg: var(--color-light);
 }
 
-.background {
+@custom-variant dark (&:where(.dark, .dark *));
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.background-texture {
   @apply fixed inset-0 -z-10;
 
   background-color: #e5e5f7;
@@ -24,12 +47,4 @@
   );
   background-size: 10px 10px;
   opacity: 0.1;
-}
-
-@custom-variant dark (&:where(.dark, .dark *));
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
