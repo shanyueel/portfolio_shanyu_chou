@@ -11,8 +11,8 @@ const NavigationMenu = () => {
   const filteredNavItems = navItems.filter(item => item.name !== "Home")
 
   return (
-    <nav className="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-      <ul className="flex items-center justify-center gap-0.5 bg-white/80 dark:bg-black/40 relative min-h-0">
+    <nav className="absolute top-1/2 left-1/2 hidden md:block transform -translate-x-1/2 -translate-y-1/2">
+      <ul className="relative flex items-center justify-center gap-1 min-h-0">
         {filteredNavItems.map(({ name, path }, idx) => {
           const isActive = pathname === path
           const showDivider = idx < filteredNavItems.length - 1
@@ -23,16 +23,16 @@ const NavigationMenu = () => {
                 <Link
                   href={path}
                   aria-current={isActive ? "page" : undefined}
-                  className={`relative flex items-center justify-center px-3 py-1.5 font-medium text-center transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 dark:focus-visible:ring-blue-500 min-w-[72px] text-ellipsis whitespace-nowrap overflow-hidden hover:underline hover:underline-offset-6 hover:decoration-3
-                    ${isActive ? "text-blue-600 dark:text-blue-400 decoration-3 underline underline-offset-6 font-semibold" : "text-black dark:text-white hover:text-blue-600 dark:hover:text-blue-400 hover:font-medium"}
+                  className={`relative flex justify-center items-center px-3 font-bold text-center transition-all duration-200 text-black dark:text-white
+                    ${isActive ? "text-link font-semibold" : " hover:text-link hover:font-bold"}
                   `}
                 >
                   {name}
                 </Link>
               </li>
               {showDivider && (
-                <li className="mx-0.5 h-5 w-px" aria-hidden="true">
-                  |
+                <li className="w-px h-5" aria-hidden="true">
+                  <span className="inline-flex items-center w-full h-full bg-dark"></span>
                 </li>
               )}
             </Fragment>

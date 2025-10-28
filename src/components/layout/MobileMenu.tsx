@@ -6,6 +6,7 @@ import { useRef, useEffect, useCallback } from "react"
 import { navItems } from "@/lib/constants"
 
 interface MobileMenuProps {
+  toggleRef: React.RefObject<HTMLButtonElement | null>
   isOpen: boolean
   setIsOpenAction: (v: boolean) => void
 }
@@ -13,7 +14,7 @@ interface MobileMenuProps {
 /**
  * MobileMenu component that displays a collapsible menu for mobile devices.
  */
-const MobileMenu = ({ isOpen, setIsOpenAction }: MobileMenuProps) => {
+const MobileMenu = ({ toggleRef, isOpen, setIsOpenAction }: MobileMenuProps) => {
   const pathname = usePathname()
   const menuRef = useRef<HTMLDivElement | null>(null)
 
@@ -23,7 +24,13 @@ const MobileMenu = ({ isOpen, setIsOpenAction }: MobileMenuProps) => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+      const clickOnToggle = toggleRef.current && toggleRef.current.contains(event.target as Node)
+      if (clickOnToggle) {
+        return
+      }
+
+      const clickOutsideMenu = menuRef.current && !menuRef.current.contains(event.target as Node)
+      if (clickOutsideMenu) {
         closeMenu()
       }
     }
@@ -37,7 +44,7 @@ const MobileMenu = ({ isOpen, setIsOpenAction }: MobileMenuProps) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside)
     }
-  }, [isOpen, closeMenu])
+  }, [toggleRef, isOpen, closeMenu])
 
   return (
     <div
@@ -46,15 +53,15 @@ const MobileMenu = ({ isOpen, setIsOpenAction }: MobileMenuProps) => {
         isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
       }`}
     >
-      <ul className="flex flex-col gap-2 mt-2">
+      <ul className="flex flex-col gap-1 mt-2">
         {navItems.map(({ name, path }) => (
           <li key={name}>
             <Link
               href={path}
               className={`block w-full px-4 py-2 text-sm font-medium transition-colors ${
                 pathname === path
-                  ? "bg-blue-500 dark:bg-blue-600 text-black dark:text-white"
-                  : "text-black dark:text-white hover:bg-gray-800"
+                  ? "text-dark dark:text-light bg-link"
+                  : "text-dark dark:text-light hover:bg-link"
               }`}
               onClick={closeMenu}
             >

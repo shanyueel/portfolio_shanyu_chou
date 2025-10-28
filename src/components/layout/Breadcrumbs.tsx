@@ -5,13 +5,13 @@ import { usePathname } from "next/navigation"
 import blog from "@/data/blog"
 import projects from "@/data/projects"
 import work from "@/data/work"
-import { FaChevronLeft } from "react-icons/fa"
+import Logo from "@/assets/icons/logo.svg"
 
 const Breadcrumbs = () => {
   const pathname = usePathname()
   const segments = pathname.split("/").filter(Boolean)
 
-  const allowedRoots = ["blog", "projects", "work"]
+  const allowedRoots = ["projects", "work" /* , "blog" */]
   const isAllowed = segments.length > 0 && allowedRoots.includes(segments[0])
 
   // Validate subpath: only show breadcrumbs if the path exists
@@ -31,21 +31,11 @@ const Breadcrumbs = () => {
     }
   }
 
-  const showPrevLink = segments.length > 0
-
   return (
     <div className="flex items-center gap-2">
-      {showPrevLink && (
-        <Link
-          href={`/${segments.slice(0, -1).join("/")}`}
-          className="hover:text-blue-400 font-bold"
-        >
-          <FaChevronLeft />
-        </Link>
-      )}
-
-      <div className="flex items-center gap-1 text-black dark:text-white my-auto">
-        <Link href="/" className="hover:text-blue-400 font-semibold">
+      <div className="flex items-center gap-1 my-auto text-lg text-dark dark:text-light">
+        <Link href="/" className="group flex items-center gap-2 font-semibold hover:text-link">
+          <Logo className="w-8 h-8 text-primary group-hover:text-link" />
           {/* Initials on mobile */}
           <span className="block md:hidden">SC</span>
           {/* Full name on desktop */}
@@ -55,15 +45,18 @@ const Breadcrumbs = () => {
         {/* Crumbs part: show only on mobile, not on desktop */}
         <span className="flex md:hidden items-center gap-1">
           {showBreadcrumbs &&
-            segments.map((segment, i) => {
-              const href = "/" + segments.slice(0, i + 1).join("/")
-              const label = segment.replace(/[-_]/g, " ").replace(/\b\w/g, l => l.toUpperCase())
+            segments.map((segment, index) => {
+              const href = "/" + segments.slice(0, index + 1).join("/")
+              const label = segment
+                .replace(/[-_]/g, " ") // Replace hyphens/underscores with spaces
+                .replace(/\b\w/g, letter => letter.toUpperCase()) // Capitalize first letter of each word
+
               return (
-                <span key={href} className="flex items-center gap-1">
-                  <span className="text-gray-500">/</span>
+                <span key={href} className="flex items-center gap-1 text-lg">
+                  <span className="text-muted">/</span>
                   <Link
                     href={href}
-                    className="text-black dark:text-white hover:text-blue-400 transition-colors"
+                    className="text-dark dark:text-light hover:text-link transition-colors"
                   >
                     {label}
                   </Link>

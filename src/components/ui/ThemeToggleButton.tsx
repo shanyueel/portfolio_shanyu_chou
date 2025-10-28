@@ -16,6 +16,7 @@ const ThemeToggleButton = () => {
     setMounted(true)
   }, [])
 
+  // Prevents rendering before getting the correct theme on the client side
   if (!mounted) {
     return null
   }
@@ -23,7 +24,7 @@ const ThemeToggleButton = () => {
   return (
     <button
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-      className="rounded-full transition-colors cursor-pointer p-2 dark:p-1 hover:bg-gray-200 dark:hover:bg-gray-800"
+      className="p-2 dark:p-2.5 rounded-full transition-colors cursor-pointer  hover:bg-gray-200 dark:hover:bg-gray-600"
       aria-label="Toggle Dark Mode"
     >
       {resolvedTheme === "dark" ? <FaMoon size="16" /> : <MdSunny size="20" />}
