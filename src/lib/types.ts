@@ -2,6 +2,8 @@ import React from "react"
 
 export type ColorHex = `#${string}`
 
+export type ColorType = "primary" | "secondary" | "info" | "success" | "danger" | "warning"
+
 export interface TechIconColors extends React.CSSProperties {
   "--text-c"?: ColorHex
   "--text-c-dark"?: ColorHex
