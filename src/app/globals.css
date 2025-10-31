@@ -8,9 +8,22 @@
   --color-dark: #2c2d38;
 
   --color-primary: #f5a115;
-  /* --color-primary-fg: var(--color-light); */
+  --color-primary-fg: var(--color-light);
+
   --color-secondary: #0598d6;
-  /* --color-secondary-fg: var(--color-dark); */
+  --color-secondary-fg: var(--color-light);
+
+  --color-info: #3698c9;
+  --color-info-fg: var(--color-light);
+
+  --color-success: #32ba54;
+  --color-success-fg: var(--color-light);
+
+  --color-warning: #e0872d;
+  --color-warning-fg: var(--color-light);
+
+  --color-danger: #d45542;
+  --color-danger-fg: var(--color-light);
 
   --color-muted: #707372;
   /* --color-border: var(--color-fg); */
