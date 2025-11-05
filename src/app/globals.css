@@ -31,6 +31,9 @@
 }
 
 :root {
+  --mobile-header-height: 52px;
+  --desktop-header-height: 68px;
+
   --color-bg: var(--color-light);
   --color-fg: var(--color-dark);
 }
@@ -48,16 +51,34 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.main-container {
+  @apply px-4 py-6;
+}
+
 .background-texture {
   @apply fixed inset-0 -z-10;
 
-  background-color: #e5e5f7;
-  background-image: radial-gradient(
-    ellipse farthest-corner at 10px 10px,
-    #bebebe,
-    #bebebe 50%,
-    #e5e5f7 50%
-  );
-  background-size: 10px 10px;
-  opacity: 0.1;
+  background-color: #ffffff;
+  opacity: 0.2;
+  background-image:
+    repeating-radial-gradient(circle at 0 0, transparent 0, #ffffff 12px),
+    repeating-linear-gradient(#c4c4c455, #c4c4c4);
+}
+
+@layer utilities {
+  .h-full-container {
+    min-height: calc(100vh - var(--mobile-header-height));
+
+    @media (min-width: 768px) {
+      min-height: calc(100vh - var(--desktop-header-height));
+    }
+  }
+
+  .scroll-mt-header {
+    scroll-margin-top: calc(var(--mobile-header-height) + 1px);
+
+    @media (min-width: 768px) {
+      scroll-margin-top: calc(var(--desktop-header-height) + 1px);
+    }
+  }
 }

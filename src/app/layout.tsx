@@ -67,7 +67,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <ThemeProvider attribute="class" defaultTheme="system">
           <div className="background-texture" />
           <Header />
-          <main className="flex-grow container mx-auto px-4 py-6">{children}</main>
+          <main className="flex-grow container mx-auto">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>
