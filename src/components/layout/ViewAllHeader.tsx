@@ -18,12 +18,12 @@ export default function ViewAllHeader({ title, pageUrl, itemCount }: ViewAllButt
       <h2 className="text-2xl font-semibold">{title}</h2>
       <Link
         href={pageUrl}
-        className="relative inline-block text-blue-500 text-sm transition-all duration-300 group hover:text-blue-400"
+        className="group relative inline-block text-sm text-link transition-all duration-300 hover:text-link"
       >
         <span className="group-hover:underline group-hover:decoration-transparent">
           View all ({itemCount})
         </span>
-        <span className="absolute left-0 -bottom-0.5 w-0 h-[2px] bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
+        <span className="absolute left-0 -bottom-0.5 w-0 h-[2px] bg-link transition-all duration-300 group-hover:w-full"></span>
       </Link>
     </div>
   )
