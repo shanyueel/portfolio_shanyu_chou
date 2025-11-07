@@ -24,7 +24,7 @@ import projects from "@/data/projects"
 import work from "@/data/work"
 import Button from "@/components/ui/Button"
 import WorkItem from "@/components/features/WorkItem"
-import ProjectTile from "@/components/features/ProjectTile"
+import ProjectCard from "@/components/features/ProjectCard"
 import BlogPost from "@/components/features/BlogPost"
 import ViewAllHeader from "@/components/layout/ViewAllHeader"
 import Logo from "@/assets/icons/logo.svg"
@@ -184,7 +184,7 @@ export default function Home() {
               (tech): tech is string => typeof tech === "string"
             )
             return (
-              <ProjectTile
+              <ProjectCard
                 key={proj.slug}
                 {...proj}
                 techStack={filteredTechStack}

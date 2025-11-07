@@ -1,50 +1,53 @@
-interface Project {
+import { TechKey } from "@/lib/constants"
+
+enum ProjectTag {
+  Personal = "Personal Proj.",
+  Commercial = "Commercial Proj.",
+  BootStrap = "Bootstrapped Proj.",
+}
+
+export interface Project {
   slug: string
   title: string
   image: string
-  description: string
   startDate: string
   endDate: string | "Present"
-  techStack: string[]
+  tag: ProjectTag[]
+  techStack: TechKey[]
+  description: string
 }
 
 const projects: Project[] = [
   {
-    slug: "portfolio",
-    title: "Portfolio",
-    image: "/projects/pictureA.jpg",
-    description: "A personal branding platform designed and engineered to showcase my career and experience for an international recruiters and hiring managers.",
-    startDate: "2025-09",
-    endDate: "Present",
-    techStack: ["Nextjs", "React", "Typescript", "TailwindCSS", "Vercel"],
-  },
-  {
-    slug: "dataWarehouse",
-    title: "WACA - Data Warehouse",
+    slug: "waca",
+    title: "WACA Platform",
     image: "/projects/pictureB.jpg",
-    description: "A centralized data warehouse solution for a e-commerce website, enabling efficient data management and analytics.",
-    startDate: "2024-11",
-    endDate: "2025-05",
-    techStack: ["Vue", "TypeScript", "Pinia", "Sass", "Figma", "Storybook"],
+    description: "A e-commerce platform that focuses on creating a seamless 'Online-Merge-Offline' retail and reservation experience for all merchants.",
+    startDate: "2023-12",
+    endDate: "Present",
+    tag: [ProjectTag.Commercial],
+    techStack: [TechKey.Vue, TechKey.TypeScript, TechKey.Pinia, TechKey.Sass, TechKey.Figma, TechKey.Storybook],
   },
   {
     slug: "wildSync",
     title: "WildSync",
     image: "/projects/pictureC.jpg",
     description:
-      "A social platform that connects outdoor enthusiasts, allowing them to plan activities, discover new adventures, and meet like-minded people.",
+      "A social platform that connects outdoor enthusiasts, allowing them to plan activities, discover new adventures, and meet people.",
     startDate: "2023-06",
     endDate: "2023-09",
-    techStack: ["React", "React Router", "Redux", "Styled Components", "Sass", "Firebase"],
+    tag: [ProjectTag.Personal],
+    techStack: [TechKey.React, TechKey.ReactRouter, TechKey.Redux, TechKey.StyledComponents, TechKey.Firebase],
   },
   {
     slug: "alphitter",
     title: "Alphitter",
     image: "/projects/img_alphitter_cover.jpg",
-    description: "A social media app that allows users to post short messages and follow others.",
+    description: "A social media app like Twitter that allows users to post short messages, like interesting content, and follow others.",
     startDate: "2023-04",
     endDate: "2023-05",
-    techStack: ["React", "React Router", "Styled Components", "Axios", "Figma", "Postman"],
+    tag: [ProjectTag.BootStrap],
+    techStack: [TechKey.React, TechKey.ReactRouter, TechKey.StyledComponents, TechKey.Axios, TechKey.Figma, TechKey.Postman],
   },
 ]
 

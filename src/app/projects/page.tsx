@@ -5,7 +5,7 @@ import { FaFrown } from "react-icons/fa"
 import { motion, AnimatePresence } from "framer-motion"
 import FilterDropdown from "@/components/features/FilterDropdown"
 import SortDropdown from "@/components/features/SortDropdown"
-import ProjectTile from "@/components/features/ProjectTile"
+import ProjectCard from "@/components/features/ProjectCard"
 import ActiveFilterChips from "@/components/features/ActiveFilterChips"
 import projects from "@/data/projects"
 
@@ -122,7 +122,7 @@ export default function ProjectsPage() {
             transition={{ duration: 0.2 }}
           >
             {filteredProjects.map(project => (
-              <ProjectTile key={project.slug} {...project} />
+              <ProjectCard key={project.slug} {...project} />
             ))}
           </motion.div>
         ) : (
