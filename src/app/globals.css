@@ -66,6 +66,17 @@ body {
 }
 
 @layer utilities {
+  /* z-index 系統 */
+  .z-base { z-index: 0; }
+  .z-surface { z-index: 1;}
+  .z-dropdown { z-index: 100; }
+  .z-sticky { z-index: 200; }
+  .z-overlay { z-index: 300; }
+  .z-modal { z-index: 400; }
+  .z-tooltip { z-index: 500; }
+  .z-toast { z-index: 600; }
+  .z-max { z-index: 999; }
+
   .h-full-container {
     min-height: calc(100vh - var(--mobile-header-height));
 
