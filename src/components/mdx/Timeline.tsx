@@ -19,10 +19,16 @@ const container = {
  * @param children - The timeline items to be displayed, i.e., job positions, promotions, roles within a company.
  * @constructor
  */
-export function Timeline({ children }: { children: React.ReactNode }) {
+export function Timeline({
+  className,
+  children,
+}: {
+  className?: string
+  children: React.ReactNode
+}) {
   return (
     <motion.div
-      className="relative border-l-2 border-gray-300 dark:border-gray-700 ml-4 mx-w-4xl w-full"
+      className={`relative flex flex-col gap-8 ml-4 w-full mx-w-4xl border-l-2 border-dark/50 dark:border-light/50 ${className}`}
       variants={container}
       initial="hidden"
       whileInView="show"
@@ -35,9 +41,10 @@ export function Timeline({ children }: { children: React.ReactNode }) {
 
 interface TimelineItemProps {
   title: string
+  subtitle?: string
   duration: string
   location: string
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 /**
@@ -48,7 +55,7 @@ interface TimelineItemProps {
  * @param children the content of the role, e.g., bulleted list of responsibilities
  * @constructor
  */
-export function TimelineItem({ title, duration, location, children }: TimelineItemProps) {
+export function TimelineItem({ title, subtitle, duration, location, children }: TimelineItemProps) {
   return (
     <motion.div
       variants={{
@@ -56,11 +63,11 @@ export function TimelineItem({ title, duration, location, children }: TimelineIt
         show: { opacity: 1, y: 0 },
       }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="relative mb-12 pl-8"
+      className="relative pl-6 md:pl-8"
     >
       {/* Animated Dot */}
       <motion.div
-        className="absolute left-[-10px] top-2 w-4 h-4 bg-blue-500 dark:bg-blue-400 rounded-full border-2 border-white dark:border-gray-900"
+        className="absolute top-2 left-[-10px] w-4 h-4 border-2 border-dark bg-secondary rounded-full dark:border-light dark:bg-secondary"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -68,8 +75,15 @@ export function TimelineItem({ title, duration, location, children }: TimelineIt
 
       {/* Content */}
       <div>
-        <h3 className="text-2xl font-semibold mb-1">{title}</h3>
-        <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-3">
+        <div className="mb-1">
+          <h3 className="text-xl text-left font-semibold text-secondary">{title}</h3>
+          {subtitle && (
+            <h4 className="mt-1 text-base text-left font-medium text-gray-600 dark:text-gray-300">
+              {subtitle}
+            </h4>
+          )}
+        </div>
+        <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 ">
           <span className="flex items-center gap-1">
             <FaCalendarAlt className="w-4 h-4" />
             {duration}
@@ -79,7 +93,11 @@ export function TimelineItem({ title, duration, location, children }: TimelineIt
             {location}
           </span>
         </div>
-        <div className="text-gray-700 dark:text-gray-300 prose dark:prose-invert">{children}</div>
+        {children && (
+          <div className="mt-3 text-gray-700 dark:text-gray-300 prose dark:prose-invert">
+            {children}
+          </div>
+        )}
       </div>
     </motion.div>
   )
