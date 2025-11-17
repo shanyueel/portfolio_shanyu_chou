@@ -1,124 +1,97 @@
-import { useState, useRef, useEffect } from "react"
-import { FaChevronDown, FaBroom, FaCheck } from "react-icons/fa"
+import { useState } from "react"
+import { FaChevronDown, FaTrashAlt } from "react-icons/fa"
+import Button from "../ui/Button"
+import Dropdown from "../ui/Dropdown"
+import CheckboxGroup from "../ui/CheckboxGroup"
+import Checkbox from "../ui/Checkbox"
 
 interface FilterDropdownProps {
-  items: { name: string; count: number }[]
   selectedItems: string[]
-  onToggle: (item: string) => void
-  onApply: () => void
-  onClear: () => void
+  setSelectedItems: (selected: string[]) => void
+  items: { id: string; label: string }[]
   placeholder: string
   resultCount: number
+  onApply: () => void
 }
 
 /**
  * FilterDropdown component that provides a dropdown for filtering items.
  * It allows users to select multiple items and apply or clear the filters.
+ * @param selectedItems - Array of currently selected item names.
+ * @param setSelectedItems - Function to update the selected items.
+ * @param items - Array of available items with their id and label.
+ * @param placeholder - Placeholder text for the dropdown button.
+ * @param resultCount - Number of results matching the current filters.
+ * @param onApply - Callback function to apply the selected filters.
  */
-export default function FilterDropdown({
-  items,
+const FilterDropdown = ({
   selectedItems,
-  onToggle,
-  onApply,
-  onClear,
+  setSelectedItems,
+  items,
   placeholder,
   resultCount,
-}: FilterDropdownProps) {
+  onApply,
+}: FilterDropdownProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  const dropdownRef = useRef<HTMLDivElement>(null)
+  const [triggerContent, setTriggerContent] = useState(placeholder)
 
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setIsDropdownOpen(false)
-      }
-    }
-
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setIsDropdownOpen(false)
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside)
-    document.addEventListener("keydown", handleEscape)
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-      document.removeEventListener("keydown", handleEscape)
-    }
-  }, [])
-
-  // Close the dropdown when filters are applied
   const handleApply = () => {
     onApply()
+    setTriggerContent(selectedItems.length === 0 ? placeholder : `${selectedItems.length} Selected`)
     setIsDropdownOpen(false)
   }
 
-  return (
-    <div className="relative" ref={dropdownRef}>
-      <button
-        onClick={() => setIsDropdownOpen(prev => !prev)}
-        className="cursor-pointer flex items-center justify-between border px-4 py-2 rounded bg-white dark:bg-gray-800
-                dark:border-gray-600 w-full shadow-sm hover:bg-gray-100 dark:hover:bg-gray-700 text-sm text-gray-800 dark:text-gray-200 relative"
-      >
-        <span className="truncate">
-          {selectedItems.length === 0 ? placeholder : `${selectedItems.length} Selected`}
-        </span>
-        <FaChevronDown className="ml-2 text-sm" />
-        {resultCount > 0 && (
-          <span
-            className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white
-                        text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
-            title={`${resultCount} results`}
-          >
-            {resultCount}
-          </span>
-        )}
-      </button>
+  const handleClear = () => {
+    setSelectedItems([])
+  }
 
-      <div
-        className={
-          "origin-top transition-all duration-200 ease-out transform absolute z-10 mt-2 w-64 bg-white dark:bg-gray-800 border dark:border-gray-700 rounded shadow-lg p-4 space-y-3" +
-          (isDropdownOpen ? " scale-y-100 opacity-100" : " scale-y-0 opacity-0 pointer-events-none")
-        }
-        style={{ transformOrigin: "top" }}
-      >
+  return (
+    <Dropdown
+      isOpen={isDropdownOpen}
+      onOpenChange={setIsDropdownOpen}
+      placement="bottom-start"
+      trigger={
+        <Button color="info" className="relative" outline>
+          <span className="truncate">{triggerContent}</span>
+          <FaChevronDown className="ml-2 text-sm" />
+
+          {resultCount > 0 && (
+            <span
+              className="absolute top-0 right-0 flex items-center justify-center w-5 h-5 rounded-full text-xs font-bold transform translate-x-1/2
+                        -translate-y-1/2 bg-primary text-light"
+              title={`${resultCount} results`}
+            >
+              {resultCount}
+            </span>
+          )}
+        </Button>
+      }
+    >
+      <div className="w-max max-w-64 p-4 border border-dark rounded-md bg-light shadow-md dark:border-secondary dark:bg-dark">
         <div className="max-h-48 overflow-y-auto">
-          {items.map(({ name, count }) => (
-            <label key={name} className="flex items-center space-x-3 cursor-pointer group py-1">
-              <span className="relative inline-block w-5 h-5">
-                <input
-                  type="checkbox"
-                  checked={selectedItems.includes(name)}
-                  onChange={() => onToggle(name)}
-                  className="peer absolute opacity-0 w-full h-full z-10 cursor-pointer"
-                />
-                <span className="block w-full h-full rounded border border-gray-400 dark:border-gray-500 peer-checked:bg-blue-600 peer-checked:border-blue-600 transition duration-200"></span>
-                <FaCheck className="absolute top-0 left-0 w-full h-full p-1 text-white opacity-0 peer-checked:opacity-100 transition-opacity duration-200" />
-              </span>
-              <span className="text-gray-800 dark:text-gray-200 text-sm group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
-                {name} <span className="text-gray-500">({count})</span>
-              </span>
-            </label>
-          ))}
+          <CheckboxGroup selectedItems={selectedItems} setSelectedItems={setSelectedItems}>
+            {items.map(({ id, label }) => {
+              return <Checkbox key={id} value={id} label={label} />
+            })}
+          </CheckboxGroup>
         </div>
-        <div className="flex justify-between items-center pt-2">
-          <button
-            onClick={handleApply}
-            className="px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm cursor-pointer"
-          >
+
+        <div className="flex justify-between items-center mt-2 pt-2">
+          <Button color="secondary" size="sm" onClick={handleApply}>
             Apply
-          </button>
+          </Button>
           <button
-            onClick={onClear}
-            className="flex items-center text-sm text-gray-600 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 cursor-pointer"
             title="Clear filters"
+            className="flex items-center text-sm cursor-pointer text-gray-400 hover:text-danger"
+            onClick={handleClear}
           >
-            <FaBroom className="mr-1" />
+            <FaTrashAlt className="mr-1" />
             Clear
           </button>
         </div>
       </div>
-    </div>
+    </Dropdown>
   )
 }
+
+export default FilterDropdown
