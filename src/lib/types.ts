@@ -9,6 +9,8 @@ export interface TechIconColors extends React.CSSProperties {
   "--text-c-dark"?: ColorHex
 }
 
+export type OrderType = "newest" | "oldest" | "asc" | "desc"
+
 /**
  * @description This type is used to define the params for a dynamic route in Next.js.
  */

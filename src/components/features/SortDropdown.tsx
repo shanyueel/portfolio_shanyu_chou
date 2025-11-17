@@ -1,72 +1,58 @@
-import { useState, useRef, useEffect } from "react"
+import { useState } from "react"
 import { FaChevronDown } from "react-icons/fa"
+import { OrderType } from "@/lib/types"
+import Button from "../ui/Button"
+import Dropdown from "../ui/Dropdown"
 
 interface SortDropdownProps {
-  sortOrder: "newest" | "oldest" | "asc" | "desc"
-  onChange: (order: "newest" | "oldest" | "asc" | "desc") => void
-  options: { label: string; value: "newest" | "oldest" | "asc" | "desc" }[]
+  sortOrder: OrderType
+  setSortOrder: (order: OrderType) => void
+  options: { id: OrderType; label: string }[]
 }
 
 /**
  * SortDropdown component that provides a dropdown for selecting sorting options (e.g., newest, oldest).
+ * @param sortOrder - The current selected sort order.
+ * @param setSortOrder - Callback function to update the selected sort order.
+ * @param options - Array of sorting options with labels and values.
  */
-export default function SortDropdown({ sortOrder, onChange, options }: SortDropdownProps) {
+const SortDropdown = ({ sortOrder, setSortOrder, options }: SortDropdownProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  const dropdownRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setIsDropdownOpen(false)
-      }
-    }
+  const triggerLabel = options.find(option => option.id === sortOrder)?.label || "Sort"
 
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setIsDropdownOpen(false)
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside)
-    document.addEventListener("keydown", handleEscape)
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-      document.removeEventListener("keydown", handleEscape)
-    }
-  }, [])
+  const handleSelect = (value: OrderType) => {
+    setSortOrder(value)
+    setIsDropdownOpen(false)
+  }
 
   return (
-    <div className="relative" ref={dropdownRef}>
-      <button
-        onClick={() => setIsDropdownOpen(prev => !prev)}
-        className="cursor-pointer flex items-center justify-between border px-4 py-2 rounded bg-white dark:bg-gray-800
-                dark:border-gray-600 w-full shadow-sm hover:bg-gray-100 dark:hover:bg-gray-700 text-sm text-gray-800 dark:text-gray-200"
-      >
-        <span>{options.find(option => option.value === sortOrder)?.label || "Sort"}</span>
-        <FaChevronDown className="ml-2 text-sm" />
-      </button>
-
-      <div
-        className={
-          "origin-top-right absolute right-0 mt-2 w-44 bg-white dark:bg-gray-800 border dark:border-gray-700 rounded shadow-lg text-sm z-50" +
-          (isDropdownOpen ? " scale-y-100 opacity-100" : " scale-y-0 opacity-0 pointer-events-none")
-        }
-        style={{ transformOrigin: "top right" }}
-      >
-        {options.map(({ label, value }) => (
-          <button
-            key={value}
-            onClick={() => {
-              onChange(value)
-              setIsDropdownOpen(false)
-            }}
-            className="cursor-pointer block w-full text-left px-4 py-2 hover:bg-gray-100
-                        dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200"
-          >
-            {label}
-          </button>
-        ))}
+    <Dropdown
+      isOpen={isDropdownOpen}
+      onOpenChange={setIsDropdownOpen}
+      placement="bottom-end"
+      trigger={
+        <Button color="info" className="relative" outline>
+          <span>{triggerLabel}</span>
+          <FaChevronDown className="ml-2 text-sm" />
+        </Button>
+      }
+    >
+      <div className="w-max max-w-64 p-1 border border-dark rounded-md bg-light shadow-md dark:border-secondary dark:bg-dark">
+        <div className="max-h-48 overflow-y-auto">
+          {options.map(({ id, label }) => (
+            <button
+              key={id}
+              onClick={() => handleSelect(id)}
+              className="block w-full px-4 py-2 text-left text-dark cursor-pointer hover:text-secondary hover:bg-gray-200 dark:text-light dark:hover:bg-gray-700"
+            >
+              {label}
+            </button>
+          ))}
+        </div>
       </div>
-    </div>
+    </Dropdown>
   )
 }
+
+export default SortDropdown
