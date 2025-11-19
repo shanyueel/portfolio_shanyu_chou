@@ -1,61 +1,67 @@
 import { FaTimes, FaTrashAlt } from "react-icons/fa"
 import React from "react"
+import clsx from "clsx"
+import Tag from "../ui/Tag"
 
 interface ActiveFilterChipsProps {
   filters: string[]
   onRemove: (filter: string) => void
-  onClearAll?: () => void
-  clearAllLabel?: string
   className?: string
+  clearAllLabel?: string
+  onClearAll?: () => void
 }
 
 /**
  * Reusable component for displaying active filter chips with remove and clear all functionality.
+ * @filters - Array of active filter strings to display as chips.
+ * @onRemove - Callback function to remove a specific filter.
+ * @className - (Optional) additional CSS classes for styling.
+ * @clearAllLabel - (Optional) label for the clear all button (default: "Clear All").
+ * @onClearAll - (Optional) callback function to clear all filters.
  */
-export default function ActiveFilterChips({
+const ActiveFilterChips = ({
   filters,
   onRemove,
   onClearAll,
   clearAllLabel = "Clear All",
   className = "",
-}: ActiveFilterChipsProps) {
+}: ActiveFilterChipsProps) => {
   if (!filters || filters.length === 0) return null
 
+  const showClearAll = onClearAll && filters.length > 1
+
   return (
-    <div
-      className={`flex flex-row flex-wrap gap-2 mb-6 overflow-x-auto pb-2 scrollbar-thin ${className}`}
-    >
+    <div className={clsx("flex flex-wrap gap-2 overflow-x-auto", className)}>
+      {/* Selected Filters */}
       {filters.map(filter => (
-        <span
-          key={filter}
-          className="flex items-center bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300
-                    px-3 py-1 rounded-full text-xs md:text-sm font-medium shadow-sm"
-        >
-          {filter}
-          <button
-            onClick={() => onRemove(filter)}
-            aria-label={`Remove filter ${filter}`}
-            className="ml-2 text-blue-500 hover:text-blue-700 focus:outline-none cursor-pointer flex items-center"
-            tabIndex={0}
-          >
-            <FaTimes className="w-4 h-4 md:w-4 md:h-4" />
-          </button>
-        </span>
+        <div key={filter} className="bg-light dark:bg-dark rounded-full">
+          <Tag color="secondary" className="flex gap-1">
+            {filter}
+            <button
+              onClick={() => onRemove(filter)}
+              aria-label={`Remove filter ${filter}`}
+              className="text-secondary/70 hover:text-secondary cursor-pointer focus:outline-none"
+              tabIndex={0}
+            >
+              <FaTimes size={16} />
+            </button>
+          </Tag>
+        </div>
       ))}
 
-      {onClearAll && filters.length > 1 && (
-        <button
-          onClick={onClearAll}
-          className="flex items-center bg-gray-200 dark:bg-gray-700 text-gray-700
-                    dark:text-gray-200 px-3 py-1 rounded-full text-xs md:text-sm font-medium shadow-sm
-                    hover:bg-gray-300 dark:hover:bg-gray-600 ml-2 cursor-pointer"
-          aria-label={clearAllLabel}
-          tabIndex={0}
-        >
-          <FaTrashAlt className="w-4 h-4 md:w-4 md:h-4 mr-1" />
-          {clearAllLabel}
-        </button>
+      {/* Clear All Button */}
+      {showClearAll && (
+        <div className="bg-light dark:bg-dark rounded-full">
+          <button aria-label={clearAllLabel} tabIndex={0} onClick={onClearAll}>
+            <Tag color="danger" className="flex gap-1 cursor-pointer">
+              <FaTrashAlt size={16} />
+              {clearAllLabel}
+            </Tag>
+          </button>
+        </div>
       )}
     </div>
   )
 }
+
+export default ActiveFilterChips
