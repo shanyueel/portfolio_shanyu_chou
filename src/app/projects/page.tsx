@@ -3,39 +3,37 @@
 import { useState, useMemo } from "react"
 import { FaFrown } from "react-icons/fa"
 import { motion, AnimatePresence } from "framer-motion"
+import projects from "@/data/projects"
 import FilterDropdown from "@/components/features/FilterDropdown"
 import SortDropdown from "@/components/features/SortDropdown"
-import ProjectCard from "@/components/features/ProjectCard"
 import ActiveFilterChips from "@/components/features/ActiveFilterChips"
-import projects from "@/data/projects"
+import ProjectCard from "@/components/features/ProjectCard"
 
 /**
  * ProjectsPage component that serves as the main page for displaying projects.
  * This is accessed at the "/projects" URL of the application.
  */
-export default function ProjectsPage() {
-  const [selectedTechStack, setSelectedTechStack] = useState<string[]>([])
+const ProjectsPage = () => {
   const [techStackDrafts, setTechStackDrafts] = useState<string[]>([])
+  const [selectedTechStack, setSelectedTechStack] = useState<string[]>([])
   const [sortOrder, setSortOrder] = useState<"oldest" | "newest">("newest")
 
   // Memoized unique tech stack list with counts to avoid recalculating on every render
   const uniqueTechStack = useMemo(() => {
     const techStackCounts: Record<string, number> = {}
-    projects.forEach(project => {
-      ;(project.techStack || []).forEach(tech => {
+
+    for (const project of projects) {
+      if (!project.techStack || project.techStack.length === 0) continue
+
+      project.techStack.forEach(tech => {
         techStackCounts[tech] = (techStackCounts[tech] || 0) + 1
       })
-    })
+    }
+
     return Object.entries(techStackCounts)
       .map(([tech, count]) => ({ tech, count }))
       .sort((a, b) => a.tech.localeCompare(b.tech))
   }, [])
-
-  const toggleTechStackDraft = (tech: string) => {
-    setTechStackDrafts(prev =>
-      prev.includes(tech) ? prev.filter(t => t !== tech) : [...prev, tech]
-    )
-  }
 
   const applyFilters = () => {
     setSelectedTechStack([...techStackDrafts])
@@ -50,12 +48,6 @@ export default function ProjectsPage() {
   const removeTech = (tech: string) => {
     setSelectedTechStack(prev => prev.filter(t => t !== tech))
     setTechStackDrafts(prev => prev.filter(t => t !== tech))
-  }
-
-  // Handler to clear all tech filters
-  const clearAllTech = () => {
-    setSelectedTechStack([])
-    setTechStackDrafts([])
   }
 
   // Memoized filtered projects based on selected tech stack and sort order
@@ -76,73 +68,69 @@ export default function ProjectsPage() {
   }, [selectedTechStack, sortOrder])
 
   return (
-    <section className="px-4 max-w-4xl mx-auto">
-      <div className="flex flex-wrap justify-between gap-4 mb-8 items-center w-full">
-        {/* Tech Stack Filter Dropdown - Left */}
-        <div className="relative flex-grow md:flex-grow-0">
+    <section className="max-w-4xl mx-auto">
+      <div className="main-container">
+        <div className="flex justify-between items-center gap-4 w-full mb-4">
           <FilterDropdown
-            items={uniqueTechStack.map(({ tech, count }) => ({ name: tech, count }))}
+            items={uniqueTechStack.map(({ tech, count }) => ({
+              id: tech,
+              label: `${tech} (${count})`,
+            }))}
             selectedItems={techStackDrafts}
-            onToggle={toggleTechStackDraft}
+            setSelectedItems={setTechStackDrafts}
             onApply={applyFilters}
             onClear={clearFilters}
             placeholder="Filter by Tech"
             resultCount={filteredProjects.length}
           />
-        </div>
-
-        {/* Sort Order Dropdown - Right */}
-        <div className="relative flex-grow md:flex-grow-0 z-20">
           <SortDropdown
             sortOrder={sortOrder}
-            onChange={order => setSortOrder(order as "newest" | "oldest")}
+            setSortOrder={setSortOrder}
             options={[
-              { label: "Newest First", value: "newest" },
-              { label: "Oldest First", value: "oldest" },
+              { label: "Newest First", id: "newest" },
+              { label: "Oldest First", id: "oldest" },
             ]}
           />
         </div>
+
+        {/* Active Filter Chips */}
+        <ActiveFilterChips filters={selectedTechStack} className="mb-4" onRemove={removeTech} />
+
+        <AnimatePresence mode="wait">
+          {filteredProjects.length > 0 ? (
+            <motion.div
+              key="projects"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              {filteredProjects.map(project => (
+                <ProjectCard key={project.slug} {...project} />
+              ))}
+            </motion.div>
+          ) : (
+            <motion.div
+              key="no-results"
+              className="flex flex-col items-center mt-12 px-4 text-center text-gray-600 dark:text-gray-300"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            >
+              <FaFrown className="mb-3 text-4xl text-gray-400 md:text-5xl dark:text-gray-500" />
+              <p className="text-lg font-semibold md:text-xl lg:text-2xl">No matched projects</p>
+              <p className="text-sm md:text-base lg:text-lg mt-2 max-w-2xl">
+                The combination of selected tech stack filters didn&apos;t match any projects. Try
+                changing or clearing your filters.
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-
-      {/* Active Filter Chips */}
-      <ActiveFilterChips
-        filters={selectedTechStack}
-        onRemove={removeTech}
-        onClearAll={selectedTechStack.length > 1 ? clearAllTech : undefined}
-      />
-
-      <AnimatePresence mode="wait">
-        {filteredProjects.length > 0 ? (
-          <motion.div
-            key="projects"
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            {filteredProjects.map(project => (
-              <ProjectCard key={project.slug} {...project} />
-            ))}
-          </motion.div>
-        ) : (
-          <motion.div
-            key="no-results"
-            className="flex flex-col items-center text-center text-gray-600 dark:text-gray-300 mt-12 px-4"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-          >
-            <FaFrown className="text-4xl md:text-5xl mb-3 text-gray-400 dark:text-gray-500" />
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold">No projects found</p>
-            <p className="text-sm md:text-base lg:text-lg mt-2 max-w-2xl">
-              The combination of selected tech stack filters didn&apos;t match any projects. Try
-              changing or clearing your filters.
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   )
 }
+
+export default ProjectsPage
