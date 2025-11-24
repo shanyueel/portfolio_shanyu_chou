@@ -2,42 +2,6 @@
 
 import { motion } from "framer-motion"
 import { FaMapMarkerAlt, FaCalendarAlt } from "react-icons/fa"
-import React from "react"
-
-const container = {
-  hidden: { opacity: 1 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.3,
-    },
-  },
-}
-
-/**
- * Timeline component that wraps around timeline items.
- * @param children - The timeline items to be displayed, i.e., job positions, promotions, roles within a company.
- * @constructor
- */
-export function Timeline({
-  className,
-  children,
-}: {
-  className?: string
-  children: React.ReactNode
-}) {
-  return (
-    <motion.div
-      className={`relative flex flex-col gap-8 ml-4 w-full mx-w-4xl border-l-2 border-dark/50 dark:border-light/50 ${className}`}
-      variants={container}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.2 }}
-    >
-      {children}
-    </motion.div>
-  )
-}
 
 interface TimelineItemProps {
   title: string
@@ -55,7 +19,7 @@ interface TimelineItemProps {
  * @param children the content of the role, e.g., bulleted list of responsibilities
  * @constructor
  */
-export function TimelineItem({ title, subtitle, duration, location, children }: TimelineItemProps) {
+const TimelineItem = ({ title, subtitle, duration, location, children }: TimelineItemProps) => {
   return (
     <motion.div
       variants={{
@@ -63,7 +27,7 @@ export function TimelineItem({ title, subtitle, duration, location, children }: 
         show: { opacity: 1, y: 0 },
       }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="relative pl-6 md:pl-8"
+      className="relative pl-5 md:pl-8"
     >
       {/* Animated Dot */}
       <motion.div
@@ -75,15 +39,16 @@ export function TimelineItem({ title, subtitle, duration, location, children }: 
 
       {/* Content */}
       <div>
-        <div className="mb-1">
-          <h3 className="text-xl text-left font-semibold text-secondary">{title}</h3>
+        <div className="m-0 py-0.5">
+          <h5 className="m-0 text-xl text-left font-semibold text-secondary">{title}</h5>
           {subtitle && (
-            <h4 className="mt-1 text-base text-left font-medium text-gray-600 dark:text-gray-300">
+            <h6 className="mt-1 mb-0 text-left font-medium text-gray-600 dark:text-gray-300">
               {subtitle}
-            </h4>
+            </h6>
           )}
         </div>
-        <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 ">
+
+        <div className="mt-1 flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 ">
           <span className="flex items-center gap-1">
             <FaCalendarAlt className="w-4 h-4" />
             {duration}
@@ -94,7 +59,7 @@ export function TimelineItem({ title, subtitle, duration, location, children }: 
           </span>
         </div>
         {children && (
-          <div className="mt-3 text-gray-700 dark:text-gray-300 prose dark:prose-invert">
+          <div className="mt-3 text-gray-700 w-full dark:text-gray-300 text-sm md:text-base">
             {children}
           </div>
         )}
@@ -102,3 +67,5 @@ export function TimelineItem({ title, subtitle, duration, location, children }: 
     </motion.div>
   )
 }
+
+export default TimelineItem
