@@ -1,17 +1,26 @@
+import Link from "next/link"
 import { notFound } from "next/navigation"
+import { compileMDX } from "next-mdx-remote/rsc"
 import path from "path"
 import fs from "fs"
-import { compileMDX } from "next-mdx-remote/rsc"
-import rehypeHighlight from "rehype-highlight"
-import Link from "next/link"
-import projects from "@/data/projects"
-import { FaUsers, FaUserTie, FaClock, FaGithub, FaPlayCircle, FaLayerGroup } from "react-icons/fa"
-import AnimatedArticle from "@/components/ui/AnimatedArticle"
-import { techStackMap } from "@/lib/constants"
-import { pageParams, TechIconColors } from "@/lib/types"
 import remark_gfm from "remark-gfm"
-import ImageCarouselWrapper from "@/components/features/ImageCarouselWrapper"
+import rehypeHighlight from "rehype-highlight"
+import { FaUsers, FaUserTie, FaClock, FaGithub, FaPlayCircle, FaLayerGroup } from "react-icons/fa"
+import projects from "@/data/projects"
+import { techStackMap, TechKey } from "@/lib/constants"
+import { pageParams, TechIconColors } from "@/lib/types"
 import TeamMembers from "@/components/features/project/TeamMembers"
+import ImageCarouselWrapper from "@/components/features/ImageCarouselWrapper"
+import Button from "@/components/ui/Button"
+import Divider from "@/components/ui/Divider"
+import Timeline from "@/components/ui/Timeline"
+import TimelineItem from "@/components/ui/TimelineItem"
+import AnimatedArticle from "@/components/ui/AnimatedArticle"
+import Card from "@/components/mdx/Card"
+import ImageCard from "@/components/mdx/ImageCard"
+import Callout from "@/components/mdx/Callout"
+import Quote from "@/components/mdx/Quote"
+import Grid from "@/components/mdx/Grid"
 
 /**
  * Generate static parameters for the blog post pages to be pre-rendered.
@@ -25,10 +34,11 @@ export async function generateStaticParams() {
 /**
  * ProjectPage component that renders a single project based on the slug.
  */
-export default async function ProjectPage(props: { params: pageParams }) {
+const ProjectPage = async (props: { params: pageParams }) => {
   const { slug } = await props.params
-  const post = projects.find(p => p.slug === slug)
-  if (!post) return notFound()
+
+  const project = projects.find(p => p.slug === slug)
+  if (!project) return notFound()
 
   const filePath = path.join(process.cwd(), "src", "data", "projects", `${slug}.mdx`)
   const projectPhotoDir = path.join(process.cwd(), "public", "projects", slug)
@@ -42,15 +52,26 @@ export default async function ProjectPage(props: { params: pageParams }) {
   const { content, frontmatter } = await compileMDX<{
     title: string
     subtitle: string
-    introduction: string
+    coverImage: string
     role: string
     duration: string
     techStack: Record<string, string[]>
+    impacts: Record<string, string>
     teamMembers?: Record<string, number>
     githubUrl?: string
     liveDemoUrl?: string
   }>({
     source: mdxSource,
+    components: {
+      Timeline,
+      TimelineItem,
+      ImageCard,
+      Card,
+      Callout,
+      Quote,
+      Divider,
+      Grid,
+    },
     options: {
       parseFrontmatter: true,
       mdxOptions: {
@@ -63,132 +84,142 @@ export default async function ProjectPage(props: { params: pageParams }) {
   const showLinks = frontmatter.githubUrl || frontmatter.liveDemoUrl
 
   return (
-    <AnimatedArticle>
-      <h1 className="text-3xl font-extrabold ">{frontmatter.title}</h1>
-      <h3 className="text-lg mb-4 text-gray-500">{frontmatter.subtitle}</h3>
-
-      {/* GitHub Link & Live Demo Section */}
-      {showLinks && (
-        <div className="flex gap-4 mb-4">
-          {frontmatter.githubUrl && (
-            <Link
-              href={frontmatter.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center text-gray-800 dark:text-gray-100 hover:text-blue-600 transition"
-            >
-              <FaGithub className="mr-1.5 w-5 h-5 text-gray-700 group-hover:text-blue-600" />
-              <span className="underline underline-offset-4">GitHub</span>
-            </Link>
-          )}
-          {frontmatter.liveDemoUrl && (
-            <Link
-              href={frontmatter.liveDemoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center text-gray-800 dark:text-gray-100 hover:text-blue-600 transition"
-            >
-              <FaPlayCircle className="mr-1.5 w-5 h-5 text-red-500 group-hover:text-blue-600" />
-              <span className="underline underline-offset-4">Live Demo</span>
-            </Link>
-          )}
+    <div className="main-container">
+      <AnimatedArticle>
+        <div className="mb-4">
+          <h1 className="text-2xl font-extrabold text-center md:text-3xl">{frontmatter.title}</h1>
+          <h3 className="text-base text-center text-gray-400">{frontmatter.subtitle}</h3>
         </div>
-      )}
 
-      {/* Project Introduction */}
-      <p className="mb-4">{frontmatter.introduction}</p>
-
-      {/* Project Metadata */}
-      <div className="mb-6 p-2 w-full bg-gray-50 dark:bg-gray-800 rounded-xl shadow-md">
-        <div className="grid grid-cols-1 gap-2 text-sm sm:grid-cols-2 sm:text-base">
-          <div className="flex items-center gap-2">
-            <FaUserTie className="text-green-500" />
-            <span>
-              <strong>Role:</strong> {frontmatter.role}
-            </span>
+        {/* GitHub Link & Live Demo Section */}
+        {showLinks && (
+          <div className="flex gap-4 mb-4">
+            {frontmatter.githubUrl && (
+              <Link
+                href={frontmatter.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center text-gray-800 transition hover:text-link dark:text-gray-100"
+              >
+                <Button color="info">
+                  <FaGithub className="w-5 h-5 mr-1.5 text-light" size={10} />
+                  <span>GitHub Repo</span>
+                </Button>
+              </Link>
+            )}
+            {frontmatter.liveDemoUrl && (
+              <Link
+                href={frontmatter.liveDemoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center text-gray-800 transition hover:text-link dark:text-gray-100"
+              >
+                <Button color="danger">
+                  <FaPlayCircle className="w-5 h-5 mr-1.5 text-light" size={10} />
+                  <span>Live Demo</span>
+                </Button>
+              </Link>
+            )}
           </div>
+        )}
 
-          <div className="flex items-center gap-2">
-            <FaClock className="text-purple-500" />
-            <span>
-              <strong>Duration:</strong> {frontmatter.duration}
-            </span>
+        {fs.existsSync(projectPhotoDir) && fs.readdirSync(projectPhotoDir).length > 0 && (
+          <div className="w-full">
+            <ImageCarouselWrapper imageDir={`projects/${slug}`} altPrefix={frontmatter.title} />
           </div>
+        )}
 
-          {frontmatter.teamMembers && (
-            <div className="col-span-1  sm:col-span-2 flex items-center gap-2">
-              <FaUsers className="text-blue-500" />
+        {/* Project Metadata */}
+        <Callout className="mb-6">
+          <div className="grid grid-cols-1 gap-2 text-sm sm:grid-cols-2 sm:text-base">
+            <div className="flex items-center gap-2">
+              <FaUserTie className="text-secondary" />
               <span>
-                <strong>Team:</strong>
+                <strong>Role:</strong> {frontmatter.role}
               </span>
+            </div>
 
-              <div className="flex gap-2">
-                {Object.entries(frontmatter.teamMembers).map(([role, count]) => (
-                  <TeamMembers key={role} role={role} count={count} />
+            <div className="flex items-center gap-2">
+              <FaClock className="text-secondary" />
+              <span>
+                <strong>Duration:</strong> {frontmatter.duration}
+              </span>
+            </div>
+
+            {frontmatter.teamMembers && (
+              <div className="col-span-1  sm:col-span-2 flex items-center gap-2">
+                <FaUsers className="text-secondary" />
+                <span>
+                  <strong>Team:</strong>
+                </span>
+
+                <div className="flex gap-2">
+                  {Object.entries(frontmatter.teamMembers).map(([role, count]) => (
+                    <TeamMembers key={role} role={role} count={count} />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <Divider className="col-span-full" gap={0} />
+
+            <div className="col-span-1 sm:col-span-2">
+              <div className="flex items-center gap-2">
+                <FaLayerGroup className="text-primary" />
+                <span>
+                  <strong>Tech Stack</strong>
+                </span>
+              </div>
+              <div className="flex flex-col gap-2 mt-1">
+                {Object.entries(frontmatter.techStack || {}).map(([category, technologies]) => (
+                  <div
+                    key={category}
+                    className="flex flex-col gap-1 items-start sm:flex-row sm:items-center sm:ml-7"
+                  >
+                    <h3 className="text-md font-semibold text-gray-700 capitalize dark:text-gray-300">
+                      {category}
+                    </h3>
+                    <div className="ml-0 pl-2 border-l-2 border-gray-300 sm:ml-2">
+                      <ul className="flex flex-wrap gap-x-2 gap-y-1 sm:gap-x-4">
+                        {technologies.map(tech => {
+                          const { icon: Icon, color, darkColor } = techStackMap[tech as TechKey]
+                          return (
+                            <li
+                              key={tech}
+                              className="flex items-center gap-1 text-sm"
+                              style={
+                                {
+                                  ["--text-c"]: color,
+                                  ["--text-c-dark"]: darkColor ?? color,
+                                } as TechIconColors
+                              }
+                            >
+                              {Icon && (
+                                <Icon
+                                  size={16}
+                                  className="text-[var(--text-c)] dark:text-[var(--text-c-dark)]"
+                                />
+                              )}
+                              <span>{tech}</span>
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
-          )}
-
-          <hr className="col-span-full border-gray-300" />
-
-          <div className="col-span-1  sm:col-span-2">
-            <div className="flex items-center gap-2">
-              <FaLayerGroup className="text-gray-500" />
-              <span>
-                <strong>Tech Stack</strong>
-              </span>
-            </div>
-            <div className="flex flex-col gap-1 mt-1">
-              {Object.entries(frontmatter.techStack || {}).map(([category, technologies]) => (
-                <div
-                  key={category}
-                  className="flex flex-col items-start sm:flex-row sm:items-center sm:ml-7"
-                >
-                  <h3 className="text-md font-bold capitalize text-gray-700 dark:text-gray-300">
-                    {category}:
-                  </h3>
-                  <ul className="flex flex-wrap gap-x-2 gap-y-1 ml-0 sm:gap-x-4 sm:ml-2">
-                    {technologies.map(tech => {
-                      const { icon: Icon, color, darkColor } = techStackMap[tech]
-                      return (
-                        <li
-                          key={tech}
-                          className="flex items-center gap-2"
-                          style={
-                            {
-                              ["--text-c"]: color,
-                              ["--text-c-dark"]: darkColor ?? color,
-                            } as TechIconColors
-                          }
-                        >
-                          {Icon && (
-                            <Icon
-                              size={20}
-                              className="text-[var(--text-c)] dark:text-[var(--text-c-dark)]"
-                            />
-                          )}
-                          <span>{tech}</span>
-                        </li>
-                      )
-                    })}
-                  </ul>
-                </div>
-              ))}
-            </div>
           </div>
-        </div>
-      </div>
+        </Callout>
 
-      {/* Image Carousel - Display project photos if available */}
-      {fs.existsSync(projectPhotoDir) && fs.readdirSync(projectPhotoDir).length > 0 && (
-        <div className="w-full">
-          <ImageCarouselWrapper imageDir={`projects/${slug}`} altPrefix={frontmatter.title} />
+        {/* Display the actual content of the .mdx file */}
+        <div className="max-w-4xl prose prose-h2:mt-8 prose-h3:text-base dark:prose-invert">
+          {content}
         </div>
-      )}
-
-      {/* Display the actual content of the .mdx file */}
-      <div className="max-w-4xl prose dark:prose-invert">{content}</div>
-    </AnimatedArticle>
+      </AnimatedArticle>
+    </div>
   )
 }
+
+export default ProjectPage
