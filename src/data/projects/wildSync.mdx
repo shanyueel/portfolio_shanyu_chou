@@ -1,11 +1,11 @@
 ---
 title: "WildSync Outdoor Platform"
 subtitle: "An Activity Platform for Outdoor Enthusiasts"
+coverImage: "/projects/pictureB.jpg"
 githubUrl: "https://github.com/shanyueel/wild_sync_with_react"
 liveDemoUrl: "https://shanyueel.github.io/wild_sync_with_react"
 role: "Frontend Engineer"
 duration: "Jun 2023 – Sep 2023"
-highlight: "Built a application from scratch independently, enabling users to create, join, manage outdoor activities and interact with others."
 techStack:
   frontend:
     - React
@@ -17,47 +17,93 @@ techStack:
     - Styled Components
 ---
 
+import Divider from "@/components/ui/Divider"
+import ImageCard from "@/components/mdx/ImageCard"
+import Card from "@/components/mdx/Card"
+import Callout from "@/components/mdx/Callout"
+import Quote from "@/components/mdx/Quote"
+import Grid from "@/components/mdx/Grid"
+
+<Card>
+  <Quote>
+    Built a application from scratch independently, enabling users to create, join, manage outdoor
+    activities and interact with others.
+  </Quote>
+</Card>
+
 ## Key Features
 
-### Discovery & Matching System
+<Grid columns={{xs: 1, md: 3}} gap={4}>
 
-- **Recommendation**: Display popular locations and newest activities at homepage, helping users discover interesting outdoor events efficiently.
-- **Activity List**: Users can browse a list of all available activities. They can also search for specific activities based on keywords, activity type, location, and date.
+<ImageCard src="/projects/pictureB.jpg" alt="WildSync Outdoor Platform">
+
+### Discovery & Matching
+
+- **Recommendation**: Display popular locations and newest activities, helping users discover outdoor events efficiently.
+- **Activity List**: Browse all activities and search for specific activities based on keywords, type, location, and date.
+
+</ImageCard>
+
+<ImageCard src="/projects/pictureB.jpg" alt="WildSync Outdoor Platform">
 
 ### Activity Management
 
-- **Activity Detail**: Each activity has its dedicated page displaying detailed information, including activity details, additional memos, and a list of attendees.
-- **User Interactions**: Users can create or join interesting activities, and leave activities they joined. They can also like activities for later reference.
+- **Activity Detail**: Displays detailed information, additional memos, and a list of attendees at the activity page.
+- **User Interactions**: Create, join and leave activities. Users can also like activities for later reference.
 
-### Community & Engagement
+</ImageCard>
 
-- **User Management**: Allow user to register, login, and manage their personal profile, including basic information, avatar, and cover image.
-- **Personal Info**: Showcase user's personal information and avatar, listing out activities they created, joined or liked for other users to view.
+<ImageCard src="/projects/pictureB.jpg" alt="WildSync Outdoor Platform">
+
+### Community Interaction
+
+- **User Management**: Register, login, and manage personal profile, including basic information and avatar image.
+- **Personal Info**: Showcase user's personal brief and avatar, listing out activities they created, joined or liked.
+
+</ImageCard>
+
+</Grid>
 
 ## Technical Decisions
+
+<Card>
 
 ### Decision 1: Utilized Firebase for Backend Services
 
 - **Why**: As a solo frontend developer aiming for rapid delivery, building a secure and real-time backend from scratch was not feasible.
 - **Result**: Leveraged Firebase services to build a full-stack web application with secure user management and real-time data synchronization.
 
+<Divider borderStyle="dashed" gap={4} />
+
 ### Decision 2: Integrated Redux for State Management
 
 - **Why**: Managing global state with React Context API led to excessive prop drilling and redundant database reads.
 - **Result**: Introduced Redux to manage global state, reducing prop drilling and cutting redundant database reads, resulting in a leaner data flow and single source of truth.
+
+<Divider borderStyle="dashed" gap={4} />
 
 ### Decision 3: Deployed on GitHub Pages for Demo
 
 - **Why**: Needed a quick and cost-effective way to deploy the application for global access.
 - **Result**: Deployed the application on GitHub Pages, ensuring easy access for users worldwide.
 
-## Challenges: Product Management
+</Card>
+
+## Challenge: Product Management
+
+<Callout>
 
 - **Challenge**: Being too ambitious and trying to get everything perfect at once caused the schedule to be delayed again and again.
 - **Solution**: Apply the **Minimum Viable Product (MVP)** principle by modularizing and prioritizing all features based on their strategic importance and business value. This allows for a swift initial launch, followed by an iterative process of rolling out the remaining functionalities as well-planned modules.
 
+</Callout>
+
 ## Outcomes
+
+<Card>
 
 - **3 Month Delivery** from concept to deployment for a full-stack application.
 - **100% Solo Ownership** handling product management, design and development.
 - **5+ Complex Modules** engineered like authentication, activity management and social interactions.
+
+</Card>

@@ -10,7 +10,6 @@ teamMembers:
   UI/UX: 3
   FE: 2
   BE: 4
-highlight: "Developed the high-value modules like Data Warehouse and led the frontend modernization (PHP Laravel > Vue 3)."
 techStack:
   frontend:
     - Laravel
@@ -27,58 +26,106 @@ techStack:
     - Figma
 ---
 
+import Divider from "@/components/ui/Divider"
+import ImageCard from "@/components/mdx/ImageCard"
+import Card from "@/components/mdx/Card"
+import Callout from "@/components/mdx/Callout"
+import Quote from "@/components/mdx/Quote"
+import Grid from "@/components/mdx/Grid"
+
+<Card>
+  <Quote>
+    Developed the high-value modules like Data Warehouse and led the frontend modernization (PHP
+    Laravel > Vue 3).
+  </Quote>
+</Card>
+
 ## Key Features & Contributions
+
+<Grid columns={{xs: 1, md: 3}} gap={4}>
+
+<ImageCard src="/projects/pictureB.jpg" alt="WildSync Outdoor Platform" className="md:col-span-3" horizontal>
 
 ### Data Warehouse
 
-A centralized platform for managing and analyzing e-commerce data related to products, sales, and customer behavior. Built with Vue and TypeScript, providing a user-friendly interface for data visualization and reporting.
+A centralized platform for managing and analyzing e-commerce data related to products, sales, and customer behavior.
 
-- **Data Visualization**: Engineered a dynamic data visualization dashboard, rendering complex business metrics into interactive charts and graphs, enabling users to intuitively analyze trends.
+- **Data Visualization**: Engineered a dynamic data visualization dashboard with _Echarts_ and _Vue3 Easy Data Table_, rendering complex metrics into intuitive charts and graphs.
+- **Analytics & Comparisons**: Implemented an analytics toolkit with customizable date-range pickers and dynamic metric comparison, allowing users to perform complex analysis.
 - **AI Recommendation**: Integrated ChatGPT's API to surface AI-driven business recommendations within the user interface to help users trust and act upon the data-driven suggestions.
-- **Analytics & Comparisons**: Implemented an analytics toolkit, featuring customizable date-range pickers and dynamic metric comparison, that allow users to perform analysis of metrics such as sales trends, customer behavior, and more.
-- **Library Selection**: Utilized _Echarts_ and _Vue3 Easy Data Table_ to build complex data visualizations and tables, significantly reducing development time while ensuring high performance and responsiveness.
+
+</ImageCard>
+
+<ImageCard src="/projects/pictureB.jpg" alt="WildSync Outdoor Platform">
 
 ### Core E-commerce SaaS Platform
 
-A robust e-commerce platform that enables entrepreneurs to create and manage online stores with features such as product management, order processing, hold promotion activities, customer relationship management, and more.
-
-- **Onboarding Page**: Guides new merchants through the essential initial setup of a complex e‑commerce platform, speeding time-to-first-configuration and reducing early support friction.
+- **Onboarding Page**: Guides new users through the essential initial setup of the complex e-commerce platform, speeding up configuration time and reducing early support friction.
 - **Rental Service**: Implemented a rental service feature that allows users to rent their products or spaces, expanding the platform's offering to attract a broader customer base.
-- **UI Engineering**: Utilized Sass and BEM method to translate UI/UX designs from Figma into pixel-perfect, responsive web pages within a Laravel (Blade) environment.
+
+</ImageCard>
+
+<ImageCard src="/projects/pictureB.jpg" alt="WildSync Outdoor Platform">
+
+### Maintenance
+
+- **Component Library**: Developed and maintained a component library using _Storybook_ to ensure design consistency and accelerate frontend development.
 - **Customer Support**: Diagnosed and resolved critical, customer-reported bugs in production environment, conducting analysis to implement robust, long-term solutions.
+
+</ImageCard>
+
+<ImageCard src="/projects/pictureB.jpg" alt="WildSync Outdoor Platform">
 
 ### Internal Management System
 
-Centralizes configuration, merchant reporting, and announcement/promo publishing for different internal roles, streamlining daily operations and improving efficiency.
+- **Project Modernization**: Cooperated with backend team to migrate legacy PHP Laravel + jQuery codebase to Vue 3 & TypeScript, enhancing maintainability and productivity.
+- **Interface Optimization**: Redesigned interfaces to improve usability and efficiency for various roles, including customer support, marketing, and operations teams.
 
-- **Project Modernization**: Migrated legacy PHP Laravel + jQuery codebase to Vue 3 & TypeScript, enhancing code maintainability, scalability, and developer productivity.
-- **Interface Optimization**: Redesigned internal interfaces to improve usability and efficiency for various roles, including customer support, marketing, and operations teams.
+</ImageCard>
+
+</Grid>
 
 ## Technical Decisions
+
+<Card>
 
 ### Decision 1: Adopting Storybook for Design-Dev Bridging
 
 - **Why**: UI inconsistencies between design and development teams causes delays and redundant rework.
 - **Result**: Established a single source of truth for UI components, facilitating smoother collaboration with designers and other developers.
 
+<Divider borderStyle="dashed" gap={4} />
+
 ### Decision 2: Type-Safe Architecture with TypeScript
 
 - **Why**: The complex data structures in the "Data Warehouse" required strict reliability to enhance maintainability.
 - **Result**: Prevented runtime errors and clarified API contracts with both frontend and backend teams (via Postman integration).
+
+<Divider borderStyle="dashed" gap={4} />
 
 ### Decision 3: Pinia State Management
 
 - **Why**: The application required a robust state management solution to handle complex data interactions and shared states across components.
 - **Result**: Improved code organization and maintainability, ensuring a predictable and maintainable state for user permissions, search conditions and shared data across the application.
 
+</Card>
+
 ## Challenge: Team Allocation
+
+<Callout>
 
 - **Challenge**: The project timeline was tight, and with a small team of 2 frontend developers, it was challenging to allocate resources effectively to meet deadlines without compromising on quality.
 - **Solution**: Listed all features before development began, breaking them down into manageable tasks. Assigned tasks based on the urgency and each developer's time, ensuring a balanced workload, and update and adjust the plan regularly with the project manager.
 
+</Callout>
+
 ## Outcomes
+
+<Card>
 
 - **+15% Avg. Plan Value** driven by the new Data Warehouse feature
 - **-30% Development Time** via Design System & Standardized API Docs
 - **4 Months Time-to-Market** from concept to Data Warehouse launch
 - **20,000+ Active Merchants** served by the high-traffic SaaS platform
+
+</Card>

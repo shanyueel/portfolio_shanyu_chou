@@ -1,14 +1,14 @@
 ---
 title: "Alphitter Social Media Website"
 subtitle: "A Minimalist Simple Twitter Application"
+coverImage: "/projects/pictureB.jpg"
 githubUrl: "https://github.com/Noseble/simple-twitter"
 liveDemoUrl: "https://noseble.github.io/simple-twitter/login"
 role: "Frontend Engineer"
-duration: "Mar 2023 – Apr 2023"
+duration: "Apr 2023 – May 2023"
 teamMembers:
   FE: 2
   BE: 2
-highlight: ""
 techStack:
   frontend:
     - React
@@ -20,44 +20,85 @@ techStack:
     - Figma
 ---
 
+import Divider from "@/components/ui/Divider"
+import ImageCard from "@/components/mdx/ImageCard"
+import Card from "@/components/mdx/Card"
+import Callout from "@/components/mdx/Callout"
+import Quote from "@/components/mdx/Quote"
+import Grid from "@/components/mdx/Grid"
+
+<Card>
+  <Quote>
+    Worked as a frontend engineer in a team of 4 to develop a social media platform enabling users
+    to post tweets, follow others, and interact through likes and replies.
+  </Quote>
+</Card>
+
 ## Key Features & Contributions
+
+<Grid columns={{xs: 1, md: 3}} gap={4}>
+
+<ImageCard src="/projects/pictureB.jpg" alt="Alphitter Social Media Website">
 
 ### User Profiles:
 
-- **Authentication**: Users can sign up for a new account or log in to an existing one.
-- **User Profiles**: Each user has a profile page displaying their tweets, replies, and liked tweets.
-- **Profile Editing**: Users can edit their personal information, including name, introduction, avatar, and background image.
+- **Authentication**: Utilize Firebase to allow users to sign up for a new account or log in to an existing one.
+- **User Profiles**: Each user has a profile page displaying their information, tweets, replies, and liked tweets.
+
+</ImageCard>
+
+<ImageCard src="/projects/pictureB.jpg" alt="Alphitter Social Media Website">
 
 ### Tweeting System:
 
-- **Timeline**: The main page displays a timeline of all users' tweets.
 - **Tweeting & Engagement**: Users can create & post new tweets. They can also reply to and like tweets from other users.
 - **Following System**: Users can follow and unfollow other users to customize their social network.
 
+</ImageCard>
+
+<ImageCard src="/projects/pictureB.jpg" alt="Alphitter Social Media Website">
+
 ### Admin Management:
 
-- **Independent Entry**: A separate login and web page for administrators to manage the platform.
 - **Tweet Management**: Administrators can view all tweets posted by users and have the ability to delete any tweet.
 - **User Management**: Administrators can view a list of all registered users on the platform.
 
+</ImageCard>
+
+</Grid>
+
 ## Technical Decisions
+
+<Card>
 
 ### Decision 1: Postman for API Documentation
 
 - **Why**: With a tight delivery schedule, the frontend team couldn't wait for the backend team to complete API features before starting development.
 - **Result**: Collaborated with backend engineers to create a shared API specification using Postman, allowing the frontend team to start development in parallel.
 
+<Divider borderStyle="dashed" gap={4} />
+
 ### Decision 2: Adopted Styled Components for Modular CSS-in-JS
 
 - **Why**: Original CSS definitions were scattered across multiple files, leading to style duplication and maintenance challenges.
 - **Result**: Adopted Styled Components to encapsulate styles within React components, promoting reusability and keep component structure, style, and logic together.
 
+</Card>
+
 ## Challenge: Remote Collaboration
+
+<Callout>
 
 - **Challenge**: Team members were in different locations with varying schedules, making frequent meetings difficult.
 - **Solution**: Leveraged messaging apps and adopted Agile development practices, including online stand-ups and weekly sprint planning, to stay updated and ensure delivery on time.
 
-## Outcome
+</Callout>
+
+## Outcomes
+
+<Card>
 
 - **~35% Code Reduction** by engineering ~18 reusable React components to standardize UI elements and minimize markup duplication.
 - **3 Days Early Headstart**enabled by defining a shared Postman API specification, allowing parallel frontend-backend development and decoupling dependencies.
+
+</Card>

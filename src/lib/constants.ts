@@ -1,4 +1,3 @@
-import { TechKey } from '@/lib/constants';
 import packageJson from "../../package.json"
 import type { IconType } from "react-icons"
 import type { ColorHex } from "./types"
@@ -95,7 +94,7 @@ export enum TechKey {
   PowerPoint = "PowerPoint",
 }
 
-export type TechKeyType = `${TechKey}`;
+export type TechKeyType = `${TechKey}`
 
 /* Mapping for tech stack icons and colors */
 interface TechStackIcon {
