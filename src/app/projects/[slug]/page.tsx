@@ -84,7 +84,7 @@ const ProjectPage = async (props: { params: pageParams }) => {
   const showLinks = frontmatter.githubUrl || frontmatter.liveDemoUrl
 
   return (
-    <div className="main-container">
+    <div className="main-content">
       <AnimatedArticle>
         <div className="mb-4">
           <h1 className="text-2xl font-extrabold text-center md:text-3xl">{frontmatter.title}</h1>

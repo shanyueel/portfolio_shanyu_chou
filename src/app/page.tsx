@@ -75,7 +75,7 @@ export default function Home() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
-        className="main-container flex flex-col h-full-container text-center"
+        className="main-content flex flex-col h-full-container text-center"
       >
         <div className="flex-1 flex flex-col justify-center items-center">
           <div className="flex flex-col justify-center items-center gap-2 md:flex-row md:gap-12">
@@ -163,7 +163,7 @@ export default function Home() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
         viewport={{ once: true, amount: 0.3 }}
-        className="main-container mt-12 scroll-mt-header"
+        className="main-content mt-12 scroll-mt-header"
       >
         <ViewAllHeader title="Recent Projects" pageUrl="/projects" itemCount={projects.length} />
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2">
@@ -212,7 +212,7 @@ export default function Home() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
-        className="main-container mt-2 text-center scroll-mt-header"
+        className="main-content mt-2 text-center scroll-mt-header"
       >
         <h2 className="text-3xl font-extrabold text-primary text-shadow-[2px_2px_0px_rgba(0_0_0_/_0.6)] text-shadow-primary/50 leading-none dark:text-secondary dark:text-shadow-secondary/50">
           A Bit About Me

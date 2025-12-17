@@ -68,68 +68,66 @@ const ProjectsPage = () => {
   }, [selectedTechStack, sortOrder])
 
   return (
-    <section className="max-w-4xl mx-auto">
-      <div className="main-container">
-        <div className="flex justify-between items-center gap-4 w-full mb-4">
-          <FilterDropdown
-            items={uniqueTechStack.map(({ tech, count }) => ({
-              id: tech,
-              label: `${tech} (${count})`,
-            }))}
-            selectedItems={techStackDrafts}
-            setSelectedItems={setTechStackDrafts}
-            onApply={applyFilters}
-            onClear={clearFilters}
-            placeholder="Filter by Tech"
-            resultCount={filteredProjects.length}
-          />
-          <SortDropdown
-            sortOrder={sortOrder}
-            setSortOrder={setSortOrder}
-            options={[
-              { label: "Newest First", id: "newest" },
-              { label: "Oldest First", id: "oldest" },
-            ]}
-          />
-        </div>
-
-        {/* Active Filter Chips */}
-        <ActiveFilterChips filters={selectedTechStack} className="mb-4" onRemove={removeTech} />
-
-        <AnimatePresence mode="wait">
-          {filteredProjects.length > 0 ? (
-            <motion.div
-              key="projects"
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              {filteredProjects.map(project => (
-                <ProjectCard key={project.slug} {...project} />
-              ))}
-            </motion.div>
-          ) : (
-            <motion.div
-              key="no-results"
-              className="flex flex-col items-center mt-12 px-4 text-center text-gray-600 dark:text-gray-300"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-            >
-              <FaFrown className="mb-3 text-4xl text-gray-400 md:text-5xl dark:text-gray-500" />
-              <p className="text-lg font-semibold md:text-xl lg:text-2xl">No matched projects</p>
-              <p className="text-sm md:text-base lg:text-lg mt-2 max-w-2xl">
-                The combination of selected tech stack filters didn&apos;t match any projects. Try
-                changing or clearing your filters.
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
+    <div className="main-content">
+      <div className="flex justify-between items-center gap-4 w-full mb-4">
+        <FilterDropdown
+          items={uniqueTechStack.map(({ tech, count }) => ({
+            id: tech,
+            label: `${tech} (${count})`,
+          }))}
+          selectedItems={techStackDrafts}
+          setSelectedItems={setTechStackDrafts}
+          onApply={applyFilters}
+          onClear={clearFilters}
+          placeholder="Filter by Tech"
+          resultCount={filteredProjects.length}
+        />
+        <SortDropdown
+          sortOrder={sortOrder}
+          setSortOrder={setSortOrder}
+          options={[
+            { label: "Newest First", id: "newest" },
+            { label: "Oldest First", id: "oldest" },
+          ]}
+        />
       </div>
-    </section>
+
+      {/* Active Filter Chips */}
+      <ActiveFilterChips filters={selectedTechStack} className="mb-4" onRemove={removeTech} />
+
+      <AnimatePresence mode="wait">
+        {filteredProjects.length > 0 ? (
+          <motion.div
+            key="projects"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            {filteredProjects.map(project => (
+              <ProjectCard key={project.slug} {...project} />
+            ))}
+          </motion.div>
+        ) : (
+          <motion.div
+            key="no-results"
+            className="flex flex-col items-center mt-12 px-4 text-center text-gray-600 dark:text-gray-300"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+          >
+            <FaFrown className="mb-3 text-4xl text-gray-400 md:text-5xl dark:text-gray-500" />
+            <p className="text-lg font-semibold md:text-xl lg:text-2xl">No matched projects</p>
+            <p className="text-sm md:text-base lg:text-lg mt-2 max-w-2xl">
+              The combination of selected tech stack filters didn&apos;t match any projects. Try
+              changing or clearing your filters.
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   )
 }
 

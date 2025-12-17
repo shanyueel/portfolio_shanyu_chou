@@ -8,7 +8,7 @@ import journey from "@/data/journey"
 
 export default function AboutPage() {
   return (
-    <section className="flex flex-col items-center justify-center px-4 max-w-4xl mx-auto text-left">
+      <div className="main-content">
       <h1 className="text-3xl mb-4 font-extrabold">About me</h1>
       <Link
         href="/resume.pdf"
@@ -114,6 +114,6 @@ export default function AboutPage() {
           </TimelineItem>
         ))}
       </Timeline>
-    </section>
+    </div>
   )
 }
