@@ -44,7 +44,7 @@ interface NavItem {
 
 export const navItems: NavItem[] = [
   { name: "Home", path: "/" },
-  { name: "Work", path: "/work" },
+  // { name: "Work", path: "/work" },
   { name: "Projects", path: "/projects" },
   // { name: "Blog", path: "/blog" },
   { name: "About", path: "/about" },

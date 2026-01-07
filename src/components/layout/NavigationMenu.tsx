@@ -32,7 +32,7 @@ const NavigationMenu = () => {
               </li>
               {showDivider && (
                 <li className="w-px h-5" aria-hidden="true">
-                  <span className="inline-flex items-center w-full h-full bg-dark"></span>
+                  <span className="inline-flex items-center w-full h-full bg-dark dark:bg-light"></span>
                 </li>
               )}
             </Fragment>

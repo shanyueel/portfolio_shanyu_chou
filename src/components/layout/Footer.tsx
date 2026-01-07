@@ -8,21 +8,21 @@ const Footer = () => {
   return (
     <footer
       id="footerPortfolio"
-      className="mt-4 py-6 text-center text-sm text-gray-500 px-4 border-t
-            dark:border-gray-800 border-gray-300 bg-white dark:bg-black"
+      className="mt-4 px-4 py-6 border-t border-gray-300 text-center text-sm text-gray-500
+        bg-light dark:border-gray-800 dark:bg-dark"
     >
       <div className="flex justify-center gap-6 mb-2 text-xl">
         <Link
           href="https://github.com/shanyueel"
           aria-label="GitHub"
-          className="hover:text-blue-500 transition-transform hover:scale-125 duration-200"
+          className="transition-transform duration-200 hover:text-link hover:scale-125"
         >
           <FaGithub />
         </Link>
         <Link
           href="https://www.linkedin.com/in/shanyu-chou/"
           aria-label="LinkedIn"
-          className="hover:text-blue-500 transition-transform hover:scale-125 duration-200"
+          className="transition-transform duration-200 hover:text-link hover:scale-125"
         >
           <FaLinkedin />
         </Link>
@@ -30,7 +30,7 @@ const Footer = () => {
           href="mailto:wulingkevin0704@gmail.com"
           target="_blank"
           aria-label="Email"
-          className="hover:text-blue-500 transition-transform hover:scale-125 duration-200"
+          className="transition-transform duration-200 hover:text-link hover:scale-125"
         >
           <FaEnvelope />
         </Link>
