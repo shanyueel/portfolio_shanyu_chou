@@ -21,7 +21,7 @@ const projects: Project[] = [
   {
     slug: "waca",
     title: "WACA Platform",
-    image: "/projects/pictureB.jpg",
+    image: "/projects/waca/thumbnail_waca.jpg",
     description:
       "A e-commerce platform that focuses on creating a seamless 'Online-Merge-Offline' retail and reservation experience for all merchants.",
     startDate: "2023-12",
@@ -42,7 +42,7 @@ const projects: Project[] = [
   {
     slug: "wildSync",
     title: "WildSync",
-    image: "/projects/pictureC.jpg",
+    image: "/projects/wildSync/thumbnail_wildSync.jpg",
     description:
       "An activity platform that connects outdoor enthusiasts, allowing them to plan activities, discover new adventures, and meet people.",
     startDate: "2023-06",
@@ -60,7 +60,7 @@ const projects: Project[] = [
   {
     slug: "alphitter",
     title: "Alphitter",
-    image: "/projects/alphitter/cover_img_alphitter.png",
+    image: "/projects/alphitter/thumbnail_alphitter.jpg",
     description:
       "A social media app like Twitter that allows users to post short messages, like interesting content, and follow others.",
     startDate: "2023-04",

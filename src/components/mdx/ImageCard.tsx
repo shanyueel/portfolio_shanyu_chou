@@ -20,11 +20,11 @@ interface ImageCardProps {
 const ImageCard = ({ src, alt, horizontal = false, children, className }: ImageCardProps) => {
   return (
     <Card className={cn("group relative p-0 overflow-hidden md:p-0", className)}>
-      <div className={cn(horizontal && "md:grid md:grid-cols-5 lg:grid-cols-3 md:items-center")}>
+      <div className={cn(horizontal && "md:grid md:grid-cols-2 md:items-center")}>
         <div
           className={cn(
             "relative aspect-[4/3] w-full rounded-t-lg",
-            horizontal && "md:col-span-2 lg:col-span-1 md:h-full"
+            horizontal && "md:col-span-1  md:h-full"
           )}
         >
           <Image
@@ -42,7 +42,7 @@ const ImageCard = ({ src, alt, horizontal = false, children, className }: ImageC
             "[&>*:first-child]:mt-0 [&>*:last-child]:mb-0",
             "[&>p]:leading-6",
             "[&_ul]:list-none [&_ul]:p-0 [&_ul]:text-sm [&_li]:my-1 [&_li]:p-0",
-            horizontal && "md:col-span-3 lg:col-span-2"
+            horizontal && "md:col-span-1"
           )}
         >
           {children}

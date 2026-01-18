@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { notFound } from "next/navigation"
 import { compileMDX } from "next-mdx-remote/rsc"
 import path from "path"
@@ -10,7 +11,6 @@ import projects from "@/data/projects"
 import { techStackMap, TechKey } from "@/lib/constants"
 import { pageParams, TechIconColors } from "@/lib/types"
 import TeamMembers from "@/components/features/project/TeamMembers"
-import ImageCarouselWrapper from "@/components/features/ImageCarouselWrapper"
 import Button from "@/components/ui/Button"
 import Divider from "@/components/ui/Divider"
 import Timeline from "@/components/ui/Timeline"
@@ -41,7 +41,6 @@ const ProjectPage = async (props: { params: pageParams }) => {
   if (!project) return notFound()
 
   const filePath = path.join(process.cwd(), "src", "data", "projects", `${slug}.mdx`)
-  const projectPhotoDir = path.join(process.cwd(), "public", "projects", slug)
 
   if (!fs.existsSync(filePath)) {
     return notFound()
@@ -123,11 +122,16 @@ const ProjectPage = async (props: { params: pageParams }) => {
           </div>
         )}
 
-        {fs.existsSync(projectPhotoDir) && fs.readdirSync(projectPhotoDir).length > 0 && (
-          <div className="w-full">
-            <ImageCarouselWrapper imageDir={`projects/${slug}`} altPrefix={frontmatter.title} />
-          </div>
-        )}
+        {/* Cover Image */}
+        <div className="relative rounded-lg w-full aspect-video overflow-hidden mb-6">
+          <Image
+            src={frontmatter.coverImage}
+            alt={`${frontmatter.title} Cover Image`}
+            className="object-cover"
+            fill
+            quality={75}
+          />
+        </div>
 
         {/* Project Metadata */}
         <Callout className="mb-6">

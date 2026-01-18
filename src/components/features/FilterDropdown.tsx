@@ -29,7 +29,6 @@ const FilterDropdown = ({
   setSelectedItems,
   items,
   placeholder,
-  resultCount,
   onApply,
 }: FilterDropdownProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
@@ -54,16 +53,6 @@ const FilterDropdown = ({
         <Button color="info" className="relative" outline>
           <span className="truncate">{triggerContent}</span>
           <FaChevronDown className="ml-2 text-sm" />
-
-          {resultCount > 0 && (
-            <span
-              className="absolute top-0 right-0 flex items-center justify-center w-5 h-5 rounded-full text-xs font-bold transform translate-x-1/2
-                        -translate-y-1/2 bg-primary text-light"
-              title={`${resultCount} results`}
-            >
-              {resultCount}
-            </span>
-          )}
         </Button>
       }
     >

@@ -29,7 +29,7 @@ export default function ProjectCard({
   priority = false,
 }: ProjectCardProps) {
   return (
-    <Link href={`/projects/${slug}`} className="group block">
+    <Link href={`/projects/${slug}`} className="group flex">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -46,7 +46,7 @@ export default function ProjectCard({
         className="text-dark bg-light border-1 rounded-xl overflow-hidden shadow-md transition-all
                  hover:border-primary hover:shadow-xl dark:bg-dark dark:text-light"
       >
-        <div className="relative w-full h-48 overflow-hidden">
+        <div className="relative w-full h-64 overflow-hidden">
           <Image
             src={image}
             alt={title}
@@ -55,17 +55,10 @@ export default function ProjectCard({
             className="object-cover"
             quality={75}
           />
-          <div className="absolute top-4 left-4 z-surface">
-            <h3 className="text-2xl text-light font-extrabold text-shadow-[2px_2px_0px_rgba(0_0_0_/_0.6)] text-shadow-primary leading-none">
+          <div className="absolute bottom-0 left-0 w-full p-4 z-surface bg-gradient-to-b from-transparent to-dark/80">
+            <h3 className="mt-2 text-3xl text-light font-extrabold text-shadow-[2px_2px_0px_rgba(0_0_0_/_0.6)] text-shadow-primary leading-none">
               {title}
             </h3>
-            <div className="flex flex-wrap gap-1 mt-2">
-              {tag.map(tag => (
-                <Tag key={tag} className="!bg-light" color="primary" size="sm" outline>
-                  <span className="font-bold">{tag}</span>
-                </Tag>
-              ))}
-            </div>
           </div>
 
           <div className="absolute z-surface flex justify-center items-center bg-dark/80 opacity-0 inset-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -77,6 +70,13 @@ export default function ProjectCard({
           <p className="text-xs font-semibold text-gray-400">
             {startDate} - {endDate}
           </p>
+          <div className="flex flex-wrap gap-1 mt-1">
+            {tag.map(tag => (
+              <Tag key={tag} className="!bg-light dark:!bg-dark" color="primary" size="sm" outline>
+                <span className="font-bold">{tag}</span>
+              </Tag>
+            ))}
+          </div>
           <p className="text-sm mt-1">{description}</p>
           <hr className="w-full my-2 border-gray-200" />
           <div className="flex flex-wrap justify-start gap-1.5">
