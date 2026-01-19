@@ -24,6 +24,7 @@ import Tag from "@/components/ui/Tag"
 import AnimatedArticle from "@/components/ui/AnimatedArticle"
 import Timeline from "@/components/ui/Timeline"
 import TimelineItem from "@/components/ui/TimelineItem"
+import { resumeLink } from "@/lib/constants"
 
 export default async function AboutPage() {
   const filePath = path.join(process.cwd(), "src", "data", "about", "about.mdx")
@@ -33,6 +34,30 @@ export default async function AboutPage() {
   }
 
   const mdxSource = fs.readFileSync(filePath, "utf-8")
+
+  const socialLinks = [
+    {
+      id: "GitHub",
+      href: "https://github.com/shanyueel",
+      icon: <FaGithub />,
+    },
+    {
+      id: "LinkedIn",
+      href: "https://www.linkedin.com/in/shanyu-chou/",
+      icon: <FaLinkedin />,
+    },
+    {
+      id: "Email",
+      href: "mailto:wulingkevin0704@gmail.com",
+      icon: <FaEnvelope />,
+    },
+    {
+      id: "DownloadResume",
+      href: resumeLink,
+      icon: <FaDownload />,
+      label: "Download CV",
+    },
+  ]
 
   const { content } = await compileMDX<{
     title: string
@@ -70,6 +95,9 @@ export default async function AboutPage() {
     options: {
       mdxOptions: {
         remarkPlugins: [remark_gfm],
+      },
+      scope: {
+        socialLinks,
       },
     },
   })

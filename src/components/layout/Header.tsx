@@ -8,6 +8,7 @@ import NavigationMenu from "@/components/layout/NavigationMenu"
 import ThemeToggleButton from "@/components/ui/ThemeToggleButton"
 import MobileMenuToggle from "@/components/layout/MobileMenuToggle"
 import MobileMenu from "@/components/layout/MobileMenu"
+import { resumeLink } from "@/lib/constants"
 
 /**
  * Header component that serves as the top navigation bar for the portfolio.
@@ -33,10 +34,11 @@ const Header = () => {
 
         <div className="flex items-center gap-2">
           <Link
-            href="/resume.pdf"
-            title="Download Resume"
+            href={resumeLink}
+            title="Download CV"
             target="_blank"
             className="inline-block p-2.5 rounded-full transition-colors cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600"
+            rel="noopener noreferrer"
           >
             <FaDownload size={16} />
           </Link>

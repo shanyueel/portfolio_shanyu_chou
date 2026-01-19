@@ -50,6 +50,9 @@ export const navItems: NavItem[] = [
   { name: "About", path: "/about" },
 ]
 
+export const resumeLink =
+  "https://docs.google.com/document/d/1IPY2gR_dvIvdBpRXedxJMnwtpmhM3yvJRHFFq-gfRZ0/edit?usp=sharing"
+
 export enum TechKey {
   // programming languages
   Python = "Python",

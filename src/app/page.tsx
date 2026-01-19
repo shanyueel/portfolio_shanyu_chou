@@ -21,6 +21,7 @@ import Logo from "@/assets/icons/logo.svg"
 import scrollDownArrows from "@/assets/animations/scrollDownArrows.json"
 import blog from "@/data/blog"
 import projects from "@/data/projects"
+import { resumeLink } from "@/lib/constants"
 
 interface Fact {
   icon: IconType
@@ -114,7 +115,7 @@ export default function Home() {
               <AiFillMessage size={16} />
               Who am I ?
             </Button>
-            <Link href="#">
+            <Link href={resumeLink} target="_blank" rel="noopener noreferrer">
               <Button color="secondary" className="flex-1 flex items-center gap-1">
                 <HiDownload size={16} />
                 Download CV
