@@ -12,9 +12,9 @@ const Callout = ({ children, className }: CalloutProps) => {
   return (
     <div
       className={cn(
-        "w-full p-4 border-2 border-primary rounded-lg",
+        "w-full p-4 border-2 border-primary bg-light rounded-lg dark:bg-dark",
         "[&>*:first-child]:mt-0 [&>*:last-child]:mb-0",
-        "[&_ul]:list-none [&_ul]:p-0 [&_ul]:mt-0 [&_ul]:mb-0",
+        "[&_ul]:mt-0 [&_ul]:mb-0",
         className
       )}
     >
