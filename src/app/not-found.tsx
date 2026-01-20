@@ -1,5 +1,7 @@
 import Link from "next/link"
 import { useMemo } from "react"
+import Button from "@/components/ui/Button"
+import { FaHome } from "react-icons/fa"
 
 /**
  * NotFound component that displays a 404 error message when a page is not found.
@@ -26,21 +28,16 @@ export default function NotFound() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
-      <div className="text-6xl md:text-8xl font-extrabold text-blue-500 mb-2 select-none">404</div>
-      <h1 className="text-xl md:text-2xl font-bold mb-2 text-gray-900 dark:text-gray-100">
+      <div className="text-6xl md:text-8xl font-extrabold text-secondary mb-2 select-none">404</div>
+      <h1 className="text-xl md:text-2xl font-bold mb-2 text-dark dark:text-light">
         Page Not Found
       </h1>
-      <p className="mb-6 text-gray-600 dark:text-gray-300">
-        <span className="inline-block font-mono text-base text-blue-600 dark:text-blue-400">
-          $ {randomLine}
-        </span>
-      </p>
-      <Link
-        href="/"
-        className="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded
-                transition-colors shadow focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
-      >
-        Go Home
+      <p className="mb-6 font-mono text-base text-gray-500 dark:text-gray-400">$ {randomLine}</p>
+      <Link href="/">
+        <Button size="lg" className="flex gap-1 items-center">
+          <FaHome />
+          Back to Home
+        </Button>
       </Link>
     </div>
   )
