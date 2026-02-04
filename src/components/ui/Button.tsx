@@ -1,7 +1,8 @@
 import { ColorType } from "@/lib/types"
+import { cn } from "@/lib/utils"
 import React from "react"
 
-type ButtonSize = "sm" | "md" | "lg"
+type ButtonSize = "xs" |"sm" | "md" | "lg"
 
 interface ButtonProps {
   children: React.ReactNode
@@ -10,11 +11,14 @@ interface ButtonProps {
   type?: "button" | "submit" | "reset"
   size?: ButtonSize
   outline?: boolean
+  rounded?: boolean
   disabled?: boolean
-  onClick?: () => void
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
+  onMouseDown?: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 const sizeClasses: Record<ButtonSize, string> = {
+  xs: "px-1 py-0.5 text-xs",
   sm: "px-2 py-1 text-sm",
   md: "px-3 py-1.5 text-base",
   lg: "px-4 py-2 text-lg",
@@ -44,7 +48,7 @@ const outlineVariantClasses: Record<ColorType, string> = {
 }
 
 const baseClasses =
-  "flex items-center justify-center font-medium whitespace-nowrap cursor-pointer rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:cursor-not-allowed"
+  "flex items-center justify-center font-medium whitespace-nowrap cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:cursor-not-allowed"
 
 /**
  * A functional component that renders a button with various styles.
@@ -52,28 +56,41 @@ const baseClasses =
  * @param size - The size of the button (e.g., "sm", [default]"md", "lg").
  * @param color - The color of the button (e.g., [default]"primary", "secondary").
  * @param outline - Whether the button should have an outline style.
+ * @param rounded - Whether the button should have fully rounded corners (pill shape). [default]false
  */
 const Button = ({
   children,
   onClick,
+  onMouseDown,
   className = "",
   type = "button",
   disabled = false,
   size = "md",
   color = "primary",
   outline = false,
+  rounded = false,
 }: ButtonProps) => {
   const variantClasses = outline ? outlineVariantClasses[color] : solidVariantClasses[color]
+  const roundedClasses = rounded ? "rounded-full" : "rounded-md"
   const disabledClasses = outline
-    ? "disabled:border-gray-300 disabled:text-gray-400 disabled:bg-transparent"
+    ? "disabled:border-gray-300 disabled:bg-gray-200 disabled:text-gray-400 "
     : "disabled:bg-gray-400 disabled:text-gray-200"
 
   return (
     <button
       type={type}
       onClick={onClick}
+      onMouseDown={onMouseDown}
       disabled={disabled}
-      className={`${baseClasses} ${sizeClasses[size]} ${variantClasses} ${disabledClasses} ${className}`}
+      className={cn(
+        baseClasses,
+        roundedClasses,
+        sizeClasses[size],
+        variantClasses,
+        disabledClasses,
+        variantClasses,
+        className
+      )}
     >
       {children}
     </button>

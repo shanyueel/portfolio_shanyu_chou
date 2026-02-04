@@ -25,9 +25,36 @@
   --color-danger: #d45542;
   --color-danger-fg: var(--color-light);
 
-  --color-muted: #707372;
+  --color-muted: var(--color-gray-400);
   /* --color-border: var(--color-fg); */
   --color-link: var(--color-primary);
+
+  /* Custom shadows */
+  --shadow-primary-glow: 
+    0 0 0 2px color-mix(in srgb, var(--color-primary) 10%, transparent), 
+    0 0 20px color-mix(in srgb, var(--color-primary) 15%, transparent);
+
+  /* z-index */
+  --z-index-base: 0;
+  --z-index-surface: 1;
+  --z-index-dropdown: 100;
+  --z-index-sticky: 200;
+  --z-index-overlay: 300;
+  --z-index-modal: 400;
+  --z-index-tooltip: 500;
+  --z-index-toast: 600;
+  --z-index-max: 999;
+
+  @keyframes thinking {
+    0%, 80%, 100% {
+      opacity: 0.3;
+      transform: scale(0.8);
+    }
+    40% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 }
 
 :root {
@@ -66,41 +93,29 @@ body {
 }
 
 @layer utilities {
-  /* z-index 系統 */
-  .z-base {
-    z-index: 0;
-  }
-  .z-surface {
-    z-index: 1;
-  }
-  .z-dropdown {
-    z-index: 100;
-  }
-  .z-sticky {
-    z-index: 200;
-  }
-  .z-overlay {
-    z-index: 300;
-  }
-  .z-modal {
-    z-index: 400;
-  }
-  .z-tooltip {
-    z-index: 500;
-  }
-  .z-toast {
-    z-index: 600;
-  }
-  .z-max {
-    z-index: 999;
-  }
-
   .h-full-container {
-    min-height: calc(100vh - var(--mobile-header-height));
+    height: calc(100dvh - var(--mobile-header-height));
 
     @media (min-width: 768px) {
-      min-height: calc(100vh - var(--desktop-header-height));
+      height: calc(100dvh - var(--desktop-header-height));
     }
+  }
+
+  .min-h-full-container {
+    min-height: calc(100dvh - var(--mobile-header-height));
+
+    @media (min-width: 768px) {
+      min-height: calc(100dvh - var(--desktop-header-height));
+    }
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 
   .scroll-mt-header {
@@ -110,4 +125,6 @@ body {
       scroll-margin-top: calc(var(--desktop-header-height) + 1px);
     }
   }
+
+
 }

@@ -1,0 +1,15 @@
+import Grid from "@/components/mdx/Grid"
+import { TechIcon, HeroCardContainer } from "@/components/mdx/HeroCards"
+import { SiReact, SiVuedotjs, SiTypescript, SiTailwindcss, SiStorybook } from "react-icons/si"
+import { GiPineapple } from "react-icons/gi"
+
+<HeroCardContainer>
+  <Grid columns={{ xs: 3, md: 6 }} gap={4}>
+    <TechIcon icon={<SiReact className="text-[#61DAFB]" />} label="React" />
+    <TechIcon icon={<SiVuedotjs className="text-[#4FC08D]" />} label="Vue 3" />
+    <TechIcon icon={<SiTypescript className="text-[#007ACC]" />} label="TypeScript" />
+    <TechIcon icon={<SiTailwindcss className="text-[#38B2AC]" />} label="Tailwind" />
+    <TechIcon icon={<GiPineapple className="text-[#FFE46A]" />} label="Pinia" />
+    <TechIcon icon={<SiStorybook className="text-[#FF4785]" />} label="Storybook" />
+  </Grid>
+</HeroCardContainer>
