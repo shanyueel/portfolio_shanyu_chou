@@ -1,0 +1,24 @@
+import { HeroCardContainer } from "@/components/mdx/HeroCards"
+import HighlightBox from "@/components/mdx/HighlightBox"
+import { LuPuzzle, LuWrench, LuRocket } from "react-icons/lu";
+
+<HeroCardContainer>
+  During the development of Waca's data warehouse, I had to implement a complex Dual-Mode Date Picker with custom shortcusts and intricate permission logic.
+  <HighlightBox icon={<LuPuzzle />} title="The Challenge" variant="negative" className="mt-4">
+    The biggest obstacle was that no third-party library met our specific design and functional requirements, and a brute-force implementation would have led to a 'spaghetti code' nightmare.
+  </HighlightBox>
+
+  <HighlightBox icon={<LuWrench />} title="The Solution" variant="neutral" className="mt-4">
+    I took a two-pronged approach:
+    - **Design Negotiation**: I demonstrated the technical constraints of existing libraries to the design team, and adjusted the UI with them to leverage the library's strengths while keeping the most important features.
+    - **Architectural Decoupling**: I broke the monolithic component into granular sub-components. Then, I abstracted the complext validation and business logic into a standalone Logic Controller (OOP approach). Therefore, I could instantiate a fresh 'state manager' everytime the picker opened, ensuring zero side effects. 
+  </HighlightBox>
+
+  <HighlightBox icon={<LuRocket />} title="The Result" variant="positive" className="mt-4">
+    This decoupling made the codebase significantly cleaner and more testable. It allowed us to implement the feature on time, and reduced the maintenance effort for subsequent updates by roughly 30% because the logic was isolated from the UI.
+  </HighlightBox>
+
+  <FooterLink href="/projects/waca">
+    Learn More About WACA Platform →
+  </FooterLink>
+</HeroCardContainer>

@@ -1,13 +1,38 @@
 import Grid from "@/components/mdx/Grid"
-import { StatCard, FooterLink, HeroCardContainer } from "@/components/mdx/HeroCards"
+import Callout from "@/components/mdx/Callout"
+import HighlightBox from "@/components/mdx/HighlightBox"
+import { LuClockArrowDown, LuCircleDollarSign, LuUsers  } from "react-icons/lu";
+import { HeroCardContainer, FooterLink } from "@/components/mdx/HeroCards"
 
 <HeroCardContainer>
-  <Grid columns={{ xs: 1, md: 2 }} gap={4}>
-    <StatCard value="+15%" label="Avg. Plan Price Increase" color="success" />
-    <StatCard value="-30%" label="Dev Time Reduced" color="secondary" />
-  </Grid>
+  The WACA E-commerce Platform is where I delivered the most measurable impact:
+  <HighlightBox
+    icon={<LuClockArrowDown />}
+    title="60% Faster Development"
+    variant="negative"
+  >
+    Accelerated development time by 3x through component library, API documents, and AI-assisted coding. 
+  </HighlightBox>
+
+  <HighlightBox
+    icon={<LuCircleDollarSign />}
+    title="15% Increase in Average Plan Value"
+    variant="positive"
+    className="mt-4"
+  >
+    Drove a 15% increase in Average Plan Value within 4 months of the Data Warehouse feature launch.
+  </HighlightBox>
+
+  <HighlightBox
+    icon={<LuUsers />}
+    title="Serving 2,000+ Merchants"
+    variant="neutral"
+    className="mt-4"
+  >
+    Built and maintained a production system serving 2,000+ active merchants and processing 500,000+ customer transactions.
+  </HighlightBox>
 
   <FooterLink href="/projects/waca">
-    Driven by WACA E-commerce Platform →
+    Take a closer look at the WACA E-commerce Platform →
   </FooterLink>
 </HeroCardContainer>

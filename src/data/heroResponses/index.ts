@@ -7,9 +7,13 @@ import fs from "fs"
 import path from "path"
 import remarkGfm from "remark-gfm"
 import Grid from "@/components/mdx/Grid"
+import Quote from "@/components/mdx/Quote"
+import Timeline from "@/components/ui/Timeline"
+import TimelineItem from "@/components/ui/TimelineItem"
+import HighlightBox from "@/components/mdx/HighlightBox"
 import { StatCard, FooterLink, HeroCardContainer, TechIcon } from "@/components/mdx/HeroCards"
-import { SiReact, SiVuedotjs, SiTypescript, SiTailwindcss, SiStorybook } from "react-icons/si"
-import { GiPineapple } from "react-icons/gi"
+import Callout from "@/components/mdx/Callout"
+import { LuClockArrowDown, LuCircleDollarSign, LuUsers, LuPuzzle, LuWrench, LuRocket, LuPalette, LuDatabase, LuTarget, LuNotebookPen, LuSearch, LuShieldCheck , LuLayoutDashboard, LuBot, LuSchool, LuPodcast, LuHandshake, LuPackage, LuGlobe } from "react-icons/lu";
 import { heroResponseDefs } from "./responses"
 
 /**
@@ -23,17 +27,35 @@ export async function compileHeroMDX(mdxFileName: string): Promise<React.ReactEl
     source: mdxSource,
     components: {
       Grid,
+      Callout,
+      Quote,
+      Timeline,
+      TimelineItem,
+      HighlightBox,
       StatCard,
       FooterLink,
       HeroCardContainer,
       TechIcon,
-      // Icons
-      SiReact,
-      SiVuedotjs,
-      SiTypescript,
-      SiTailwindcss,
-      SiStorybook,
-      GiPineapple,
+      // Icons for HighlightBox
+      LuClockArrowDown,
+      LuCircleDollarSign,
+      LuUsers,
+      LuPuzzle,
+      LuWrench,
+      LuRocket,
+      LuPalette,
+      LuDatabase,
+      LuTarget,
+      LuNotebookPen ,
+      LuSearch,
+      LuShieldCheck,
+      LuLayoutDashboard,
+      LuBot,
+      LuSchool,
+      LuPodcast,
+      LuHandshake,
+      LuPackage,
+      LuGlobe
     },
     options: {
       parseFrontmatter: false,

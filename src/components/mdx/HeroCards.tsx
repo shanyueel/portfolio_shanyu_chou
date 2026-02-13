@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils"
+import { techStackMap, type TechKeyType } from "@/lib/constants"
 
 interface StatCardProps {
   value: string
@@ -27,26 +28,42 @@ export const StatCard = ({ value, label, color = "primary", className }: StatCar
 }
 
 interface TechIconProps {
-  icon: React.ReactNode
-  label: string
+  /**
+   * The technology key from TechKey enum. Icon and color will be automatically loaded from techStackMap.
+   * To add a new technology, define it in constants.ts techStackMap.
+   */
+  techKey: TechKeyType
+  /**
+   * Label to display below the icon. Optional, defaults to the techKey value.
+   */
+  label?: string
   className?: string
 }
 
 /**
- * A tech icon card for displaying technology stack
+ * A tech icon card for displaying technology stack.
+ * 
+ * Usage: <TechIcon techKey="TypeScript" />
+ * 
+ * To add new technologies, update the techStackMap in constants.ts
  */
-export const TechIcon = ({ icon, label, className }: TechIconProps) => {
+export const TechIcon = ({ techKey, label, className }: TechIconProps) => {
+  const techInfo = techStackMap[techKey]
+  const IconComponent = techInfo.icon
+  const displayLabel = label || techKey
+
   return (
     <div
       className={cn(
         "flex flex-col items-center gap-2 p-4 rounded-xl",
         "bg-surface/50 dark:bg-dark/50 border border-muted/20",
-        "hover:border-primary/50 transition-colors",
         className
       )}
     >
-      <span className="text-3xl">{icon}</span>
-      <span className="text-xs text-muted">{label}</span>
+      <span className="text-3xl" style={{ color: techInfo.color }}>
+        <IconComponent />
+      </span>
+      <span className="text-xs text-muted">{displayLabel}</span>
     </div>
   )
 }
@@ -59,8 +76,8 @@ interface HeroCardContainerProps {
 /**
  * Container for hero response cards
  */
-export const HeroCardContainer = ({ children, className }: HeroCardContainerProps) => {
-  return <div className={cn("p-6", className)}>{children}</div>
+export const HeroCardContainer = ({ children }: HeroCardContainerProps) => {
+  return <>{children}</>
 }
 
 interface FooterLinkProps {
@@ -76,15 +93,13 @@ export const FooterLink = ({ href, children, className }: FooterLinkProps) => {
   return (
     <div
       className={cn(
-        "mt-4 p-4 rounded-xl bg-surface/50 dark:bg-dark/50 border border-muted/20",
+        "mt-4 py-2 [&_p]:my-0",
         className
       )}
     >
-      <span className="text-sm text-muted">
-        <a href={href} className="text-primary hover:underline font-medium">
-          {children}
-        </a>
-      </span>
+      <a href={href} className="text-link font-medium">
+        {children}
+      </a>
     </div>
   )
 }

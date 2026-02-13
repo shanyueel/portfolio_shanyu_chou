@@ -1,0 +1,33 @@
+import HighlightBox from "@/components/mdx/HighlightBox"
+import { HeroCardContainer } from "@/components/mdx/HeroCards"
+import { LuShieldCheck , LuLayoutDashboard, LuBot } from "react-icons/lu"
+
+<HeroCardContainer>
+  My approach to code quality is built on three layers of verification: Type Safety, Visual Testing, and Automated Logic Validation.
+
+  <HighlightBox
+    icon={<LuShieldCheck />}
+    title="Type Safety: TypeScript"
+    variant="info"
+  >
+    Moving from JavaScript to TypeScript was a turning point for me. By defining clear **Interfaces** for each function, I ensure that logic across nested components remained consistent. This **prevents 80% of runtime errors** during the development phase that allows me to solve complex problems by ensuring each block is reliable.
+  </HighlightBox>
+
+  <HighlightBox
+    icon={<LuLayoutDashboard />}
+    title="Visual Testing: Storybook"
+    variant="negative"
+    className="mt-4"
+  >
+    I use Storybook for **Component-Driven Development**. It allows me to perform visual checks in isolation. For instance, I use it to verify edge cases, such as ensuring a Modal scrolls correctly when content overflows, or testing interactive states like hover and focus. This prevents visual bugs from leaking into the final layout.
+  </HighlightBox>
+
+  <HighlightBox
+    icon={<LuBot />}
+    title="The Future of QA: AI & TDD"
+    variant="positive"
+    className="mt-4"
+  >
+    While my current workflow is supported by manual and static testing, my CS studies at Oregon State University have shown me the immense value of **Test-Driven Development**. Especially in the AI era, I believe high test coverage is the key to verifying AI-generated code. I am moving towards a workflow where tests act as the 'source of truth,' allowing for automated feedback loops that significantly reduce human intervention and boost overall reliability."
+  </HighlightBox>
+</HeroCardContainer>

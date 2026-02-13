@@ -1,0 +1,26 @@
+import Grid from "@/components/mdx/Grid"
+import { TechIcon, HeroCardContainer } from "@/components/mdx/HeroCards"
+
+<HeroCardContainer>
+  My core stack centers on TypeScript and modern frameworks, featuring React (used in my side projects) and Vue 3 (modernized legacy systems at Wabow). For state management, I use Redux or Pinia to handle complex data flows, ensuring predictable application state.
+  <Grid columns={3} gap={2}>
+    <TechIcon techKey="TypeScript" />
+    <TechIcon techKey="React" />
+    <TechIcon techKey="Vue" label="Vue 3" />
+    <TechIcon techKey="Redux" />
+    <TechIcon techKey="Pinia" />
+  </Grid>
+
+  Regarding UI/UX implementation, I specialize in Tailwind integrated with Design Tokens. I also build component libraries with Storybook to ensure consistent UI and higher maintainability.
+  <Grid columns={2} gap={2}>
+    <TechIcon techKey="TailwindCSS" label="Tailwind" />
+    <TechIcon techKey="Storybook" />
+  </Grid>
+
+  Furthermore, I have basic knowledge of Python for Problem-solving & Algorithms. I also have experience with Firebase and Postman for API integration and testing.
+  <Grid columns={3} gap={2}>
+    <TechIcon techKey="Python" />
+    <TechIcon techKey="Firebase" />
+    <TechIcon techKey="Postman" />
+  </Grid>
+</HeroCardContainer>

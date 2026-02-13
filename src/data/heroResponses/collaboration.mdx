@@ -1,0 +1,36 @@
+import HighlightBox from "@/components/mdx/HighlightBox"
+import { HeroCardContainer } from "@/components/mdx/HeroCards"
+import { LuPalette, LuDatabase, LuTarget } from "react-icons/lu"
+
+<HeroCardContainer>
+  My collaboration philosophy is built on **active communication** and **technical empathy**.
+  <HighlightBox
+    icon={<LuPalette />}
+    title="With Designers"
+    variant="neutral"
+  >
+    When design conflict with technical constraints, I initiate a technical consultation to find a win-win solution. I show designers my concerns about maintainability and what the component can naturally achieve, then negotiate alternatives that balance design vision with technical feasibility. 
+    
+    For the Date Picker project, I marked up customizable parts of the calendar library for the designers. This allowed them to create a design that was both visually polished and technically easy to maintain.
+  </HighlightBox>
+
+  <HighlightBox
+    icon={<LuDatabase />}
+    title="With Backend Engineers"
+    variant="positive"
+    className="mt-4"
+  >
+    We use **Postman / Bruno** for API contract dicussions. If a backend change is too high-risk for the database, I happily implement an 'Adapter Layer' in the frontend. This ensures system stability while keeping the frontend type-safe and independent.
+  </HighlightBox>
+
+  <HighlightBox
+    icon={<LuTarget />}
+    title="With Product Managers"
+    variant="info"
+    className="mt-4"
+  >
+    I treat PO as strategic partners. During the Data Warehouse launch, the initial scope far exceeded the timeline. Through conducted a detailed task breakdown and proposed a Milestone-based delivery, I defined the 'Core Minimum Viable Product' that could be launched independently to ensure early value delivery.
+
+    Finally, we managed to ship a high-quality, functional version on schedule, preventing a 'black hole' of development time while allowing the team to work at a sustainable pace.
+  </HighlightBox>
+</HeroCardContainer>

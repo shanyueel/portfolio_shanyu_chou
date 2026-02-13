@@ -1,0 +1,33 @@
+import HighlightBox from "@/components/mdx/HighlightBox"
+import { HeroCardContainer } from "@/components/mdx/HeroCards"
+import { LuNotebookPen, LuSearch, LuRocket } from "react-icons/lu"
+
+<HeroCardContainer>
+  I treat AI as a high-performance collaborator, and I’ve developed a structured workflow to maximize its potential while ensuring code integrity.
+
+  <HighlightBox
+    icon={<LuNotebookPen />}
+    title="Architectural Planning"
+    variant="neutral"
+  >
+    I extensively use tools like **Claude Code** and **Antigravity** for feature development and complex refactoring. My key strategy is to leverage AI for establishing a comprehensive execution plan before any code is written. Then, I decompose the plan into granular sub-tasks for AI to implement step by step. This approach significantly boosts the success rate of the final output.
+  </HighlightBox>
+
+  <HighlightBox
+    icon={<LuSearch />}
+    title="Quality & Trust"
+    variant="info"
+    className="mt-4"
+  >
+    Once the code is generated, I follow a strict multi-stage verification. I deploy specialized AI agents configured with coding styles and ESLint rules to audit the generated code for consistency and performance. On the other hand, I perform rigorous functional testing on browsers to verify the core business logic and edge cases to ensure the quality and reliability of the code.
+  </HighlightBox>
+
+  <HighlightBox
+    icon={<LuRocket />}
+    title="The Impact"
+    variant="positive"
+    className="mt-4"
+  >
+    This AI-augmented workflow allowed me to accelerate development by **3x** in the WACA project, shifting our focus from repetitive boilerplate coding to designing **system architecture** and perfecting **user experience** and **core business logic**.
+  </HighlightBox>
+</HeroCardContainer>
