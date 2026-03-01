@@ -11,7 +11,9 @@ interface CommandPaletteProps {
   /** Whether there is chat history */
   hasChatHistory: boolean
   /** Whether the typing animation is complete */
-  isTypingComplete: boolean,
+  isTypingComplete: boolean
+  /** IDs of responses the user has already seen */
+  seenResponseIds: string[]
   /** Whether the command palette is disabled */
   disabled: boolean,
   /** Callback function for when the user submits a query (text input) */
@@ -31,6 +33,7 @@ interface CommandPaletteProps {
 const CommandPalette = ({
   hasChatHistory,
   isTypingComplete,
+  seenResponseIds,
   disabled,
   onQuerySubmit,
   onIdSubmit,
@@ -40,6 +43,7 @@ const CommandPalette = ({
 }: CommandPaletteProps) => {
   const [query, setQuery] = useState("")
   const [isFocused, setIsFocused] = useState(false)
+  const [displayChips, setDisplayChips] = useState<typeof heroResponseDefs>([])
 
   const commandPaletteRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -116,6 +120,30 @@ const CommandPalette = ({
     }
   }, [query])
 
+  // Determine which chips to show
+  useEffect(() => {
+    const shuffle = <T,>(array: T[]): T[] => {
+      const newArray = [...array]
+      for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1))
+        ;[newArray[i], newArray[j]] = [newArray[j], newArray[i]]
+      }
+      return newArray
+    }
+
+    const unseen = heroResponseDefs.filter(d => !seenResponseIds.includes(d.id))
+    const seen = heroResponseDefs.filter(d => seenResponseIds.includes(d.id))
+
+    let result = shuffle(unseen)
+    if (result.length < 4) {
+      result = [...result, ...shuffle(seen).slice(0, 4 - result.length)]
+    } else {
+      result = result.slice(0, 4)
+    }
+    
+    setDisplayChips(result)
+  }, [seenResponseIds])
+
   return (
     <div ref={commandPaletteRef} className="w-full max-w-2xl mx-auto scroll-mb-4">
       {/* Input Field */}
@@ -159,7 +187,7 @@ const CommandPalette = ({
             transition={{ duration: 0.3, delay: 0.1 }}
             className="flex flex-wrap justify-center gap-2"
           >
-            {heroResponseDefs.map(def => (
+            {displayChips.map(def => (
               <Button
                 key={def.id}
                 type="button"

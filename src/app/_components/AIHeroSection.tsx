@@ -37,6 +37,7 @@ const AIHeroSection = ({ compiledResponses, projectsSectionRef }: AIHeroSectionP
   const [isInputFocused, setIsInputFocused] = useState(false)
   const [isTypingComplete, setIsTypingComplete] = useState(false)
   const [isCommandPaletteDisabled, setIsCommandPaletteDisabled] = useState(false)
+  const [seenResponseIds, setSeenResponseIds] = useState<string[]>([])
 
   const aiHeroSectionRef = useRef<HTMLDivElement>(null)
 
@@ -53,6 +54,31 @@ const AIHeroSection = ({ compiledResponses, projectsSectionRef }: AIHeroSectionP
     return () => {
       isMounted.current = false
     }
+  }, [])
+
+  // Load seen responses from localStorage
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("seenHeroResponses")
+      if (stored) {
+        setSeenResponseIds(JSON.parse(stored))
+      }
+    } catch (e) {
+      console.error("Failed to load seenHeroResponses", e)
+    }
+  }, [])
+
+  const markAsSeen = useCallback((id: string) => {
+    setSeenResponseIds(prev => {
+      if (prev.includes(id)) return prev
+      const next = [...prev, id]
+      try {
+        localStorage.setItem("seenHeroResponses", JSON.stringify(next))
+      } catch (e) {
+        console.error("Failed to save seenHeroResponses", e)
+      }
+      return next
+    })
   }, [])
 
   // Rotate characteristics
@@ -127,6 +153,8 @@ const AIHeroSection = ({ compiledResponses, projectsSectionRef }: AIHeroSectionP
   const handleIdSubmit = async (responseId: string) => {
     setIsCommandPaletteDisabled(true)
 
+    markAsSeen(responseId)
+
     // Find the response definition to get the display text
     const responseDef = findResponseById(responseId)
     const displayText = responseDef?.fullQuestion || `Tell me about ${responseId}`
@@ -172,6 +200,10 @@ const AIHeroSection = ({ compiledResponses, projectsSectionRef }: AIHeroSectionP
     const responseId = matched?.id || null
     const fallbackMessage = matched ? null : getRandomFallback()
 
+    if (responseId) {
+      markAsSeen(responseId)
+    }
+
     // User message: plain text wrapped in <p>
     addChatMessage("user", <p>{query}</p>)
 
@@ -206,7 +238,7 @@ const AIHeroSection = ({ compiledResponses, projectsSectionRef }: AIHeroSectionP
   const parseFallbackMessage = (message: string) => {
     const parts = message.split(/(\[[^\]]+\])/g)
   
-    return parts.map((part) => {
+    return parts.map((part, index) => {
       const match = part.match(/\[([^\]]+)\]/)
       if (match) {
         const text = match[1]
@@ -225,6 +257,7 @@ const AIHeroSection = ({ compiledResponses, projectsSectionRef }: AIHeroSectionP
   
         return (
           <span
+            key={index}
             onClick={handleClick}
             className="text-link mx-0.5 inline-flex underline underline-offset-2 cursor-pointer"
           >
@@ -232,7 +265,7 @@ const AIHeroSection = ({ compiledResponses, projectsSectionRef }: AIHeroSectionP
           </span>
         )
       }
-      return part
+      return <span key={index}>{part}</span>
     })
   }
 
@@ -278,6 +311,7 @@ const AIHeroSection = ({ compiledResponses, projectsSectionRef }: AIHeroSectionP
             disabled={isCommandPaletteDisabled}
             hasChatHistory={chatHistory.length > 0}
             isTypingComplete={isTypingComplete}
+            seenResponseIds={seenResponseIds}
             onFocus={() => {
               setIsInputFocused(true)
               setIsTypingComplete(false)
