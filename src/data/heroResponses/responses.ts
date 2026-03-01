@@ -1,7 +1,10 @@
 /**
  * Hero response definitions and utilities
  * Contains the main Q&A response configurations
+ * Uses Fuse.js for fuzzy search matching
  */
+import Fuse from "fuse.js"
+import { removeStopwords, eng } from "stopword"
 
 /**
  * Hero Response definition
@@ -11,6 +14,7 @@ export interface HeroResponseDef {
   keywords: string[]
   chipLabel: string
   fullQuestion: string // The complete question to display in chat
+  questionVariants: string[] // Alternative phrasings for Layer 3 fuzzy matching
 }
 
 /**
@@ -19,78 +23,369 @@ export interface HeroResponseDef {
 export const heroResponseDefs: HeroResponseDef[] = [
   {
     id: "introduction",
-    keywords: ["who", "introduce", "introduction", "about", "yourself", "background", "bio", "experience"],
+    keywords: [
+      "who", "introduce", "introduction", "about", "yourself", "background", "bio",
+      "tell me about you", "self introduction", "who is shanyu", "portfolio owner",
+      "who are you", "about you", "your story", "describe yourself", "summary",
+      "hello", "meet", "get to know", "shanyu", "shan-yu",
+    ],
     chipLabel: "👤 Introduction",
     fullQuestion: "Who are you?",
+    questionVariants: [
+      "Who are you?",
+      "Tell me about yourself",
+      "Can you introduce yourself?",
+      "What's your background?",
+      "Give me a quick summary of who you are",
+    ],
   },
   {
     id: "impact",
-    keywords: ["impact", "revenue", "results", "growth", "15%", "business", "value", "achievement", "waca", "sales", "merchant"],
+    keywords: [
+      "impact", "revenue", "results", "15%", "business", "achievement", "waca", "sales", "merchant",
+      "measurable", "delivered", "kpi", "roi", "metrics", "ecommerce", "e-commerce",
+      "outcome", "contribution", "data-driven", "conversion", "optimize",
+      "60%", "2000", "data warehouse",
+    ],
     chipLabel: "🚀 High Impact",
     fullQuestion: "What are the measurable impacts you've delivered in your projects?",
+    questionVariants: [
+      "What are the measurable impacts you've delivered in your projects?",
+      "What results have you achieved?",
+      "Can you show me some numbers or metrics?",
+      "What's your most impressive achievement?",
+      "How did you add business value?",
+      "Tell me about your impact at WACA",
+    ],
   },
   {
     id: "techStacks",
-    keywords: ["stack", "tech", "skills", "frontend", "react", "vue", "typescript", "javascript", "python", "css", "sass", "tailwind"],
+    keywords: [
+      "stack", "tech", "skills", "frontend", "react", "vue", "typescript", "javascript", "python", "css", "sass", "tailwind",
+      "next.js", "nextjs", "node", "frameworks", "programming language", "technology",
+      "html", "web development", "library", "proficient", "expertise", "languages",
+      "framer motion", "graphql", "rest api", "webpack", "vite",
+      "redux", "pinia", "storybook", "firebase", "postman",
+    ],
     chipLabel: "🛠️ Tech Stack",
     fullQuestion: "What technologies and tools do you work with?",
+    questionVariants: [
+      "What technologies and tools do you work with?",
+      "What's your tech stack?",
+      "What programming languages do you know?",
+      "What frameworks are you experienced with?",
+      "What can you code in?",
+      "What are your technical skills?",
+    ],
   },
   {
     id: "problemSolving",
-    keywords: ["problem", "bug", "challenge", "difficult", "solved", "debugging", "legacy", "refactor", "modernize", "jquery"],
+    keywords: [
+      "problem", "bug", "challenge", "difficult", "solved", "debugging", "legacy", "refactor", "modernize",
+      "fix", "issue", "resolve", "technical challenge", "troubleshoot",
+      "obstacle", "bottleneck", "complex", "hard problem", "root cause",
+      "migrate", "migration", "upgrade", "workaround",
+      "date picker", "spaghetti code", "decoupling", "logic controller",
+    ],
     chipLabel: "💡 Problem Solving",
     fullQuestion: "Can you describe a challenging technical bug or problem you solved?",
+    questionVariants: [
+      "Can you describe a challenging technical bug or problem you solved?",
+      "Tell me about a difficult problem you solved",
+      "What's the hardest technical challenge you've faced?",
+      "How do you approach debugging?",
+      "Give me an example of a complex problem you fixed",
+    ],
   },
   {
     id: "careerTransition",
-    keywords: ["transition", "career change", "switch", "design", "industrial design", "ncku", "why", "designer"],
+    keywords: [
+      "transition", "career change", "switch", "industrial design", "ncku",
+      "changed career", "pivot", "background shift", "from designer to dev",
+      "why frontend", "motivation", "how did you start", "origin story",
+      "design background", "career path", "journey",
+      "become a developer", "become engineer", "started coding", "started programming",
+      "what made you", "how did you become", "why did you choose",
+      "cmf designer", "left design",
+    ],
     chipLabel: "🔄 Career Transition",
     fullQuestion: "Why did you transition from Industrial Design to Front-End Engineering?",
+    questionVariants: [
+      "Why did you transition from Industrial Design to Front-End Engineering?",
+      "Why did you switch careers?",
+      "How did you become a developer?",
+      "What made you leave design for engineering?",
+      "Tell me about your career change",
+      "How did you start coding?",
+    ],
   },
   {
     id: "collaboration",
-    keywords: ["collaboration", "teamwork", "designer", "backend", "communication", "pm", "agile", "scrum", "workflow", "bridge"],
+    keywords: [
+      "collaboration", "teamwork", "backend", "communication", "agile", "scrum", "bridge",
+      "cross-functional", "team", "work together", "stakeholder",
+      "product manager", "sprint", "stand-up", "pair programming",
+      "coordinate", "cooperate", "handoff",
+      "technical consultation", "adapter layer", "milestone",
+    ],
     chipLabel: "🤝 Collaboration",
     fullQuestion: "How do you collaborate with designers and backend teams?",
+    questionVariants: [
+      "How do you collaborate with designers and backend teams?",
+      "How do you work with your team?",
+      "Tell me about your teamwork experience",
+      "How do you handle cross-functional collaboration?",
+      "How do you communicate with product managers?",
+      "What's your approach to working with others?",
+    ],
   },
   {
     id: "aiIntegration",
-    keywords: ["ai", "copilot", "cursor", "workflow", "efficiency", "gpt", "prompt", "automation", "agent"],
+    keywords: [
+      "ai", "copilot", "cursor", "efficiency", "gpt", "prompt", "automation", "agent",
+      "chatgpt", "llm", "gemini", "claude", "artificial intelligence", "machine learning",
+      "ai tools", "productivity", "github copilot", "coding assistant",
+      "prompt engineering", "ai workflow", "automate",
+      "antigravity", "claude code", "ai-assisted",
+    ],
     chipLabel: "🤖 AI Integration",
     fullQuestion: "Which AI tools do you integrate into your daily workflow, and how?",
+    questionVariants: [
+      "Which AI tools do you integrate into your daily workflow, and how?",
+      "How do you use AI in your work?",
+      "Do you use GitHub Copilot or ChatGPT?",
+      "What's your AI-assisted development workflow?",
+      "How does AI help you code?",
+      "Tell me about your experience with AI tools",
+    ],
   },
   {
     id: "qualityControl",
-    keywords: ["quality", "maintainability", "clean code", "testing", "storybook", "documentation", "typescript", "review", "robust"],
+    keywords: [
+      "quality", "maintainability", "clean code", "testing", "storybook", "documentation", "robust",
+      "unit test", "code review", "best practices", "lint", "ci/cd",
+      "eslint", "prettier", "jest", "cypress", "test coverage",
+      "scalable", "reliable", "standard",
+      "type safety", "visual testing", "tdd", "test-driven",
+    ],
     chipLabel: "🔎 Quality Control",
     fullQuestion: "How do you ensure the maintainability and quality of your code?",
+    questionVariants: [
+      "How do you ensure the maintainability and quality of your code?",
+      "How do you write clean code?",
+      "What's your approach to testing?",
+      "How do you maintain code quality?",
+      "Do you use Storybook or unit tests?",
+      "What are your coding best practices?",
+    ],
   },
   {
     id: "continuousLearning",
-    keywords: ["learning", "updated", "stay current", "osu", "university", "cs degree", "trends", "growth", "algorithm", "data structure"],
+    keywords: [
+      "learning", "stay current", "osu", "university", "cs degree", "trends", "algorithm", "data structure",
+      "study", "course", "degree", "self-taught", "bootcamp", "education",
+      "online course", "certificate", "continuous improvement", "upskill",
+      "oregon state", "computer science", "latest trends",
+      "keep learning", "new things", "evolving", "staying sharp",
+      "how do you learn", "what are you studying", "professional development",
+      "lifelong learner",
+    ],
     chipLabel: "📚 Continuous Learning",
     fullQuestion: "How do you stay updated with the rapidly evolving AI and Frontend landscape?",
+    questionVariants: [
+      "How do you stay updated with the rapidly evolving AI and Frontend landscape?",
+      "How do you keep learning?",
+      "What are you currently studying?",
+      "How do you stay up to date with technology?",
+      "Are you pursuing any degrees or courses?",
+      "How do you improve your skills?",
+    ],
   },
   {
     id: "teamCulture",
-    keywords: ["culture", "looking for", "company", "environment", "remote", "international", "relocate", "values", "philosophy"],
+    keywords: [
+      "culture", "looking for", "company", "environment", "remote", "international", "relocate", "values", "philosophy",
+      "work-life balance", "startup", "open source", "diversity", "hybrid", "onsite",
+      "ideal team", "work style", "flexible", "inclusive",
+      "what kind of company", "where do you want to work",
+      "psychological safety", "product-centric", "global collaboration",
+    ],
     chipLabel: "🏢 Team Culture",
-    fullQuestion: "What kind of team or company culture are you looking for?"
-  }
+    fullQuestion: "What kind of team or company culture are you looking for?",
+    questionVariants: [
+      "What kind of team or company culture are you looking for?",
+      "What's your ideal work environment?",
+      "Are you open to remote work?",
+      "What kind of company do you want to work for?",
+      "Do you prefer startups or big companies?",
+      "Would you relocate for a job?",
+    ],
+  },
 ]
 
+// ---------------------------------------------------------------------------
+// Search infrastructure
+// ---------------------------------------------------------------------------
+
 /**
- * Find matching response definition based on query
+ * Flat keyword index entry — one record per keyword per response.
+ * Allows Fuse.js to compare short tokens against short keywords (word-to-word).
+ */
+interface KeywordEntry {
+  responseId: string
+  keyword: string
+}
+
+const keywordEntries: KeywordEntry[] = heroResponseDefs.flatMap((def) =>
+  def.keywords.map((kw) => ({ responseId: def.id, keyword: kw }))
+)
+
+/** Fuse index: token ↔ individual keyword (word-to-word matching) */
+const keywordFuse = new Fuse(keywordEntries, {
+  keys: ["keyword"],
+  threshold: 0.35,
+  includeScore: true,
+  ignoreLocation: true,
+  minMatchCharLength: 2,
+})
+
+/**
+ * Flat question variant entry — one record per variant per response.
+ * Allows Fuse.js to match the full query against the closest phrasing.
+ */
+interface QuestionEntry {
+  responseId: string
+  question: string
+}
+
+const questionEntries: QuestionEntry[] = heroResponseDefs.flatMap((def) =>
+  def.questionVariants.map((q) => ({ responseId: def.id, question: q }))
+)
+
+/** Fuse index: full query ↔ questionVariants (sentence-level matching) */
+const questionFuse = new Fuse(questionEntries, {
+  keys: ["question"],
+  threshold: 0.45,
+  includeScore: true,
+  ignoreLocation: true,
+  minMatchCharLength: 3,
+})
+
+/**
+ * Tokenise a query string into meaningful words (lowercased, stop-words removed).
+ * Uses the `stopword` package's English stop-word list for comprehensive filtering.
+ * Minimum 3 characters to avoid fuzzy noise from very short tokens (e.g. "hi" → "kpi").
+ * Short keywords like "ai" are still matched via Layer 1 exact matching.
+ */
+function tokenise(query: string): string[] {
+  const words = query.toLowerCase().split(/\s+/).filter((w) => w.length >= 3)
+  return removeStopwords(words, eng)
+}
+
+// ---------------------------------------------------------------------------
+// Public API
+// ---------------------------------------------------------------------------
+
+/**
+ * Find matching response definition based on query.
+ *
+ * Uses a three-layer unified scoring strategy:
+ *  1. **Exact keyword match** — each keyword hit adds a high base score
+ *  2. **Token-to-keyword fuzzy** — each query word is fuzzy-matched against keywords
+ *  3. **Full-query-to-question fuzzy** — entire query matched against questionVariants
+ *
+ * All layers contribute to a shared scoreMap. The best scoring response
+ * is returned, or `null` if nothing matches above threshold.
  */
 export function findMatchingResponse(query: string): HeroResponseDef | null {
-  const lowerQuery = query.toLowerCase().trim()
-  if (!lowerQuery) return null
+  const trimmed = query.trim()
+  if (!trimmed) return null
 
-  return (
-    heroResponseDefs.find((response) =>
-      response.keywords.some((keyword) => lowerQuery.includes(keyword.toLowerCase()))
-    ) || null
-  )
+  const lowerQuery = trimmed.toLowerCase()
+
+  // Unified score map across all layers
+  const scoreMap = new Map<string, number>()
+
+  // ── Layer 1: Exact keyword match with word boundaries ─────────────
+  for (const def of heroResponseDefs) {
+    let exactHits = 0
+    for (const kw of def.keywords) {
+      const escaped = kw.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+      if (new RegExp(`\\b${escaped}\\b`, "i").test(lowerQuery)) exactHits++
+    }
+    // Each exact hit gets a high base score (2) to prioritize layer 1
+    if (exactHits > 0) scoreMap.set(def.id, exactHits * 2)
+  }
+
+  // Fast path: if exactly one response has exact hits, return immediately
+  if (scoreMap.size === 1) {
+    const [winnerId] = scoreMap.keys()
+    return heroResponseDefs.find((def) => def.id === winnerId) ?? null
+  }
+
+  // ── Layer 2: Token-to-keyword fuzzy matching ───────────────────────
+  const tokens = tokenise(trimmed)
+
+  for (const token of tokens) {
+    const hits = keywordFuse.search(token)
+    // Avoid redundant accumulation by only taking the best match for this token per response
+    const tokenBestScores = new Map<string, number>()
+    
+    for (const hit of hits) {
+      // Fuse score: 0 = perfect, 1 = worst — invert so higher = better
+      const matchScore = 1 - (hit.score ?? 1)
+      const current = tokenBestScores.get(hit.item.responseId) ?? 0
+      if (matchScore > current) {
+        tokenBestScores.set(hit.item.responseId, matchScore)
+      }
+    }
+    
+    // Add token's best scores to the overall scoreMap
+    for (const [id, score] of tokenBestScores) {
+      const current = scoreMap.get(id) ?? 0
+      scoreMap.set(id, current + score)
+    }
+  }
+
+  // ── Layer 3: Full-query-to-question fuzzy matching ─────────────────
+  const questionHits = questionFuse.search(trimmed)
+  // Only take the best matching variant per response
+  const questionBestScores = new Map<string, number>()
+  
+  for (const hit of questionHits) {
+    const matchScore = 1 - (hit.score ?? 1)
+    const current = questionBestScores.get(hit.item.responseId) ?? 0
+    if (matchScore > current) {
+      questionBestScores.set(hit.item.responseId, matchScore)
+    }
+  }
+
+  // Add the best variant matches to the overall scoreMap
+  for (const [id, score] of questionBestScores) {
+    // Weight sentence-level matches slightly higher when they're strong
+    const boosted = score * 1.2
+    const current = scoreMap.get(id) ?? 0
+    scoreMap.set(id, current + boosted)
+  }
+
+  // ── Pick the best result ───────────────────────────────────────────
+  if (scoreMap.size === 0) return null
+
+  let bestId = ""
+  let bestScore = 0
+  for (const [id, score] of scoreMap) {
+    if (score > bestScore) {
+      bestId = id
+      bestScore = score
+    }
+  }
+
+  // Require a minimum aggregated score to avoid weak false-positives.
+  // A single strong fuzzy match scores ~0.65, so 1.0 ensures at least
+  // two fuzzy hits or one strong Layer 3 sentence-level match (×1.2 boost).
+  if (bestScore < 1.0) return null
+
+  return heroResponseDefs.find((def) => def.id === bestId) ?? null
 }
 
 /**
