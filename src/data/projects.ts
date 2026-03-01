@@ -30,12 +30,8 @@ const projects: Project[] = [
     techStack: [
       TechKey.Laravel,
       TechKey.Vue,
-      TechKey.JavaScript,
       TechKey.JQuery,
       TechKey.TypeScript,
-      TechKey.Pinia,
-      TechKey.Sass,
-      TechKey.TailwindCSS,
       TechKey.Storybook,
     ],
   },
@@ -48,14 +44,7 @@ const projects: Project[] = [
     startDate: "2023-06",
     endDate: "2023-09",
     tag: [ProjectTag.Personal],
-    techStack: [
-      TechKey.React,
-      TechKey.ReactRouter,
-      TechKey.Redux,
-      TechKey.Firebase,
-      TechKey.Sass,
-      TechKey.StyledComponents,
-    ],
+    techStack: [TechKey.React, TechKey.Redux, TechKey.Firebase],
   },
   {
     slug: "alphitter",
@@ -66,14 +55,7 @@ const projects: Project[] = [
     startDate: "2023-04",
     endDate: "2023-05",
     tag: [ProjectTag.BootStrap],
-    techStack: [
-      TechKey.React,
-      TechKey.ReactRouter,
-      TechKey.StyledComponents,
-      TechKey.Axios,
-      TechKey.Postman,
-      TechKey.Figma,
-    ],
+    techStack: [TechKey.React, TechKey.JavaScript],
   },
 ]
 
