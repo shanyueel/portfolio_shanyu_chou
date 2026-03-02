@@ -69,7 +69,8 @@ export default async function WorkItemPage(props: { params: pageParams }) {
       <h2 className="text-xl font-semibold mb-6">Tech Stack & Tools used</h2>
       <div className="flex flex-wrap gap-4">
         {frontmatter.techStack?.map(tech => {
-          const { icon: Icon, color, darkColor } = techStackMap[tech]
+          const techConfig = techStackMap[tech as keyof typeof techStackMap] || {}
+          const { icon: Icon, color, darkColor } = techConfig
 
           return (
             <div
@@ -93,7 +94,8 @@ export default async function WorkItemPage(props: { params: pageParams }) {
       <hr className="w-full my-4 border-1 border-gray-300" />
       <div className="flex flex-wrap gap-4 mb-8">
         {frontmatter.toolsUsed?.map(tool => {
-          const { icon: Icon, color } = techStackMap[tool]
+          const techConfig = techStackMap[tool as keyof typeof techStackMap] || {}
+          const { icon: Icon, color } = techConfig
 
           return (
             <div

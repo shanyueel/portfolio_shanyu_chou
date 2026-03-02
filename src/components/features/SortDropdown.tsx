@@ -1,13 +1,12 @@
 import { useState } from "react"
 import { FaChevronDown } from "react-icons/fa"
-import { OrderType } from "@/lib/types"
 import Button from "../ui/Button"
 import Dropdown from "../ui/Dropdown"
 
-interface SortDropdownProps {
-  sortOrder: OrderType
-  setSortOrder: (order: OrderType) => void
-  options: { id: OrderType; label: string }[]
+interface SortDropdownProps<T extends string> {
+  sortOrder: T
+  setSortOrder: (order: T) => void
+  options: { id: T; label: string }[]
 }
 
 /**
@@ -16,12 +15,12 @@ interface SortDropdownProps {
  * @param setSortOrder - Callback function to update the selected sort order.
  * @param options - Array of sorting options with labels and values.
  */
-const SortDropdown = ({ sortOrder, setSortOrder, options }: SortDropdownProps) => {
+const SortDropdown = <T extends string>({ sortOrder, setSortOrder, options }: SortDropdownProps<T>) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   const triggerLabel = options.find(option => option.id === sortOrder)?.label || "Sort"
 
-  const handleSelect = (value: OrderType) => {
+  const handleSelect = (value: T) => {
     setSortOrder(value)
     setIsDropdownOpen(false)
   }

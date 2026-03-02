@@ -12,19 +12,19 @@ export const useCheckboxGroup = () => {
   return useContext(CheckboxGroupContext)
 }
 
-interface CheckboxGroupProps {
-  selectedItems: (string | number)[]
-  setSelectedItems: (selected: (string | number)[]) => void
+interface CheckboxGroupProps<T extends string | number> {
+  selectedItems: T[]
+  setSelectedItems: (selected: T[]) => void
   children: ReactElement<typeof Checkbox>[]
   className?: string
 }
 
-const CheckboxGroup = ({
+const CheckboxGroup = <T extends string | number>({
   selectedItems,
   setSelectedItems,
   children,
   className = "",
-}: CheckboxGroupProps) => {
+}: CheckboxGroupProps<T>) => {
   const selectedSet = new Set(selectedItems)
 
   // validation: confirm at runtime that all children are Checkbox components
@@ -44,7 +44,7 @@ const CheckboxGroup = ({
     })
   }
 
-  const handleToggle = (value: string | number) => {
+  const handleToggle = (value: T) => {
     const newSelected = new Set(selectedItems)
 
     // toggle value
@@ -60,7 +60,7 @@ const CheckboxGroup = ({
 
   const contextValue: CheckboxGroupContextValue = {
     selected: selectedSet,
-    onToggle: handleToggle,
+    onToggle: handleToggle as (value: string | number) => void,
   }
 
   return (

@@ -4,6 +4,7 @@ import { useState, useMemo } from "react"
 import { FaFrown } from "react-icons/fa"
 import { motion, AnimatePresence } from "framer-motion"
 import projects from "@/data/projects"
+import { TechKey } from "@/lib/constants"
 import FilterDropdown from "@/components/features/FilterDropdown"
 import SortDropdown from "@/components/features/SortDropdown"
 import ActiveFilterChips from "@/components/features/ActiveFilterChips"
@@ -55,7 +56,7 @@ const ProjectsPage = () => {
     const filtered = projects.filter(
       project =>
         selectedTechStack.length === 0 ||
-        (project.techStack && selectedTechStack.some(tech => project.techStack.includes(tech)))
+        (project.techStack && selectedTechStack.some(tech => project.techStack!.includes(tech as TechKey)))
     )
 
     return filtered.sort((a, b) => {
@@ -78,7 +79,6 @@ const ProjectsPage = () => {
           selectedItems={techStackDrafts}
           setSelectedItems={setTechStackDrafts}
           onApply={applyFilters}
-          onClear={clearFilters}
           placeholder="Filter by Tech"
           resultCount={filteredProjects.length}
         />

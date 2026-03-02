@@ -67,11 +67,10 @@ export default function WorkPage() {
         {/* Company Filter Dropdown - Left */}
         <div className="relative flex-grow md:flex-grow-0">
           <FilterDropdown
-            items={uniqueWorkCompany.map(({ company, count }) => ({ name: company, count }))}
+            items={uniqueWorkCompany.map(({ company, count }) => ({ id: company, label: `${company} (${count})` }))}
             selectedItems={workCompanyDrafts}
-            onToggle={toggleWorkCompanyDrafts}
+            setSelectedItems={setWorkCompanyDrafts}
             onApply={applyFilters}
-            onClear={clearFilters}
             placeholder="Filter by Company"
             resultCount={filteredWorkItems.length}
           />
@@ -81,10 +80,10 @@ export default function WorkPage() {
         <div className="relative flex-grow md:flex-grow-0 z-20">
           <SortDropdown
             sortOrder={sortOrder}
-            onChange={order => setSortOrder(order as "newest" | "oldest")}
+            setSortOrder={setSortOrder}
             options={[
-              { label: "Newest First", value: "newest" },
-              { label: "Oldest First", value: "oldest" },
+              { label: "Newest First", id: "newest" },
+              { label: "Oldest First", id: "oldest" },
             ]}
           />
         </div>

@@ -95,11 +95,10 @@ export default function BlogPage() {
         {/* Tag Filter Dropdown - Left */}
         <div className="relative flex-grow md:flex-grow-0">
           <FilterDropdown
-            items={uniqueTags.map(({ tag, count }) => ({ name: tag, count }))}
+            items={uniqueTags.map(({ tag, count }) => ({ id: tag, label: `${tag} (${count})` }))}
             selectedItems={tagDrafts}
-            onToggle={toggleTagDraft}
+            setSelectedItems={setTagDrafts}
             onApply={applyFilters}
-            onClear={clearFilters}
             placeholder="Filter by Tag"
             resultCount={filteredPosts.length}
           />
@@ -109,10 +108,10 @@ export default function BlogPage() {
         <div className="relative flex-grow md:flex-grow-0">
           <SortDropdown
             sortOrder={sortOrder}
-            onChange={order => setSortOrder(order as "asc" | "desc")}
+            setSortOrder={setSortOrder}
             options={[
-              { label: "Newest First", value: "desc" },
-              { label: "Oldest First", value: "asc" },
+              { label: "Newest First", id: "desc" },
+              { label: "Oldest First", id: "asc" },
             ]}
           />
         </div>
