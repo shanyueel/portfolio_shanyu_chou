@@ -6,7 +6,7 @@ interface EducationSectionProps {
   duration: string
   location: string
   description: string
-  tags: string[]
+  tags?: string
 }
 
 /** EducationSection component to display single educational background. */
@@ -16,7 +16,7 @@ const EducationSection = ({
   duration,
   location,
   description,
-  tags,
+  tags = "",
 }: EducationSectionProps) => {
   return (
     <div>
@@ -26,9 +26,9 @@ const EducationSection = ({
       <h4 className="text-sm text-gray-600 dark:text-gray-400">
         {duration} | {location}
       </h4>
-      <p className="mt-2 mb-4">{description}</p>
+      <p className="mt-2 mb-2">{description}</p>
       <div className="flex flex-wrap gap-2 mt-1">
-        {tags.map((tag, index) => (
+        {tags.split(",").map((tag, index) => (
           <Tag key={index}>{tag}</Tag>
         ))}
       </div>

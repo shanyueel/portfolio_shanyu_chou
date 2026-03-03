@@ -1,14 +1,41 @@
 import Link from "next/link"
+import {
+  FaDownload,
+  FaGithub,
+  FaLinkedin,
+  FaEnvelope,
+} from "react-icons/fa"
+import { resumeLink } from "@/lib/constants"
 
-interface SocialLinksProps {
-  links: { id: string; href: string; icon: React.ReactNode; label?: string }[]
-}
+const socialLinksData = [
+  {
+    id: "GitHub",
+    href: "https://github.com/shanyueel",
+    icon: <FaGithub />,
+  },
+  {
+    id: "LinkedIn",
+    href: "https://www.linkedin.com/in/shanyu-chou/",
+    icon: <FaLinkedin />,
+  },
+  {
+    id: "Email",
+    href: "mailto:wulingkevin0704@gmail.com",
+    icon: <FaEnvelope />,
+  },
+  {
+    id: "DownloadResume",
+    href: resumeLink,
+    icon: <FaDownload />,
+    label: "Download CV",
+  },
+]
 
 /** SocialLinks Component to display social media links with icons and labels (if provided) */
-const SocialLinks = ({ links }: SocialLinksProps) => {
+const SocialLinks = () => {
   return (
     <div className="flex justify-center items-center gap-4 md:justify-start mt-2">
-      {links.map(link => (
+      {socialLinksData.map(link => (
         <Link
           key={link.id}
           href={link.href}

@@ -11,6 +11,8 @@ import TimelineItem from "@/components/ui/TimelineItem"
 import { pageParams, TechIconColors } from "@/lib/types"
 import BackToPageButton from "@/components/ui/BackToPageButton"
 import remark_gfm from "remark-gfm"
+import { ThreeColumnSection } from "@/components/mdx/LayoutSections"
+import ValueCard from "@/components/features/about/ValueCard"
 
 /**
  * Generate static parameters for the work item pages to be pre-rendered.
@@ -48,6 +50,8 @@ export default async function WorkItemPage(props: { params: pageParams }) {
     components: {
       Timeline,
       TimelineItem,
+      ThreeColumnSection,
+      ValueCard,
     },
     options: {
       parseFrontmatter: true,

@@ -1,55 +1,35 @@
-import {
-  FaDownload,
-  FaShapes,
-  FaUsers,
-  FaSearch,
-  FaGithub,
-  FaLinkedin,
-  FaEnvelope,
-} from "react-icons/fa"
-import ProfileHero from "@/components/features/about/ProfileHero"
-import EducationSection from "@/components/features/about/EducationSection"
-import ValueCard from "@/components/features/about/ValueCard"
-import SocialLinks from "@/components/features/about/SocialLinks"
-import Card from "@/components/mdx/Card"
-import Grid from "@/components/mdx/Grid"
-import Callout from "@/components/mdx/Callout"
-import Tag from "@/components/ui/Tag"
-import Divider from "@/components/ui/Divider"
-import Timeline from "@/components/ui/Timeline"
-import TimelineItem from "@/components/ui/TimelineItem"
 
 <ProfileHero imageSrc="/img_profile_photo.jpg" imageAlt="Profile Photo">
 
 ## About Shan-Yu Chou
 
-<SocialLinks links={socialLinks} />
+<SocialLinks />
 
 I'm a Front-End Engineer with 3+ years of professional experience, including 2 years in a dynamic e-commerce team at Wabow Information Inc. Leverages a background in Design to build intuitive and engaging user experiences with Typescript, Vue, and React. A quick learner adept at writing clean, robust, and maintainable code to solve complex problems and deliver high-quality web applications.
 
 </ProfileHero>
 
-<Grid className="mt-6" columns={{xs: 1, md: 3}} gap={4}>
+<ThreeColumnSection className="mt-6">
 
 <ValueCard
   title="Less is more"
-  icon={<FaShapes />}
+  iconName="FaShapes"
   description="Simplicity in design and software development is key; breaking complex problems into smaller parts improves understanding of product, feature development, and maintenance."
 />
 
 <ValueCard
   title="User-Centric"
-  icon={<FaUsers />}
+  iconName="FaUsers"
   description="A successful product hinges on user experience. Understanding not only users but also coworkers helps reducing conflicts, aligning goals, and ensuring efficient delivery."
 />
 
 <ValueCard
   title="Curiosity-Driven"
-  icon={<FaSearch />}
+  iconName="FaSearch"
   description="Software work offers endless challenge and scope. My drive helps me grow, try new tech like AI, explore fields, change with the times, and do well in this always new industry."
 />
 
-</Grid>
+</ThreeColumnSection>
 
 ## Education
 
@@ -61,7 +41,7 @@ I'm a Front-End Engineer with 3+ years of professional experience, including 2 y
   duration="2024 - Present"
   location="Corvallis, OR, USA (Online)"
   description="Pursuing a second bachelor's degree to build a solid theoretical foundation in computer science."
-  tags={["Data Structures", "Algorithms", "Discrete Mathematics", "Computer Architecture"]}
+  tags="Data Structures,Algorithms,Discrete Mathematics,Computer Architecture"
 />
 
 <Divider />
@@ -72,7 +52,7 @@ I'm a Front-End Engineer with 3+ years of professional experience, including 2 y
   duration="2022 - 2023"
   location="Taipei, Taiwan (Online)"
   description="Completed an intensive, project-based training program focused on modern web development for career transition."
-  tags={["React", "JavaScript", "HTML", "CSS", "Responsive Web Design", "Agile Development"]}
+  tags="React,JavaScript,HTML,CSS,Responsive Web Design,Agile Development"
 />
 
 <Divider />
@@ -83,7 +63,7 @@ I'm a Front-End Engineer with 3+ years of professional experience, including 2 y
   duration="2015 - 2019"
   location="Tainan, Taiwan"
   description="Developed a strong foundation in user-centric design principles, directly applicable to creating intuitive and effective user interfaces."
-  tags={["User Experience (UX) Research", "User Journey Mapping", "Prototyping", "Design Thinking"]}
+  tags="User Experience (UX) Research,User Journey Mapping,Prototyping,Design Thinking"
 />
 
 </Callout>

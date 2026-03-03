@@ -2,19 +2,57 @@
  * Server-side MDX compilation utilities
  * This file should only be imported in server components
  */
+import React, { createElement } from "react"
 import { compileMDX } from "next-mdx-remote/rsc"
 import fs from "fs"
 import path from "path"
 import remarkGfm from "remark-gfm"
-import Grid from "@/components/mdx/Grid"
+import { ThreeColumnSection, TwoColumnSection } from "@/components/mdx/LayoutSections"
 import Quote from "@/components/mdx/Quote"
 import Timeline from "@/components/ui/Timeline"
 import TimelineItem from "@/components/ui/TimelineItem"
 import HighlightBox from "@/components/mdx/HighlightBox"
 import { StatCard, FooterLink, HeroCardContainer, TechIcon } from "@/components/mdx/HeroCards"
 import Callout from "@/components/mdx/Callout"
-import { LuClockArrowDown, LuCircleDollarSign, LuUsers, LuPuzzle, LuWrench, LuRocket, LuPalette, LuDatabase, LuTarget, LuNotebookPen, LuSearch, LuShieldCheck , LuLayoutDashboard, LuBot, LuSchool, LuPodcast, LuHandshake, LuPackage, LuGlobe } from "react-icons/lu";
+import { LuClockArrowDown, LuCircleDollarSign, LuUsers, LuPuzzle, LuWrench, LuRocket, LuPalette, LuDatabase, LuTarget, LuNotebookPen, LuSearch, LuShieldCheck, LuLayoutDashboard, LuBot, LuSchool, LuPodcast, LuHandshake, LuPackage, LuGlobe } from "react-icons/lu"
+import type { IconType } from "react-icons"
 import { heroResponseDefs } from "./responses"
+
+/**
+ * Icon map — add new icons here when needed in HighlightBox.
+ * This is the ONLY place you need to update when adding a new icon.
+ */
+const iconMap: Record<string, IconType> = {
+  LuClockArrowDown,
+  LuCircleDollarSign,
+  LuUsers,
+  LuPuzzle,
+  LuWrench,
+  LuRocket,
+  LuPalette,
+  LuDatabase,
+  LuTarget,
+  LuNotebookPen,
+  LuSearch,
+  LuShieldCheck,
+  LuLayoutDashboard,
+  LuBot,
+  LuSchool,
+  LuPodcast,
+  LuHandshake,
+  LuPackage,
+  LuGlobe,
+}
+
+/**
+ * MDX wrapper for HighlightBox that resolves iconName string → icon element.
+ * This keeps HighlightBox.tsx simple (accepts ReactNode) while giving MDX
+ * a clean string-based API.
+ */
+const HighlightBoxMDX = ({ iconName, ...props }: { iconName?: string } & React.ComponentProps<typeof HighlightBox>) => {
+  const icon = iconName && iconMap[iconName] ? createElement(iconMap[iconName]) : undefined
+  return createElement(HighlightBox, { ...props, icon })
+}
 
 /**
  * Compile MDX content for a hero response (Server-side only)
@@ -26,36 +64,17 @@ export async function compileHeroMDX(mdxFileName: string): Promise<React.ReactEl
   const { content } = await compileMDX({
     source: mdxSource,
     components: {
-      Grid,
+      ThreeColumnSection,
+      TwoColumnSection,
       Callout,
       Quote,
       Timeline,
       TimelineItem,
-      HighlightBox,
+      HighlightBox: HighlightBoxMDX, // MDX uses this wrapper; resolves iconName → icon
       StatCard,
       FooterLink,
       HeroCardContainer,
       TechIcon,
-      // Icons for HighlightBox
-      LuClockArrowDown,
-      LuCircleDollarSign,
-      LuUsers,
-      LuPuzzle,
-      LuWrench,
-      LuRocket,
-      LuPalette,
-      LuDatabase,
-      LuTarget,
-      LuNotebookPen ,
-      LuSearch,
-      LuShieldCheck,
-      LuLayoutDashboard,
-      LuBot,
-      LuSchool,
-      LuPodcast,
-      LuHandshake,
-      LuPackage,
-      LuGlobe
     },
     options: {
       parseFrontmatter: false,
@@ -80,7 +99,6 @@ export async function getAllCompiledHeroResponses(): Promise<
     const fileName = `${def.id}.mdx`
     const filePath = path.join(process.cwd(), "src", "data", "heroResponses", fileName)
     
-    // Check if file exists before attempting to compile
     if (fs.existsSync(filePath)) {
       compiled[def.id] = await compileHeroMDX(fileName)
     } else {

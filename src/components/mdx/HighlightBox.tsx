@@ -5,10 +5,10 @@ type VariantType = "positive" | "negative" | "neutral" | "info"
 
 interface HighlightBoxProps {
   /**
-   * Icon to display on the left side
-   * Can be an emoji, SVG, or any React component
+   * Icon to display on the left side.
+   * Can be an emoji, SVG, or any React component.
    */
-  icon: ReactNode
+  icon?: ReactNode
   /**
    * Title text displayed at the top of the content area
    */
@@ -33,9 +33,9 @@ interface HighlightBoxProps {
 
 /**
  * HighlightBox component for displaying important content with an icon and colored background.
- * 
+ *
  * Commonly used in impact sections to highlight key metrics or achievements.
- * 
+ *
  * @example
  * ```tsx
  * <HighlightBox
@@ -55,20 +55,17 @@ const HighlightBox = ({
   className,
 }: HighlightBoxProps) => {
   const variantStyles: Record<VariantType, string> = {
-    positive:
-      "bg-success/10 border-success/20 dark:bg-success/5 dark:border-success/30",
-    negative:
-      "bg-danger/10 border-danger/20 dark:bg-danger/5 dark:border-danger/30",
-    neutral:
-      "bg-primary/10 border-primary/20 dark:bg-primary/5 dark:border-primary/30",
-    info: "bg-info/10 border-info/20 dark:bg-info/5 dark:border-info/30",
+    positive: "bg-success/10 border-success/20 dark:bg-success/5 dark:border-success/30",
+    negative: "bg-danger/10 border-danger/20 dark:bg-danger/5 dark:border-danger/30",
+    neutral:  "bg-primary/10 border-primary/20 dark:bg-primary/5 dark:border-primary/30",
+    info:     "bg-info/10 border-info/20 dark:bg-info/5 dark:border-info/30",
   }
 
   const iconColorStyles: Record<VariantType, string> = {
     positive: "text-success",
     negative: "text-danger",
-    neutral: "text-primary",
-    info: "text-info",
+    neutral:  "text-primary",
+    info:     "text-info",
   }
 
   return (
@@ -83,16 +80,14 @@ const HighlightBox = ({
 
       {/* Content */}
       <div className="flex-1 min-w-0">
-        <div
-            className={cn(
-              "text-sm text-gray-500 leading-relaxed",
-              "[&>*:first-child]:mt-0 [&>*:last-child]:mb-0",
-              "[&_p]:my-2 [&_ul]:my-2 [&_ol]:my-2"
-            )}
-          >
-            {children}
-          </div>
+        <div className={cn(
+          "text-sm text-gray-500 leading-relaxed",
+          "[&>*:first-child]:mt-0 [&>*:last-child]:mb-0",
+          "[&_p]:my-2 [&_ul]:my-2 [&_ol]:my-2"
+        )}>
+          {children}
         </div>
+      </div>
     </div>
   )
 }

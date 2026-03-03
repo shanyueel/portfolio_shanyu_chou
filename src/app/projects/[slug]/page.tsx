@@ -20,7 +20,7 @@ import Card from "@/components/mdx/Card"
 import ImageCard from "@/components/mdx/ImageCard"
 import Callout from "@/components/mdx/Callout"
 import Quote from "@/components/mdx/Quote"
-import Grid from "@/components/mdx/Grid"
+import { ThreeColumnSection } from "@/components/mdx/LayoutSections"
 
 /**
  * Generate static parameters for the blog post pages to be pre-rendered.
@@ -69,7 +69,7 @@ const ProjectPage = async (props: { params: pageParams }) => {
       Callout,
       Quote,
       Divider,
-      Grid,
+      ThreeColumnSection,
     },
     options: {
       parseFrontmatter: true,
