@@ -4,7 +4,7 @@ subtitle: "An Omnichannel Retail Platform for Merchants"
 coverImage: "/projects/waca/img_waca_cover.jpg"
 liveDemoUrl: "https://www.waca.net/"
 role: "Frontend Engineer"
-duration: "Dec 2023 – Present"
+duration: "Dec 2023 – Mar 2026"
 teamMembers:
   PO: 2
   UI/UX: 3
@@ -19,13 +19,13 @@ techStack:
     - TypeScript
     - Pinia
   tools:
+    - Claude
     - Sass
     - TailwindCSS
     - Storybook
     - Postman
     - Figma
 ---
-
 
 <Card>
   <Quote>
@@ -38,42 +38,44 @@ techStack:
 
 <ThreeColumnSection>
 
-<ImageCard src="/projects/waca/img_waca_data_warehouse.jpg" alt="Waca Data Warehouse" featured>
+<ImageCard src="/projects/waca/img_waca_notification_hub.jpg" alt="Waca Notification Hub" featured>
 
-### Data Warehouse
+### Notification Hub
 
-A centralized platform for managing and analyzing e-commerce data related to products, sales, and customer behavior.
+Unified the scattered notification system by consolidating promotions, system logs, and partner resources into a single, intuitive interface.
 
-- **Data Visualization**: Engineered a dynamic data visualization dashboard with _Echarts_ and _Vue3 Easy Data Table_, rendering complex metrics into intuitive charts and graphs.
-- **Analytics & Comparisons**: Implemented an analytics toolkit with customizable date-range pickers and dynamic metric comparison, allowing users to perform complex analysis.
-- **AI Recommendation**: Integrated ChatGPT's API to surface AI-driven business recommendations within the user interface to help users trust and act upon the data-driven suggestions.
+- **Cost Optimization**: Migrated high-volume system alerts and marketing broadcasts from Intercom to an in-house solution, reducing annual costs by _an estimated $5,000+ USD_.
+- **AI-Accelerated**: Leveraged AI tools to _expedite the full SDLC_, from generating high-fidelity prototypes and UI components to streamlining backend-frontend API alignment.
+- **Content Aggregation**: Integrated diverse info streams into a prioritized feed while providing a centralized dashboard for staff to manage and broadcast messages efficiently.
+
+</ImageCard>
+
+<ImageCard src="/projects/waca/img_waca_data_warehouse.jpg" alt="Waca Data Warehouse">
+
+### Data Analytics Warehouse
+
+- **Data Visualization**:
+  Engineered a dashboard which renders complex data into intuitive charts and graphs with _Echarts_ and _Vue3 Easy Data Table_.
+- **AI Recommendation**:
+  Integrated _ChatGPT's API_ to provide AI-driven business recommendations to help users trust and act upon the complex data.
 
 </ImageCard>
 
 <ImageCard src="/projects/waca/img_waca_core_platform.jpg" alt="WildSync Outdoor Platform">
 
-### Core E-commerce SaaS Platform
+### E-commerce Platform Evolution
 
-- **Onboarding Page**: Guides new users through the essential initial setup of the complex e-commerce platform, speeding up configuration time and reducing early support friction.
-- **Rental Service**: Implemented a rental service feature that allows users to rent their products or spaces, expanding the platform's offering to attract a broader customer base.
-
-</ImageCard>
-
-<ImageCard src="/projects/waca/img_waca_maintenance.jpg" alt="WildSync Outdoor Platform">
-
-### Maintenance
-
-- **Component Library**: Developed and maintained a component library using _Storybook_ to ensure design consistency and accelerate frontend development.
-- **Customer Support**: Diagnosed and resolved critical, customer-reported bugs in production environment, conducting analysis to implement robust, long-term solutions.
+- **Features Development**: Delivered core frontend features, including _the onboarding process_ to optimize user setup process and _the rental service_ to boost customer acquisition.
+- **Incremental Modernization**: Adopting _MPA architecture_ to systematically migrate legacy jQuery codebase to _Vue 3 & TypeScript_, ensuring platform stability during the transition.
 
 </ImageCard>
 
-<ImageCard src="/projects/waca/img_waca_internal_management.jpg" alt="WildSync Outdoor Platform">
+<ImageCard src="/projects/waca/img_waca_component_library.jpg" alt="WildSync Outdoor Platform">
 
-### Internal Management System
+### Private Component Library
 
-- **Project Modernization**: Cooperated with backend team to migrate legacy PHP Laravel + jQuery codebase to Vue 3 & TypeScript, enhancing maintainability and productivity.
-- **Interface Optimization**: Redesigned interfaces to improve usability and efficiency for various roles, including customer support, marketing, and operations teams.
+- **Infrastructure**: Established a private component library based on atomic design principles, serving as the foundation for _AI-assisted scaffolding_ and UI consistency.
+- **Design Communication**: Utilized _Storybook_ to build detailed documentation and perform edge-case testing, enabling seamless, high-efficiency collaboration with designers.
 
 </ImageCard>
 
@@ -82,26 +84,72 @@ A centralized platform for managing and analyzing e-commerce data related to pro
 ## Technical Decisions
 
 <Card>
+  <TechnicalDecision title="Incremental Modernization via MPA Architecture">
+    <TDContext>
+      Our legacy PHP/jQuery architecture suffered from tight coupling, blurring development roles. Complex backend logic dominated, forcing frontend engineers into simple slicing roles. This "backend-driven" flow created major bottlenecks and an unbalanced workload. Furthermore, reliance on jQuery DOM manipulation resulted in fragmented code that was difficult to read, scale, or maintain for a platform with 2,000+ merchants and 50,000+ customers.
+    </TDContext>
+    <TDTradeOffs>
+      We standardized on Vue 3 because it’s what the team knows best. The big question was how to integrate it: Inertia.js, a full SPA rewrite, or an MPA strategy. While Inertia.js is a Laravel package, it didn't align with our long-term goal of completely decoupling the frontend. A full SPA, on the other hand, was too high-risk. We couldn’t afford to spend months re-implementing core features like authentication, permissions, and payments while still having to deliver new business requests with zero downtime.
 
-### Decision 1: Adopting Storybook for Design-Dev Bridging
+      Ultimately, we opted for an **MPA (Multi-Page Application)** approach. By embedding Vue 3 only into new features' pages, we immediately de-coupled the UI and sped up development. This strategic 'bridge' solution not only solved our immediate synchronization issues but also started the necessary shift toward API-first collaboration that prepared us for a future full SPA transition.
 
-- **Why**: UI inconsistencies between design and development teams causes delays and redundant rework.
-- **Result**: Established a single source of truth for UI components, facilitating smoother collaboration with designers and other developers.
+    </TDTradeOffs>
+    <TDImpact>
+      This transition effectively decoupled the full-stack architecture, allowing frontend and backend teams to work in parallel and **boosting overall development speed by 30%**. By leveraging Vue's reactive state management and component-based structure, we **eliminated 50% of redundant code** while centralizing logic and styles for much better maintainability.
+    </TDImpact>
 
-<Divider borderStyle="dashed" gap={4} />
+  </TechnicalDecision>
+</Card>
 
-### Decision 2: Type-Safe Architecture with TypeScript
+<Card className="mt-4">
+  <TechnicalDecision title="Independent Component Library (Storybook + Private Registry)">
+    <TDContext>
+      The legacy codebase lacked design guidelines, leading to messy styles and constant
+      "reinventing the wheel." On the other hand, AI tools often generated custom layouts with raw
+      Tailwind utilities instead of building components. This caused massive code duplication and a
+      maintenance nightmare where simple UI updates required changes in dozens of places.
+    </TDContext>
+    <TDTradeOffs>
+      To centralize styles and prevent design drift across multiple projects, we need a independent
+      component library. This approach requires extra effort to maintain, but it's the only way to
+      ensure a single source of truth and long-term maintainability. We also use **Storybook** and
+      **AI Skills** to generate documentation and usage guides for team members and AI to follow to
+      align on the design language and component usage.
+    </TDTradeOffs>
+    <TDImpact>
+      Established a single source of truth that boosted AI scaffolding success rates, with **80% of
+      UI generated** without manual fixes. It ensured **100% design consistency** across projects
+      and allowed for a **prototype-to-production** workflow, reducing overall development time by
+      **30-40%**.
+    </TDImpact>
+  </TechnicalDecision>
+</Card>
 
-- **Why**: The complex data structures in the "Data Warehouse" required strict reliability to enhance maintainability.
-- **Result**: Prevented runtime errors and clarified API contracts with both frontend and backend teams (via Postman integration).
-
-<Divider borderStyle="dashed" gap={4} />
-
-### Decision 3: Pinia State Management
-
-- **Why**: The application required a robust state management solution to handle complex data interactions and shared states across components.
-- **Result**: Improved code organization and maintainability, ensuring a predictable and maintainable state for user permissions, search conditions and shared data across the application.
-
+<Card className="mt-4">
+  <TechnicalDecision title="The Multi-Dimensional Range Filter">
+    <TDContext>
+      In the Data Warehouse project, the date picker involved heavy business logic—preset ranges
+      (Month-to-Date/Year-to-Date), tiered permissions (Pro vs. Basic), and complex period
+      comparisons. On the other hand, the search conditions were shared across multiple pages which
+      frustrated users because their filter settings would reset whenever they navigated between
+      different dashboard views.
+    </TDContext>
+    <TDTradeOffs>
+      Instead of writing giant, messy conditional blocks, I built a dedicated Class-based filtering
+      engine. I used class properties to securely store and manage the current filter state, while
+      creating individual methods to handle each complex preset. This meant each method had only one
+      job, making the whole logic much easier to debug and keep clean. Simultaneously, I integrated
+      Pinia to manage global filter states. This allowed us to persist user selections across the
+      entire application, ensuring that once a date range or comparison was set, it remained
+      consistent throughout the user’s session.
+    </TDTradeOffs>
+    <TDImpact>
+      This refactor turned a maintenance nightmare into a scalable system, reducing the time to
+      implement new rules by 50%. More importantly, the persistent state significantly improved the
+      UX, leading to a much smoother workflow where merchants could compare metrics across pages
+      without repetitive configurations.
+    </TDImpact>
+  </TechnicalDecision>
 </Card>
 
 ## Challenge: Team Allocation
@@ -121,5 +169,6 @@ A centralized platform for managing and analyzing e-commerce data related to pro
 - **-30% Development Time** via Design System & Standardized API Docs
 - **4 Months Time-to-Market** from concept to Data Warehouse launch
 - **20,000+ Active Merchants** served by the high-traffic SaaS platform
+- **0 Production Downtime** during the transition from legacy jQuery to Vue 3.
 
 </Callout>

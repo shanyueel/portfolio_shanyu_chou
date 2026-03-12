@@ -11,6 +11,11 @@ import projects from "@/data/projects"
 import { techStackMap, TechKey } from "@/lib/constants"
 import { pageParams, TechIconColors } from "@/lib/types"
 import TeamMembers from "@/components/features/project/TeamMembers"
+import TechnicalDecision, {
+  TDContext,
+  TDTradeOffs,
+  TDImpact,
+} from "@/components/features/project/TechnicalDecision"
 import Button from "@/components/ui/Button"
 import Divider from "@/components/ui/Divider"
 import Timeline from "@/components/ui/Timeline"
@@ -70,6 +75,10 @@ const ProjectPage = async (props: { params: pageParams }) => {
       Quote,
       Divider,
       ThreeColumnSection,
+      TechnicalDecision,
+      TDContext,
+      TDTradeOffs,
+      TDImpact,
     },
     options: {
       parseFrontmatter: true,
