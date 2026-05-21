@@ -15,7 +15,7 @@ const socialLinksData = [
   },
   {
     id: "LinkedIn",
-    href: "https://www.linkedin.com/in/shanyu-chou/",
+    href: "https://www.linkedin.com/in/shan-yu-chou/",
     icon: <FaLinkedin />,
   },
   {

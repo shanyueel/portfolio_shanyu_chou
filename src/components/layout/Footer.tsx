@@ -20,7 +20,7 @@ const Footer = () => {
           <FaGithub />
         </Link>
         <Link
-          href="https://www.linkedin.com/in/shanyu-chou/"
+          href="https://www.linkedin.com/in/shan-yu-chou/"
           aria-label="LinkedIn"
           className="transition-transform duration-200 hover:text-link hover:scale-125"
         >
