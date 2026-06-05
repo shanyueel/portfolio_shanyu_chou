@@ -95,7 +95,7 @@ const AIHeroSection = ({ compiledResponses, projectsSectionRef }: AIHeroSectionP
       // Get the last user message to scroll to (so both question and answer are visible)
       const userMessages = chatHistoryRef.current.querySelectorAll('[data-role="user"]')
       const lastUserMessage = userMessages[userMessages.length - 1] as HTMLElement | null
-      
+
       if (lastUserMessage) {
         // Calculate the position of the last message relative to the scroll container
         const scrollContainer = historyContainerRef.current
@@ -110,7 +110,7 @@ const AIHeroSection = ({ compiledResponses, projectsSectionRef }: AIHeroSectionP
         const topMargin = 24
 
         const scrollOffset = visualOffset + alreadyScrolled - topMargin
-        
+
         scrollContainer.scrollTo({
           top: scrollOffset,
           behavior: "smooth",
@@ -200,6 +200,14 @@ const AIHeroSection = ({ compiledResponses, projectsSectionRef }: AIHeroSectionP
     const responseId = matched?.id || null
     const fallbackMessage = matched ? null : getRandomFallback()
 
+    if (!matched) {
+      fetch("/api/notion/unmatched-questions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question: query }),
+      }).catch(() => {})
+    }
+
     if (responseId) {
       markAsSeen(responseId)
     }
@@ -237,15 +245,15 @@ const AIHeroSection = ({ compiledResponses, projectsSectionRef }: AIHeroSectionP
    */
   const parseFallbackMessage = (message: string) => {
     const parts = message.split(/(\[[^\]]+\])/g)
-  
+
     return parts.map((part, index) => {
       const match = part.match(/\[([^\]]+)\]/)
       if (match) {
         const text = match[1]
-        
+
         // Find the response ID to submit when clicked
         const responseId = fallbackChipMapping[text]
-  
+
         const handleClick = (e: React.MouseEvent<HTMLSpanElement>) => {
           e.preventDefault()
           if (responseId) {
@@ -254,7 +262,7 @@ const AIHeroSection = ({ compiledResponses, projectsSectionRef }: AIHeroSectionP
             handleQuerySubmit(`Tell me about ${text}`)
           }
         }
-  
+
         return (
           <span
             key={index}
