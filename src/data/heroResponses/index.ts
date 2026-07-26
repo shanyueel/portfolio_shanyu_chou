@@ -14,7 +14,7 @@ import TimelineItem from "@/components/ui/TimelineItem"
 import HighlightBox from "@/components/mdx/HighlightBox"
 import { StatCard, FooterLink, HeroCardContainer, TechIcon } from "@/components/mdx/HeroCards"
 import Callout from "@/components/mdx/Callout"
-import { LuClockArrowDown, LuCircleDollarSign, LuUsers, LuPuzzle, LuWrench, LuRocket, LuPalette, LuDatabase, LuTarget, LuNotebookPen, LuSearch, LuShieldCheck, LuLayoutDashboard, LuBot, LuSchool, LuPodcast, LuHandshake, LuPackage, LuGlobe } from "react-icons/lu"
+import { LuClockArrowDown, LuCircleDollarSign, LuUsers, LuPuzzle, LuWrench, LuRocket, LuPalette, LuDatabase, LuTarget, LuNotebookPen, LuSearch, LuShieldCheck, LuLayoutDashboard, LuBot, LuSchool, LuPodcast, LuHandshake, LuPackage, LuGlobe, LuLightbulb, LuTriangleAlert, LuCalendarClock, LuCompass, LuMessagesSquare, LuGraduationCap, LuLock } from "react-icons/lu"
 import type { IconType } from "react-icons"
 import { heroResponseDefs } from "./responses"
 
@@ -42,6 +42,13 @@ const iconMap: Record<string, IconType> = {
   LuHandshake,
   LuPackage,
   LuGlobe,
+  LuLightbulb,
+  LuTriangleAlert,
+  LuCalendarClock,
+  LuCompass,
+  LuMessagesSquare,
+  LuGraduationCap,
+  LuLock,
 }
 
 /**
@@ -98,7 +105,7 @@ export async function getAllCompiledHeroResponses(): Promise<
   for (const def of heroResponseDefs) {
     const fileName = `${def.id}.mdx`
     const filePath = path.join(process.cwd(), "src", "data", "heroResponses", fileName)
-    
+
     if (fs.existsSync(filePath)) {
       compiled[def.id] = await compileHeroMDX(fileName)
     } else {

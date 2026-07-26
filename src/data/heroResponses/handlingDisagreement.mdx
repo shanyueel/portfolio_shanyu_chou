@@ -1,0 +1,18 @@
+
+<HeroCardContainer>
+  At WACA there was ongoing tension between front-end and back-end engineers over **API design**. When new features came up, backend tended to reuse existing endpoints, while we preferred new ones tailored to the interface. Backend usually won that argument because they had a far deeper understanding of the codebase. After all, the project had been full-stack and backend-led before our front-end team even existed.
+
+  <HighlightBox iconName="LuLock" title="The Deadlock" variant="negative" className="mt-4">
+    This came to a head when we built an independent Vue front-end for the **Data Warehouse** feature, which had to share APIs with the main project. Several existing APIs weren't a good fit because some carried redundant data, others required multiple calls just to assemble a single view. I pushed for new APIs, and we hit a deadlock.
+  </HighlightBox>
+
+  <HighlightBox iconName="LuMessagesSquare" title="Understanding the Other Side" variant="neutral" className="mt-4">
+    Through discussion I learned the back-end's resistance wasn't stubbornness: **maintaining too many overlapping APIs was a real burden** for the backend team. In return, I made the case that dedicated endpoints would cut down front-end calls and keep naming consistent with our JavaScript conventions.
+  </HighlightBox>
+
+  <HighlightBox iconName="LuHandshake" title="The Compromise" variant="positive" className="mt-4">
+    We landed in the middle: **new APIs only for high-traffic pages** like the dashboard to enable efficient data retrieval, and for everything else I built a front-end **abstraction layer** that transformed existing responses into the shape and naming our codebase expected.
+
+    The decision let both teams cut their workload without slipping the deadline. It also taught me a lot about API design trade-offs, which made me a far more effective partner in backend discussions afterwards.
+  </HighlightBox>
+</HeroCardContainer>
