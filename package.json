@@ -14,9 +14,6 @@
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.3.1",
     "@svgr/webpack": "^8.1.0",
-    "@tiptap/pm": "^3.23.5",
-    "@tiptap/react": "^3.23.5",
-    "@tiptap/starter-kit": "^3.23.5",
     "autoprefixer": "^10.4.21",
     "clsx": "^2.1.1",
     "framer-motion": "^12.9.1",
@@ -32,7 +29,6 @@
     "react-icons": "^5.5.0",
     "rehype-highlight": "^7.0.2",
     "remark-gfm": "^4.0.1",
-    "resend": "^6.12.3",
     "stopword": "^3.1.5",
     "tailwind-merge": "^3.4.0"
   },
