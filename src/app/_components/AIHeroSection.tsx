@@ -6,7 +6,7 @@ import HeroIntro from "./hero/HeroIntro"
 import ChatHistory, { ChatMessage } from "./hero/ChatHistory"
 import CommandPalette from "./hero/CommandPalette"
 import { cn, delay, scrollToElement } from "@/lib/utils"
-import { findMatchingResponse, findResponseById } from "@/data/heroResponses/responses"
+import { findMatchingResponse, findResponseById, getCanonicalQuestion } from "@/data/heroResponses/responses"
 import { getRandomFallback, fallbackChipMapping } from "@/data/heroResponses/fallback"
 import scrollDownArrows from "@/assets/animations/scrollDownArrows.json"
 
@@ -157,7 +157,9 @@ const AIHeroSection = ({ compiledResponses, projectsSectionRef }: AIHeroSectionP
 
     // Find the response definition to get the display text
     const responseDef = findResponseById(responseId)
-    const displayText = responseDef?.fullQuestion || `Tell me about ${responseId}`
+    const displayText = responseDef
+      ? getCanonicalQuestion(responseDef)
+      : `Tell me about ${responseId}`
 
     // User message: display the chip text
     addChatMessage("user", <p>{displayText}</p>)
