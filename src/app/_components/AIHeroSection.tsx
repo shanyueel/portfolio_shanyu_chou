@@ -6,7 +6,9 @@ import HeroIntro from "./hero/HeroIntro"
 import ChatHistory, { ChatMessage } from "./hero/ChatHistory"
 import CommandPalette from "./hero/CommandPalette"
 import { cn, delay, scrollToElement } from "@/lib/utils"
-import { findMatchingResponse, findResponseById } from "@/data/heroResponses/responses"
+import { findResponseById, getCanonicalQuestion } from "@/data/heroResponses/responses"
+import { resolveQuery } from "@/lib/semantic/resolveQuery"
+import { warmSemanticMatcher } from "@/lib/semantic/semanticMatcher"
 import { getRandomFallback, fallbackChipMapping } from "@/data/heroResponses/fallback"
 import scrollDownArrows from "@/assets/animations/scrollDownArrows.json"
 
@@ -157,7 +159,9 @@ const AIHeroSection = ({ compiledResponses, projectsSectionRef }: AIHeroSectionP
 
     // Find the response definition to get the display text
     const responseDef = findResponseById(responseId)
-    const displayText = responseDef?.fullQuestion || `Tell me about ${responseId}`
+    const displayText = responseDef
+      ? getCanonicalQuestion(responseDef)
+      : `Tell me about ${responseId}`
 
     // User message: display the chip text
     addChatMessage("user", <p>{displayText}</p>)
@@ -195,22 +199,11 @@ const AIHeroSection = ({ compiledResponses, projectsSectionRef }: AIHeroSectionP
   const handleQuerySubmit = async (query: string) => {
     setIsCommandPaletteDisabled(true)
 
-    // Perform query matching to determine the appropriate response
-    const matched = findMatchingResponse(query)
-    const responseId = matched?.id || null
-    const fallbackMessage = matched ? null : getRandomFallback()
-
-    if (!matched) {
-      fetch("/api/notion/unmatched-questions", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question: query }),
-      }).catch(() => {})
-    }
-
-    if (responseId) {
-      markAsSeen(responseId)
-    }
+    // Start matching immediately but do NOT await it yet — embedding the query
+    // runs concurrently with the thinking animation below, so the model costs
+    // no perceived latency. resolveQuery never rejects; it degrades to keyword
+    // matching internally.
+    const resolution = resolveQuery(query)
 
     // User message: plain text wrapped in <p>
     addChatMessage("user", <p>{query}</p>)
@@ -220,10 +213,34 @@ const AIHeroSection = ({ compiledResponses, projectsSectionRef }: AIHeroSectionP
 
     setIsThinking(true)
 
-    await delay(THINKING_DELAY)
+    // Wait for whichever finishes last: the match or the deliberate pause.
+    const [result] = await Promise.all([resolution, delay(THINKING_DELAY)])
     if (!isMounted.current) return
 
     setIsThinking(false)
+
+    const responseId = result.id
+    const fallbackMessage = responseId ? null : getRandomFallback()
+
+    if (responseId) {
+      markAsSeen(responseId)
+    } else {
+      // Log why it was refused, not just that it was. "missed careerGoals by
+      // 0.03" tells you to add a questionVariant; "nothing came close" tells
+      // you to write a new response.
+      fetch("/api/notion/unmatched-questions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          question: query,
+          source: result.source,
+          topId: result.topId,
+          score: result.score,
+          margin: result.margin,
+          reason: result.reason,
+        }),
+      }).catch(() => {})
+    }
 
     // Assistant message: use compiled response if available, otherwise use fallback
     const assistantContent =
@@ -323,6 +340,10 @@ const AIHeroSection = ({ compiledResponses, projectsSectionRef }: AIHeroSectionP
             onFocus={() => {
               setIsInputFocused(true)
               setIsTypingComplete(false)
+              // Start fetching the embedding model the moment the visitor shows
+              // intent to type. Idempotent, and a no-op on data-saver/2G. People
+              // who only click chips never download it.
+              warmSemanticMatcher()
             }}
             onBlur={() => setIsInputFocused(false)}
           />

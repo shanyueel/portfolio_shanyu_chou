@@ -1,4 +1,4 @@
-import { createFetcher } from "@/utils/fetcher"
+import { createFetcher } from "@/lib/utils/http"
 
 const notionApi = createFetcher({
   baseUrl: "https://api.notion.com/v1",
@@ -43,14 +43,64 @@ function detectTags(question: string): string[] {
   return matched.length > 0 ? matched : ["Other"]
 }
 
-export async function logUnmatchedQuestion(question: string) {
+/** Matcher diagnostics recorded alongside an unmatched question. */
+export interface UnmatchedDiagnostics {
+  /** "semantic" or "keyword" — which matcher was in play. */
+  source?: string
+  /** Closest response even though it was refused. */
+  topId?: string
+  /** Cosine similarity of that closest response. */
+  score?: number
+  /** Gap to the runner-up. */
+  margin?: number
+  /** Which gate refused it: below-threshold, low-margin, decoy, unavailable. */
+  reason?: string
+}
+
+/**
+ * Render diagnostics as a readable line, e.g.
+ *   "semantic · refused: low-margin · closest: careerGoals 0.49 (margin 0.01)"
+ */
+function formatDiagnostics(diagnostics: UnmatchedDiagnostics): string {
+  const parts: string[] = []
+  if (diagnostics.source) parts.push(diagnostics.source)
+  if (diagnostics.reason) parts.push(`refused: ${diagnostics.reason}`)
+  if (diagnostics.topId) {
+    const score = typeof diagnostics.score === "number" ? ` ${diagnostics.score.toFixed(2)}` : ""
+    const margin =
+      typeof diagnostics.margin === "number" ? ` (margin ${diagnostics.margin.toFixed(2)})` : ""
+    parts.push(`closest: ${diagnostics.topId}${score}${margin}`)
+  }
+  return parts.join(" · ")
+}
+
+export async function logUnmatchedQuestion(
+  question: string,
+  diagnostics: UnmatchedDiagnostics = {},
+) {
   const databaseId = process.env.NOTION_DATABASE_ID
   if (!databaseId) throw new Error("NOTION_DATABASE_ID is not set")
 
   const tags = detectTags(question)
+  const summary = formatDiagnostics(diagnostics)
+
+  // Diagnostics go in the page body rather than new properties, so this keeps
+  // working against the existing database schema without a migration.
+  const children = summary
+    ? [
+        {
+          object: "block",
+          type: "paragraph",
+          paragraph: {
+            rich_text: [{ type: "text", text: { content: summary } }],
+          },
+        },
+      ]
+    : []
 
   await notionApi.post("/pages", {
     parent: { database_id: databaseId },
+    ...(children.length > 0 ? { children } : {}),
     properties: {
       Question: {
         title: [{ text: { content: question.trim() } }],

@@ -14,6 +14,11 @@ const withMDX = createMDX({
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
+  // Keep the Node-only ONNX backend out of any client bundle. transformers.js
+  // ships both a native Node backend and a WASM one; the browser needs only
+  // WASM, but without this the bundler follows onnxruntime-node's native
+  // bindings and the build fails.
+  serverExternalPackages: ["@huggingface/transformers", "onnxruntime-node"],
   // Configure Turbopack to correctly parse SVGs as React components using @svgr/webpack
   turbopack: {
     rules: {
@@ -22,6 +27,14 @@ const nextConfig: NextConfig = {
         as: "*.js",
       },
     },
+  },
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "onnxruntime-node": false,
+      sharp: false,
+    }
+    return config
   },
 }
 

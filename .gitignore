@@ -42,3 +42,4 @@ error_trace.txt
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.cache/

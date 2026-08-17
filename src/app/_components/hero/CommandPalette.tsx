@@ -4,7 +4,7 @@ import { useState, FormEvent, useRef, useEffect, KeyboardEvent, MouseEvent } fro
 import { motion } from "framer-motion"
 import { IoSparkles, IoSend } from "react-icons/io5"
 import Button from "@/components/ui/Button"
-import { heroResponseDefs } from "@/data/heroResponses/responses"
+import { getCanonicalQuestion, heroResponseDefs } from "@/data/heroResponses/responses"
 import { cn, delay, scrollToElement } from "@/lib/utils"
 
 interface CommandPaletteProps {
@@ -68,11 +68,11 @@ const CommandPalette = ({
 
   const handleSubmit = (e?: FormEvent) => {
     e?.preventDefault()
-  
+
     if (!query.trim() || disabled) return
 
     onQuerySubmit(query)
-    setQuery("") 
+    setQuery("")
   }
 
   const handleEnterSubmit = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -96,10 +96,11 @@ const CommandPalette = ({
     if (onIdSubmit) {
       onIdSubmit(responseId)
     } else {
-      // Fallback: look up fullQuestion from config for query-based submission
+      // Fallback: look up the canonical phrasing for query-based submission
       const responseDef = heroResponseDefs.find(def => def.id === responseId)
-      const fullQuestion = responseDef?.fullQuestion || `Tell me about ${responseId}`
-      onQuerySubmit(fullQuestion)
+      onQuerySubmit(
+        responseDef ? getCanonicalQuestion(responseDef) : `Tell me about ${responseId}`,
+      )
     }
     setQuery("")
 
@@ -140,7 +141,7 @@ const CommandPalette = ({
     } else {
       result = result.slice(0, 4)
     }
-    
+
     setDisplayChips(result)
   }, [seenResponseIds])
 
@@ -176,7 +177,7 @@ const CommandPalette = ({
           </button>
         </div>
       </form>
-      
+
       <div className="min-h-8 mt-4">
         {/* Chips Container */}
         {showChips &&  (
