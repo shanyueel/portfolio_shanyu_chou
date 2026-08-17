@@ -1,4 +1,4 @@
-import { createFetcher } from "@/utils/fetcher"
+import { createFetcher } from "@/lib/utils/http"
 
 const notionApi = createFetcher({
   baseUrl: "https://api.notion.com/v1",

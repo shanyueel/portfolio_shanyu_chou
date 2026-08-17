@@ -5,6 +5,9 @@
  * runtime and the Node eval script, which is what makes offline threshold tuning
  * trustworthy: the sweep measures exactly the code that ships.
  */
+import { fromBase64 } from "@/lib/utils/binary"
+import { cosine } from "@/lib/utils/vector"
+
 import { DECOY_ID, EMBEDDING_DIM, type MatcherConfig } from "./config"
 import type {
   EmbeddingArtifact,
@@ -37,25 +40,6 @@ export function quantize(vector: Float32Array): { scale: number; q: Int8Array } 
     q[i] = Math.max(-127, Math.min(127, Math.round(vector[i] / scale)))
   }
   return { scale, q }
-}
-
-export function toBase64(bytes: Int8Array): string {
-  const u8 = new Uint8Array(bytes.buffer, bytes.byteOffset, bytes.byteLength)
-  if (typeof Buffer !== "undefined") return Buffer.from(u8).toString("base64")
-  let binary = ""
-  for (const byte of u8) binary += String.fromCharCode(byte)
-  return btoa(binary)
-}
-
-export function fromBase64(base64: string): Int8Array {
-  if (typeof Buffer !== "undefined") {
-    const buf = Buffer.from(base64, "base64")
-    return new Int8Array(buf.buffer, buf.byteOffset, buf.byteLength)
-  }
-  const binary = atob(base64)
-  const u8 = new Uint8Array(binary.length)
-  for (let i = 0; i < binary.length; i++) u8[i] = binary.charCodeAt(i)
-  return new Int8Array(u8.buffer)
 }
 
 /** Dequantize and re-normalize, writing into `out` at `offset`. */
@@ -96,28 +80,6 @@ export function buildIndex(artifact: EmbeddingArtifact): EmbeddingIndex {
   dequantizeInto(artifact.canary, canary, 0, dim)
 
   return { dim, matrix, ids, texts, canary }
-}
-
-// ---------------------------------------------------------------------------
-// Similarity
-// ---------------------------------------------------------------------------
-
-/** Cosine similarity of two unit-length vectors — a plain dot product. */
-export function cosine(a: Float32Array, b: Float32Array, bOffset = 0): number {
-  let dot = 0
-  for (let i = 0; i < a.length; i++) dot += a[i] * b[bOffset + i]
-  return dot
-}
-
-/** Normalize in place; the model already does this, but eval inputs may not. */
-export function normalize(vector: Float32Array): Float32Array {
-  let norm = 0
-  for (const v of vector) norm += v * v
-  norm = Math.sqrt(norm)
-  if (norm > 0) {
-    for (let i = 0; i < vector.length; i++) vector[i] /= norm
-  }
-  return vector
 }
 
 // ---------------------------------------------------------------------------
