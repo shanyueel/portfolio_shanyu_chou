@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run build:embeddings && next build",
+    "build:embeddings": "tsx scripts/build-hero-embeddings.ts",
     "start": "next start",
     "lint": "next lint"
   },
